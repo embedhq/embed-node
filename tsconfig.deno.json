@@ -6,9 +6,9 @@
     "rootDir": "./deno",
     "lib": ["es2020", "DOM"],
     "paths": {
-      "petstore/_shims/auto/*": ["deno/_shims/auto/*-deno"],
-      "petstore/*": ["deno/*"],
-      "petstore": ["deno/index.ts"],
+      "embed/_shims/auto/*": ["deno/_shims/auto/*-deno"],
+      "embed/*": ["deno/*"],
+      "embed": ["deno/index.ts"],
     },
     "noEmit": true,
     "declaration": true,
