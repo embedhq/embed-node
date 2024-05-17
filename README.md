@@ -25,7 +25,9 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Embed from 'embed';
 
-const embed = new Embed();
+const embed = new Embed({
+  apiKey: process.env['EMBED_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
   const integrationCreateResponse = await embed.integrations.create({ provider_key: 'string' });
@@ -44,7 +46,9 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Embed from 'embed';
 
-const embed = new Embed();
+const embed = new Embed({
+  apiKey: process.env['EMBED_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
   const params: Embed.IntegrationCreateParams = { provider_key: 'string' };
@@ -107,7 +111,6 @@ You can use the `maxRetries` option to configure or disable this:
 // Configure the default for all requests:
 const embed = new Embed({
   maxRetries: 0, // default is 2
-  apiKey: 'My API Key',
 });
 
 // Or, configure per-request:
@@ -125,7 +128,6 @@ Requests time out after 1 minute by default. You can configure this with a `time
 // Configure the default for all requests:
 const embed = new Embed({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
-  apiKey: 'My API Key',
 });
 
 // Override per-request:
@@ -259,7 +261,6 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 // Configure the default for all requests:
 const embed = new Embed({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
-  apiKey: 'My API Key',
 });
 
 // Override per-request:
