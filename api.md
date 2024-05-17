@@ -7,9 +7,3 @@ Types:
 Methods:
 
 - <code title="post /integrations">client.integrations.<a href="./src/resources/integrations.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
-
-# Store
-
-## Order
-
-# User

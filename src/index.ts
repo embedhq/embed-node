@@ -8,7 +8,7 @@ import * as API from './resources/index';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['PETSTORE_API_KEY'].
+   * Defaults to process.env['EMBED_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -78,7 +78,7 @@ export class Embed extends Core.APIClient {
   /**
    * API Client for interfacing with the Embed API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['PETSTORE_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['EMBED_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['EMBED_BASE_URL'] ?? https://petstore3.swagger.io/api/v3] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -89,12 +89,12 @@ export class Embed extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('EMBED_BASE_URL'),
-    apiKey = Core.readEnv('PETSTORE_API_KEY'),
+    apiKey = Core.readEnv('EMBED_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.EmbedError(
-        "The PETSTORE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Embed client with an apiKey option, like new Embed({ apiKey: 'My API Key' }).",
+        "The EMBED_API_KEY environment variable is missing or empty; either provide it, or instantiate the Embed client with an apiKey option, like new Embed({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -117,8 +117,6 @@ export class Embed extends Core.APIClient {
   }
 
   integrations: API.Integrations = new API.Integrations(this);
-  store: API.Store = new API.Store(this);
-  user: API.User = new API.User(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -176,10 +174,6 @@ export namespace Embed {
   export import Integrations = API.Integrations;
   export import IntegrationCreateResponse = API.IntegrationCreateResponse;
   export import IntegrationCreateParams = API.IntegrationCreateParams;
-
-  export import Store = API.Store;
-
-  export import User = API.User;
 }
 
 export default Embed;
