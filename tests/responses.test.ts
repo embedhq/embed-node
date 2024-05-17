@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'petstore/core';
-import { Headers } from 'petstore/_shims/index';
+import { createResponseHeaders } from 'embed/core';
+import { Headers } from 'embed/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters

@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "petstore/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "petstore/*": ["src/*"],
-      "petstore": ["src/index.ts"],
+      "embed/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "embed/*": ["src/*"],
+      "embed": ["src/index.ts"],
     },
     "noEmit": true,
 

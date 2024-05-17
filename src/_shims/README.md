@@ -1,9 +1,9 @@
 # 👋 Wondering what everything in here does?
 
-`petstore` supports a wide variety of runtime environments like Node.js, Deno, Bun, browsers, and various
+`embed` supports a wide variety of runtime environments like Node.js, Deno, Bun, browsers, and various
 edge runtimes, as well as both CommonJS (CJS) and EcmaScript Modules (ESM).
 
-To do this, `petstore` provides shims for either using `node-fetch` when in Node (because `fetch` is still experimental there) or the global `fetch` API built into the environment when not in Node.
+To do this, `embed` provides shims for either using `node-fetch` when in Node (because `fetch` is still experimental there) or the global `fetch` API built into the environment when not in Node.
 
 It uses [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) to
 automatically select the correct shims for each environment. However, conditional exports are a fairly new
@@ -15,32 +15,32 @@ getting the wrong raw `Response` type from `.asResponse()`, for example.
 
 The user can work around these issues by manually importing one of:
 
-- `import 'petstore/shims/node'`
-- `import 'petstore/shims/web'`
+- `import 'embed/shims/node'`
+- `import 'embed/shims/web'`
 
 All of the code here in `_shims` handles selecting the automatic default shims or manual overrides.
 
 ### How it works - Runtime
 
-Runtime shims get installed by calling `setShims` exported by `petstore/_shims/registry`.
+Runtime shims get installed by calling `setShims` exported by `embed/_shims/registry`.
 
-Manually importing `petstore/shims/node` or `petstore/shims/web`, calls `setShims` with the respective runtime shims.
+Manually importing `embed/shims/node` or `embed/shims/web`, calls `setShims` with the respective runtime shims.
 
-All client code imports shims from `petstore/_shims/index`, which:
+All client code imports shims from `embed/_shims/index`, which:
 
 - checks if shims have been set manually
-- if not, calls `setShims` with the shims from `petstore/_shims/auto/runtime`
-- re-exports the installed shims from `petstore/_shims/registry`.
+- if not, calls `setShims` with the shims from `embed/_shims/auto/runtime`
+- re-exports the installed shims from `embed/_shims/registry`.
 
-`petstore/_shims/auto/runtime` exports web runtime shims.
-If the `node` export condition is set, the export map replaces it with `petstore/_shims/auto/runtime-node`.
+`embed/_shims/auto/runtime` exports web runtime shims.
+If the `node` export condition is set, the export map replaces it with `embed/_shims/auto/runtime-node`.
 
 ### How it works - Type time
 
-All client code imports shim types from `petstore/_shims/index`, which selects the manual types from `petstore/_shims/manual-types` if they have been declared, otherwise it exports the auto types from `petstore/_shims/auto/types`.
+All client code imports shim types from `embed/_shims/index`, which selects the manual types from `embed/_shims/manual-types` if they have been declared, otherwise it exports the auto types from `embed/_shims/auto/types`.
 
-`petstore/_shims/manual-types` exports an empty namespace.
-Manually importing `petstore/shims/node` or `petstore/shims/web` merges declarations into this empty namespace, so they get picked up by `petstore/_shims/index`.
+`embed/_shims/manual-types` exports an empty namespace.
+Manually importing `embed/shims/node` or `embed/shims/web` merges declarations into this empty namespace, so they get picked up by `embed/_shims/index`.
 
-`petstore/_shims/auto/types` exports web type definitions.
-If the `node` export condition is set, the export map replaces it with `petstore/_shims/auto/types-node`, though TS only picks this up if `"moduleResolution": "nodenext"` or `"moduleResolution": "bundler"`.
+`embed/_shims/auto/types` exports web type definitions.
+If the `node` export condition is set, the export map replaces it with `embed/_shims/auto/types-node`, though TS only picks this up if `"moduleResolution": "nodenext"` or `"moduleResolution": "bundler"`.
