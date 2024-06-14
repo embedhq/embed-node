@@ -1,6 +1,6 @@
 # Embed Node API Library
 
-[![NPM version](https://img.shields.io/npm/v/embed.svg)](https://npmjs.org/package/embed)
+[![NPM version](https://img.shields.io/npm/v/embed.svg)](https://npmjs.org/package/embed) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/embed)
 
 This library provides convenient access to the Embed REST API from server-side TypeScript or JavaScript.
 
@@ -25,12 +25,10 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Embed from 'embed';
 
-const embed = new Embed({
-  apiKey: process.env['EMBED_API_KEY'], // This is the default and can be omitted
-});
+const embed = new Embed();
 
 async function main() {
-  const integrationCreateResponse = await embed.integrations.create({ provider_key: 'string' });
+  const integrationCreateResponse = await embed.integrations.create({ provider_key: 'github' });
 
   console.log(integrationCreateResponse.id);
 }
@@ -46,12 +44,10 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Embed from 'embed';
 
-const embed = new Embed({
-  apiKey: process.env['EMBED_API_KEY'], // This is the default and can be omitted
-});
+const embed = new Embed();
 
 async function main() {
-  const params: Embed.IntegrationCreateParams = { provider_key: 'string' };
+  const params: Embed.IntegrationCreateParams = { provider_key: 'github' };
   const integrationCreateResponse: Embed.IntegrationCreateResponse = await embed.integrations.create(params);
 }
 
@@ -70,7 +66,7 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const integrationCreateResponse = await embed.integrations
-    .create({ provider_key: 'string' })
+    .create({ provider_key: 'github' })
     .catch(async (err) => {
       if (err instanceof Embed.APIError) {
         console.log(err.status); // 400
@@ -111,10 +107,11 @@ You can use the `maxRetries` option to configure or disable this:
 // Configure the default for all requests:
 const embed = new Embed({
   maxRetries: 0, // default is 2
+  apiKey: 'My API Key',
 });
 
 // Or, configure per-request:
-await embed.integrations.create({ provider_key: 'string' }, {
+await embed.integrations.create({ provider_key: 'github' }, {
   maxRetries: 5,
 });
 ```
@@ -128,10 +125,11 @@ Requests time out after 1 minute by default. You can configure this with a `time
 // Configure the default for all requests:
 const embed = new Embed({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
+  apiKey: 'My API Key',
 });
 
 // Override per-request:
-await embed.integrations.create({ provider_key: 'string' }, {
+await embed.integrations.create({ provider_key: 'github' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -152,12 +150,12 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const embed = new Embed();
 
-const response = await embed.integrations.create({ provider_key: 'string' }).asResponse();
+const response = await embed.integrations.create({ provider_key: 'github' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: integrationCreateResponse, response: raw } = await embed.integrations
-  .create({ provider_key: 'string' })
+  .create({ provider_key: 'github' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(integrationCreateResponse.id);
@@ -261,11 +259,12 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 // Configure the default for all requests:
 const embed = new Embed({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
+  apiKey: 'My API Key',
 });
 
 // Override per-request:
 await embed.integrations.create(
-  { provider_key: 'string' },
+  { provider_key: 'github' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },

@@ -10,7 +10,7 @@ const embed = new Embed({
 
 describe('resource integrations', () => {
   test('create: only required params', async () => {
-    const responsePromise = embed.integrations.create({ provider_key: 'string' });
+    const responsePromise = embed.integrations.create({ provider_key: 'github' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,13 +22,13 @@ describe('resource integrations', () => {
 
   test('create: required and optional params', async () => {
     const response = await embed.integrations.create({
-      provider_key: 'string',
+      provider_key: 'github',
+      id: 'github-123',
       auth_scheme: 'oauth2',
-      display_name: 'string',
       oauth_client_id: 'string',
       oauth_client_secret: 'string',
       oauth_scopes: ['string', 'string', 'string'],
-      use_test_credentials: true,
+      use_test_credentials: false,
     });
   });
 });
