@@ -129,10 +129,6 @@ export class Embed extends Core.APIClient {
     };
   }
 
-  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return { Authorization: `Bearer ${this.apiKey}` };
-  }
-
   static Embed = this;
 
   static EmbedError = Errors.EmbedError;

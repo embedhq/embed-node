@@ -28,7 +28,7 @@ export interface IntegrationCreateResponse {
   /**
    * The authentication scheme the integration uses.
    */
-  auth_scheme: 'oauth2' | 'oauth1' | 'basic' | 'api_key' | 'service_account' | 'none';
+  auth_scheme: 'oauth2' | 'oauth1' | 'basic' | 'api_key';
 
   /**
    * The Unix timestamp (in seconds) for when the integration was created.
@@ -39,6 +39,34 @@ export interface IntegrationCreateResponse {
    * Whether the integration is enabled.
    */
   is_enabled: boolean;
+
+  /**
+   * Whether the integration is using test credentials provided by Embed.
+   */
+  is_using_test_credentials: boolean;
+
+  /**
+   * The URL of the integration provider's logo.
+   */
+  logo_url: string;
+
+  /**
+   * The OAuth Client ID. Required for integrations that use OAuth.
+   */
+  oauth_client_id: string | null;
+
+  /**
+   * The OAuth Client Secret. Required for integrations that use OAuth.
+   */
+  oauth_client_secret: string | null;
+
+  /**
+   * Additional OAuth scopes to request from the user. By default, Embed will request
+   * the minimum required scopes for the
+   * [collections](/docs/api-reference/collections) and
+   * [actions](/docs/api-reference/actions) enabled on the integration.
+   */
+  oauth_scopes: Array<string>;
 
   /**
    * The object type, which is always `integration`.
@@ -56,16 +84,6 @@ export interface IntegrationCreateResponse {
   updated_at: number;
 
   /**
-   * The display name of the integration.
-   */
-  display_name?: string | null;
-
-  /**
-   * The URL of the integration provider's logo.
-   */
-  logo_url?: string | null;
-
-  /**
    * The URL of the integration provider's logo suitable for dark mode.
    */
   logo_url_dark_mode?: string | null;
@@ -78,38 +96,37 @@ export interface IntegrationCreateParams {
   provider_key: string;
 
   /**
+   * The unique identifier for the integration.
+   */
+  id?: string;
+
+  /**
    * The authentication scheme the integration should use. Only applicable for
-   * providers that support multiple authentication schemes.
+   * providers that support multiple auth schemes.
    */
-  auth_scheme?: 'oauth2' | 'oauth1' | 'basic' | 'api_key' | 'service_account' | 'none';
+  auth_scheme?: 'oauth1' | 'oauth2' | 'basic' | 'api_key';
 
   /**
-   * The display name of the integration.
-   */
-  display_name?: string | null;
-
-  /**
-   * The OAuth Client ID. Required if `auth_scheme` is `oauth2`.
+   * The OAuth Client ID. Required for integrations that use OAuth.
    */
   oauth_client_id?: string | null;
 
   /**
-   * The OAuth Client Secret. Required if `auth_scheme` is `oauth2`.
+   * The OAuth Client Secret. Required for integrations that use OAuth.
    */
   oauth_client_secret?: string | null;
 
   /**
-   * Additional OAuth scopes to request. By default, Embed will request the minimum
-   * required scopes for the [collections](/docs/api-reference/collections) and
-   * [actions](/docs/api-reference/actions) enabled on the integration.
+   * Additional OAuth scopes to request from the user. By default, Embed will request
+   * the minimum required scopes for the collections and actions enabled on the
+   * integration.
    */
-  oauth_scopes?: Array<string> | null;
+  oauth_scopes?: Array<string>;
 
   /**
-   * Whether to use test credentials provided by Embed. Only available in staging
-   * environment.
+   * Use test credentials provided by Embed. Only available in staging environment.
    */
-  use_test_credentials?: boolean | null;
+  use_test_credentials?: boolean;
 }
 
 export namespace Integrations {
