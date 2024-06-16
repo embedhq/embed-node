@@ -125,7 +125,7 @@ export interface Connection {
  * Represents an account connected to an integration.
  */
 export interface ConnectionUpdateResponse extends Connection {
-  metadata?: unknown;
+  metadata?: Record<string, unknown>;
 }
 
 export interface ConnectionListResponse {
