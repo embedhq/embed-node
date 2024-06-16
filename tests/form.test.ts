@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'embed/core';
-import { Blob } from 'embed/_shims/index';
-import { toFile } from 'embed';
+import { multipartFormRequestOptions, createForm } from '@embedhq/node/core';
+import { Blob } from '@embedhq/node/_shims/index';
+import { toFile } from '@embedhq/node';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

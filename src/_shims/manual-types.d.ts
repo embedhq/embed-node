@@ -4,8 +4,8 @@
 /**
  * Types will get added to this namespace when you import one of the following:
  *
- *   import 'embed/shims/node'
- *   import 'embed/shims/web'
+ *   import '@embedhq/node/shims/node'
+ *   import '@embedhq/node/shims/web'
  *
  * Importing more than one will cause type and runtime errors.
  */
