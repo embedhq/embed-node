@@ -20,7 +20,7 @@ or products provided by Embed please follow the respective company's security re
 
 ### Embed Terms and Policies
 
-Please contact contact@useembed.com for any questions or concerns regarding security of our services.
+Please contact support@useembed.com for any questions or concerns regarding security of our services.
 
 ---
 

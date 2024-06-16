@@ -8,9 +8,12 @@ const embed = new Embed({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource integrations', () => {
+describe('resource webhooks', () => {
   test('create: only required params', async () => {
-    const responsePromise = embed.integrations.create({ provider_key: 'github' });
+    const responsePromise = embed.webhooks.create({
+      events: ['sync.succeeded', 'sync.failed'],
+      url: 'https://my-app.com/webhook',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,19 +24,14 @@ describe('resource integrations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await embed.integrations.create({
-      provider_key: 'github',
-      id: 'github-123',
-      auth_scheme: 'oauth2',
-      oauth_client_id: 'string',
-      oauth_client_secret: 'string',
-      oauth_scopes: ['string', 'string', 'string'],
-      use_test_credentials: false,
+    const response = await embed.webhooks.create({
+      events: ['sync.succeeded', 'sync.failed'],
+      url: 'https://my-app.com/webhook',
     });
   });
 
   test('retrieve', async () => {
-    const responsePromise = embed.integrations.retrieve('github-123');
+    const responsePromise = embed.webhooks.retrieve('webhook-123');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,12 +44,12 @@ describe('resource integrations', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      embed.integrations.retrieve('github-123', { path: '/_stainless_unknown_path' }),
+      embed.webhooks.retrieve('webhook-123', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Embed.NotFoundError);
   });
 
   test('update', async () => {
-    const responsePromise = embed.integrations.update('github-123', {});
+    const responsePromise = embed.webhooks.update('webhook-123', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,7 +60,7 @@ describe('resource integrations', () => {
   });
 
   test('list', async () => {
-    const responsePromise = embed.integrations.list();
+    const responsePromise = embed.webhooks.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,23 +72,13 @@ describe('resource integrations', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.integrations.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(embed.webhooks.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
 
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      embed.integrations.list(
-        { after: 'string', before: 'string', limit: 20, order: 'desc' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Embed.NotFoundError);
-  });
-
   test('delete', async () => {
-    const responsePromise = embed.integrations.delete('github-123');
+    const responsePromise = embed.webhooks.delete('webhook-123');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,13 +90,13 @@ describe('resource integrations', () => {
 
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      embed.integrations.delete('github-123', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Embed.NotFoundError);
+    await expect(embed.webhooks.delete('webhook-123', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Embed.NotFoundError,
+    );
   });
 
   test('disable', async () => {
-    const responsePromise = embed.integrations.disable('github-123');
+    const responsePromise = embed.webhooks.disable('webhook-123');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,13 +108,13 @@ describe('resource integrations', () => {
 
   test('disable: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      embed.integrations.disable('github-123', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Embed.NotFoundError);
+    await expect(embed.webhooks.disable('webhook-123', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Embed.NotFoundError,
+    );
   });
 
   test('enable', async () => {
-    const responsePromise = embed.integrations.enable('github-123');
+    const responsePromise = embed.webhooks.enable('webhook-123');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -138,8 +126,8 @@ describe('resource integrations', () => {
 
   test('enable: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      embed.integrations.enable('github-123', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Embed.NotFoundError);
+    await expect(embed.webhooks.enable('webhook-123', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Embed.NotFoundError,
+    );
   });
 });
