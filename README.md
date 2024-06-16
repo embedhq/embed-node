@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Embed from 'embed';
 
 const embed = new Embed({
-  bearerToken: process.env['EMBED_BEARER_TOKEN'], // This is the default and can be omitted
+  apiKey: process.env['EMBED_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
@@ -47,7 +47,7 @@ This library includes TypeScript definitions for all request params and response
 import Embed from 'embed';
 
 const embed = new Embed({
-  bearerToken: process.env['EMBED_BEARER_TOKEN'], // This is the default and can be omitted
+  apiKey: process.env['EMBED_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
