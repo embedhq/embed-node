@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Embed REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found [on useembed.com](https://useembed.com/docs). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found [on docs.useembed.com](https://docs.useembed.com). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -25,12 +25,14 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Embed from 'embed';
 
-const embed = new Embed();
+const embed = new Embed({
+  bearerToken: process.env['EMBED_BEARER_TOKEN'], // This is the default and can be omitted
+});
 
 async function main() {
-  const integrationCreateResponse = await embed.integrations.create({ provider_key: 'github' });
+  const integration = await embed.integrations.create({ provider_key: 'github' });
 
-  console.log(integrationCreateResponse.id);
+  console.log(integration.id);
 }
 
 main();
@@ -44,11 +46,13 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Embed from 'embed';
 
-const embed = new Embed();
+const embed = new Embed({
+  bearerToken: process.env['EMBED_BEARER_TOKEN'], // This is the default and can be omitted
+});
 
 async function main() {
   const params: Embed.IntegrationCreateParams = { provider_key: 'github' };
-  const integrationCreateResponse: Embed.IntegrationCreateResponse = await embed.integrations.create(params);
+  const integration: Embed.Integration = await embed.integrations.create(params);
 }
 
 main();
@@ -65,17 +69,15 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const integrationCreateResponse = await embed.integrations
-    .create({ provider_key: 'github' })
-    .catch(async (err) => {
-      if (err instanceof Embed.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
+  const integration = await embed.integrations.create({ provider_key: 'github' }).catch(async (err) => {
+    if (err instanceof Embed.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 }
 
 main();
@@ -107,7 +109,6 @@ You can use the `maxRetries` option to configure or disable this:
 // Configure the default for all requests:
 const embed = new Embed({
   maxRetries: 0, // default is 2
-  apiKey: 'My API Key',
 });
 
 // Or, configure per-request:
@@ -125,7 +126,6 @@ Requests time out after 1 minute by default. You can configure this with a `time
 // Configure the default for all requests:
 const embed = new Embed({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
-  apiKey: 'My API Key',
 });
 
 // Override per-request:
@@ -154,11 +154,11 @@ const response = await embed.integrations.create({ provider_key: 'github' }).asR
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: integrationCreateResponse, response: raw } = await embed.integrations
+const { data: integration, response: raw } = await embed.integrations
   .create({ provider_key: 'github' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(integrationCreateResponse.id);
+console.log(integration.id);
 ```
 
 ### Making custom/undocumented requests
@@ -259,7 +259,6 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 // Configure the default for all requests:
 const embed = new Embed({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
-  apiKey: 'My API Key',
 });
 
 // Override per-request:
