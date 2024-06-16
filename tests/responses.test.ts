@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'embed/core';
-import { Headers } from 'embed/_shims/index';
+import { createResponseHeaders } from '@embedhq/node/core';
+import { Headers } from '@embedhq/node/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters
