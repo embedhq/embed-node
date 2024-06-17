@@ -4,7 +4,6 @@ export {
   Webhook,
   WebhookListResponse,
   WebhookDeleteResponse,
-  WebhookDisableResponse,
   WebhookCreateParams,
   WebhookUpdateParams,
   Webhooks,

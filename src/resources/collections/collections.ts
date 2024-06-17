@@ -45,7 +45,7 @@ export class Collections extends APIResource {
     collectionKey: string,
     params: CollectionDisableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CollectionDisableResponse> {
+  ): Core.APIPromise<Collection> {
     const { integration_id } = params;
     return this._client.post(`/collections/${collectionKey}/disable`, {
       query: { integration_id },
@@ -145,13 +145,6 @@ export interface CollectionListResponse {
   data: Array<Collection>;
 
   object: 'list';
-}
-
-/**
- * Represents a collection of records from a third-party provider.
- */
-export interface CollectionDisableResponse extends Collection {
-  is_enabled?: boolean;
 }
 
 export interface CollectionQueryResponse {
@@ -268,7 +261,6 @@ export interface CollectionQueryParams {
 export namespace Collections {
   export import Collection = CollectionsAPI.Collection;
   export import CollectionListResponse = CollectionsAPI.CollectionListResponse;
-  export import CollectionDisableResponse = CollectionsAPI.CollectionDisableResponse;
   export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
   export import CollectionRetrieveParams = CollectionsAPI.CollectionRetrieveParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
