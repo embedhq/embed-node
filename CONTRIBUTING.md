@@ -55,12 +55,12 @@ cd embed-node
 # With yarn
 yarn link
 cd ../my-package
-yarn link embedhq
+yarn link @embedhq/node
 
 # With pnpm
 pnpm link --global
 cd ../my-package
-pnpm link -—global embedhq
+pnpm link -—global @embedhq/node
 ```
 
 ## Running tests

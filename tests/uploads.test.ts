@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { toFile, type ResponseLike } from 'embedhq/uploads';
-import { File } from 'embedhq/_shims/index';
+import { toFile, type ResponseLike } from '@embedhq/node/uploads';
+import { File } from '@embedhq/node/_shims/index';
 
 class MyClass {
   name: string = 'foo';
