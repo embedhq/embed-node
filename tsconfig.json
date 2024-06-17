@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "embedhq/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "embedhq/*": ["src/*"],
-      "embedhq": ["src/index.ts"],
+      "@embedhq/node/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "@embedhq/node/*": ["src/*"],
+      "@embedhq/node": ["src/index.ts"],
     },
     "noEmit": true,
 

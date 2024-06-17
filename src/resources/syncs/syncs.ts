@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
-import { APIResource } from '../../resource';
-import * as SyncsAPI from './syncs';
-import * as RunsAPI from './runs';
+import * as Core from '@embedhq/node/core';
+import { APIResource } from '@embedhq/node/resource';
+import * as SyncsAPI from '@embedhq/node/resources/syncs/syncs';
+import * as RunsAPI from '@embedhq/node/resources/syncs/runs';
 
 export class Syncs extends APIResource {
   runs: RunsAPI.Runs = new RunsAPI.Runs(this._client);
