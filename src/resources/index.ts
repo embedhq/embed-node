@@ -3,7 +3,6 @@
 export {
   Action,
   ActionListResponse,
-  ActionDisableResponse,
   ActionTriggerResponse,
   ActionRetrieveParams,
   ActionListParams,
@@ -16,7 +15,6 @@ export {
 export {
   Collection,
   CollectionListResponse,
-  CollectionDisableResponse,
   CollectionQueryResponse,
   CollectionRetrieveParams,
   CollectionUpdateParams,
@@ -42,7 +40,6 @@ export {
   Integration,
   IntegrationListResponse,
   IntegrationDeleteResponse,
-  IntegrationDisableResponse,
   IntegrationCreateParams,
   IntegrationUpdateParams,
   IntegrationListParams,
@@ -82,7 +79,6 @@ export {
   Webhook,
   WebhookListResponse,
   WebhookDeleteResponse,
-  WebhookDisableResponse,
   WebhookCreateParams,
   WebhookUpdateParams,
   Webhooks,

@@ -5,7 +5,6 @@ Types:
 - <code><a href="./src/resources/integrations.ts">Integration</a></code>
 - <code><a href="./src/resources/integrations.ts">IntegrationListResponse</a></code>
 - <code><a href="./src/resources/integrations.ts">IntegrationDeleteResponse</a></code>
-- <code><a href="./src/resources/integrations.ts">IntegrationDisableResponse</a></code>
 
 Methods:
 
@@ -14,7 +13,7 @@ Methods:
 - <code title="put /integrations/{integration_id}">client.integrations.<a href="./src/resources/integrations.ts">update</a>(integrationId, { ...params }) -> Integration</code>
 - <code title="get /integrations">client.integrations.<a href="./src/resources/integrations.ts">list</a>({ ...params }) -> IntegrationListResponse</code>
 - <code title="delete /integrations/{integration_id}">client.integrations.<a href="./src/resources/integrations.ts">delete</a>(integrationId) -> IntegrationDeleteResponse</code>
-- <code title="post /integrations/{integration_id}/disable">client.integrations.<a href="./src/resources/integrations.ts">disable</a>(integrationId) -> IntegrationDisableResponse</code>
+- <code title="post /integrations/{integration_id}/disable">client.integrations.<a href="./src/resources/integrations.ts">disable</a>(integrationId) -> Integration</code>
 - <code title="post /integrations/{integration_id}/enable">client.integrations.<a href="./src/resources/integrations.ts">enable</a>(integrationId) -> Integration</code>
 
 # Connections
@@ -67,7 +66,6 @@ Types:
 
 - <code><a href="./src/resources/collections/collections.ts">Collection</a></code>
 - <code><a href="./src/resources/collections/collections.ts">CollectionListResponse</a></code>
-- <code><a href="./src/resources/collections/collections.ts">CollectionDisableResponse</a></code>
 - <code><a href="./src/resources/collections/collections.ts">CollectionQueryResponse</a></code>
 
 Methods:
@@ -75,7 +73,7 @@ Methods:
 - <code title="get /collections/{collection_key}">client.collections.<a href="./src/resources/collections/collections.ts">retrieve</a>(collectionKey, { ...params }) -> Collection</code>
 - <code title="put /collections/{collection_key}">client.collections.<a href="./src/resources/collections/collections.ts">update</a>(collectionKey, { ...params }) -> Collection</code>
 - <code title="get /collections">client.collections.<a href="./src/resources/collections/collections.ts">list</a>({ ...params }) -> CollectionListResponse</code>
-- <code title="post /collections/{collection_key}/disable">client.collections.<a href="./src/resources/collections/collections.ts">disable</a>(collectionKey, { ...params }) -> CollectionDisableResponse</code>
+- <code title="post /collections/{collection_key}/disable">client.collections.<a href="./src/resources/collections/collections.ts">disable</a>(collectionKey, { ...params }) -> Collection</code>
 - <code title="post /collections/{collection_key}/enable">client.collections.<a href="./src/resources/collections/collections.ts">enable</a>(collectionKey, { ...params }) -> Collection</code>
 - <code title="post /collections/{collection_key}/query">client.collections.<a href="./src/resources/collections/collections.ts">query</a>(collectionKey, { ...params }) -> CollectionQueryResponse</code>
 
@@ -125,14 +123,13 @@ Types:
 
 - <code><a href="./src/resources/actions/actions.ts">Action</a></code>
 - <code><a href="./src/resources/actions/actions.ts">ActionListResponse</a></code>
-- <code><a href="./src/resources/actions/actions.ts">ActionDisableResponse</a></code>
 - <code><a href="./src/resources/actions/actions.ts">ActionTriggerResponse</a></code>
 
 Methods:
 
 - <code title="get /actions/{action_key}">client.actions.<a href="./src/resources/actions/actions.ts">retrieve</a>(actionKey, { ...params }) -> Action</code>
 - <code title="get /actions">client.actions.<a href="./src/resources/actions/actions.ts">list</a>({ ...params }) -> ActionListResponse</code>
-- <code title="post /actions/{action_key}/disable">client.actions.<a href="./src/resources/actions/actions.ts">disable</a>(actionKey, { ...params }) -> ActionDisableResponse</code>
+- <code title="post /actions/{action_key}/disable">client.actions.<a href="./src/resources/actions/actions.ts">disable</a>(actionKey, { ...params }) -> Action</code>
 - <code title="post /actions/{action_key}/enable">client.actions.<a href="./src/resources/actions/actions.ts">enable</a>(actionKey, { ...params }) -> Action</code>
 - <code title="get /actions/{action_key}/schema">client.actions.<a href="./src/resources/actions/actions.ts">schema</a>(actionKey, { ...params }) -> ActionSchema</code>
 - <code title="post /actions/{action_key}/trigger">client.actions.<a href="./src/resources/actions/actions.ts">trigger</a>(actionKey, { ...params }) -> ActionTriggerResponse</code>
@@ -172,7 +169,6 @@ Types:
 - <code><a href="./src/resources/webhooks/webhooks.ts">Webhook</a></code>
 - <code><a href="./src/resources/webhooks/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks/webhooks.ts">WebhookDeleteResponse</a></code>
-- <code><a href="./src/resources/webhooks/webhooks.ts">WebhookDisableResponse</a></code>
 
 Methods:
 
@@ -181,7 +177,7 @@ Methods:
 - <code title="put /webhooks/{webhook_id}">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">update</a>(webhookId, { ...params }) -> Webhook</code>
 - <code title="get /webhooks">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">list</a>() -> WebhookListResponse</code>
 - <code title="delete /webhooks/{webhook_id}">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">delete</a>(webhookId) -> WebhookDeleteResponse</code>
-- <code title="post /webhooks/{webhook_id}/disable">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">disable</a>(webhookId) -> WebhookDisableResponse</code>
+- <code title="post /webhooks/{webhook_id}/disable">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">disable</a>(webhookId) -> Webhook</code>
 - <code title="post /webhooks/{webhook_id}/enable">client.webhooks.<a href="./src/resources/webhooks/webhooks.ts">enable</a>(webhookId) -> Webhook</code>
 
 ## Events

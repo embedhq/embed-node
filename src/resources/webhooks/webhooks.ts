@@ -50,7 +50,7 @@ export class Webhooks extends APIResource {
   /**
    * Disables a webhook.
    */
-  disable(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookDisableResponse> {
+  disable(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<Webhook> {
     return this._client.post(`/webhooks/${webhookId}/disable`, options);
   }
 
@@ -121,13 +121,6 @@ export interface WebhookDeleteResponse {
   object: 'webhook';
 }
 
-/**
- * Represents a webhook that can be used to receive events from Embed.
- */
-export interface WebhookDisableResponse extends Webhook {
-  is_enabled?: boolean;
-}
-
 export interface WebhookCreateParams {
   /**
    * The events to send to the webhook.
@@ -156,7 +149,6 @@ export namespace Webhooks {
   export import Webhook = WebhooksAPI.Webhook;
   export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookDisableResponse = WebhooksAPI.WebhookDisableResponse;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import Events = EventsAPI.Events;
