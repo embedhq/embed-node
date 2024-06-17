@@ -1,5 +1,5 @@
 {
-  "name": "@embedhq/node",
+  "name": "embedhq",
   "version": "0.1.0-alpha.1",
   "description": "The official TypeScript library for the Embed API",
   "author": "Embed <support@useembed.com>",
@@ -60,8 +60,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "@embedhq/node": ".",
-    "@embedhq/node/*": "./src/*"
+    "embedhq": ".",
+    "embedhq/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {

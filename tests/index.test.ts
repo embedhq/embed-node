@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Embed from '@embedhq/node';
-import { APIUserAbortError } from '@embedhq/node';
-import { Headers } from '@embedhq/node/core';
+import Embed from 'embedhq';
+import { APIUserAbortError } from 'embedhq';
+import { Headers } from 'embedhq/core';
 import defaultFetch, { Response, type RequestInit, type RequestInfo } from 'node-fetch';
 
 describe('instantiate client', () => {

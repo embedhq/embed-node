@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as ProvidersAPI from '@embedhq/node/resources/providers';
-import * as SchemasAPI from '@embedhq/node/resources/actions/schemas';
-import * as CollectionsSchemasAPI from '@embedhq/node/resources/collections/schemas';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import * as ProvidersAPI from './providers';
+import * as SchemasAPI from './actions/schemas';
+import * as CollectionsSchemasAPI from './collections/schemas';
 
 export class Providers extends APIResource {
   /**
