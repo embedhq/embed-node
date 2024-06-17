@@ -59,7 +59,7 @@ export class Integrations extends APIResource {
   /**
    * Disables an integration.
    */
-  disable(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationDisableResponse> {
+  disable(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<Integration> {
     return this._client.post(`/integrations/${integrationId}/disable`, options);
   }
 
@@ -163,13 +163,6 @@ export interface IntegrationDeleteResponse {
   object: 'integration';
 }
 
-/**
- * Represents an integration with a third-party provider.
- */
-export interface IntegrationDisableResponse extends Integration {
-  is_enabled?: boolean;
-}
-
 export interface IntegrationCreateParams {
   /**
    * The unique key of the integration provider.
@@ -263,7 +256,6 @@ export namespace Integrations {
   export import Integration = IntegrationsAPI.Integration;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationDisableResponse = IntegrationsAPI.IntegrationDisableResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;

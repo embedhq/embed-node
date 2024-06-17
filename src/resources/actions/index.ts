@@ -3,7 +3,6 @@
 export {
   Action,
   ActionListResponse,
-  ActionDisableResponse,
   ActionTriggerResponse,
   ActionRetrieveParams,
   ActionListParams,

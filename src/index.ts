@@ -187,7 +187,6 @@ export namespace Embed {
   export import Integration = API.Integration;
   export import IntegrationListResponse = API.IntegrationListResponse;
   export import IntegrationDeleteResponse = API.IntegrationDeleteResponse;
-  export import IntegrationDisableResponse = API.IntegrationDisableResponse;
   export import IntegrationCreateParams = API.IntegrationCreateParams;
   export import IntegrationUpdateParams = API.IntegrationUpdateParams;
   export import IntegrationListParams = API.IntegrationListParams;
@@ -216,7 +215,6 @@ export namespace Embed {
   export import Collections = API.Collections;
   export import Collection = API.Collection;
   export import CollectionListResponse = API.CollectionListResponse;
-  export import CollectionDisableResponse = API.CollectionDisableResponse;
   export import CollectionQueryResponse = API.CollectionQueryResponse;
   export import CollectionRetrieveParams = API.CollectionRetrieveParams;
   export import CollectionUpdateParams = API.CollectionUpdateParams;
@@ -238,7 +236,6 @@ export namespace Embed {
   export import Actions = API.Actions;
   export import Action = API.Action;
   export import ActionListResponse = API.ActionListResponse;
-  export import ActionDisableResponse = API.ActionDisableResponse;
   export import ActionTriggerResponse = API.ActionTriggerResponse;
   export import ActionRetrieveParams = API.ActionRetrieveParams;
   export import ActionListParams = API.ActionListParams;
@@ -261,7 +258,6 @@ export namespace Embed {
   export import Webhook = API.Webhook;
   export import WebhookListResponse = API.WebhookListResponse;
   export import WebhookDeleteResponse = API.WebhookDeleteResponse;
-  export import WebhookDisableResponse = API.WebhookDisableResponse;
   export import WebhookCreateParams = API.WebhookCreateParams;
   export import WebhookUpdateParams = API.WebhookUpdateParams;
 }

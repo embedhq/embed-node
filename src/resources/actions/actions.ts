@@ -33,7 +33,7 @@ export class Actions extends APIResource {
     actionKey: string,
     params: ActionDisableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ActionDisableResponse> {
+  ): Core.APIPromise<Action> {
     const { integration_id } = params;
     return this._client.post(`/actions/${actionKey}/disable`, { query: { integration_id }, ...options });
   }
@@ -125,13 +125,6 @@ export interface ActionListResponse {
 }
 
 /**
- * Represents an action that can be performed on a collection.
- */
-export interface ActionDisableResponse extends Action {
-  is_enabled?: boolean;
-}
-
-/**
  * The action response.
  */
 export type ActionTriggerResponse = Record<string, unknown>;
@@ -191,7 +184,6 @@ export interface ActionTriggerParams {
 export namespace Actions {
   export import Action = ActionsAPI.Action;
   export import ActionListResponse = ActionsAPI.ActionListResponse;
-  export import ActionDisableResponse = ActionsAPI.ActionDisableResponse;
   export import ActionTriggerResponse = ActionsAPI.ActionTriggerResponse;
   export import ActionRetrieveParams = ActionsAPI.ActionRetrieveParams;
   export import ActionListParams = ActionsAPI.ActionListParams;
