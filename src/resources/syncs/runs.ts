@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as RunsAPI from '@embedhq/node/resources/syncs/runs';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as RunsAPI from './runs';
 
 export class Runs extends APIResource {
   /**

@@ -1,4 +1,4 @@
-import { APIClient } from '@embedhq/node/core';
+import { APIClient } from 'embedhq/core';
 
 const { stringifyQuery } = APIClient.prototype as any;
 

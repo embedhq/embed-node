@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Embed from '@embedhq/node';
+import Embed from 'embedhq';
 import { Response } from 'node-fetch';
 
 const embed = new Embed({

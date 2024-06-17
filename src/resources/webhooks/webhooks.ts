@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as WebhooksAPI from '@embedhq/node/resources/webhooks/webhooks';
-import * as EventsAPI from '@embedhq/node/resources/webhooks/events';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as WebhooksAPI from './webhooks';
+import * as EventsAPI from './events';
 
 export class Webhooks extends APIResource {
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
