@@ -6,9 +6,9 @@
     "rootDir": "./deno",
     "lib": ["es2020", "DOM"],
     "paths": {
-      "embedhq/_shims/auto/*": ["deno/_shims/auto/*-deno"],
-      "embedhq/*": ["deno/*"],
-      "embedhq": ["deno/index.ts"],
+      "@embedhq/node/_shims/auto/*": ["deno/_shims/auto/*-deno"],
+      "@embedhq/node/*": ["deno/*"],
+      "@embedhq/node": ["deno/index.ts"],
     },
     "noEmit": true,
     "declaration": true,

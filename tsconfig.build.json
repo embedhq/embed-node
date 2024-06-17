@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "embedhq/*": ["dist/src/*"],
-      "embedhq": ["dist/src/index.ts"],
+      "@embedhq/node/*": ["dist/src/*"],
+      "@embedhq/node": ["dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,

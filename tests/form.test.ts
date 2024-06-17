@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'embedhq/core';
-import { Blob } from 'embedhq/_shims/index';
-import { toFile } from 'embedhq';
+import { multipartFormRequestOptions, createForm } from '@embedhq/node/core';
+import { Blob } from '@embedhq/node/_shims/index';
+import { toFile } from '@embedhq/node';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

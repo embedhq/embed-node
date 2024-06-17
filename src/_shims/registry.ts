@@ -42,12 +42,12 @@ export let isFsReadStream: Shims['isFsReadStream'] | undefined = undefined;
 export function setShims(shims: Shims, options: { auto: boolean } = { auto: false }) {
   if (auto) {
     throw new Error(
-      `you must \`import 'embedhq/shims/${shims.kind}'\` before importing anything else from embedhq`,
+      `you must \`import '@embedhq/node/shims/${shims.kind}'\` before importing anything else from @embedhq/node`,
     );
   }
   if (kind) {
     throw new Error(
-      `can't \`import 'embedhq/shims/${shims.kind}'\` after \`import 'embedhq/shims/${kind}'\``,
+      `can't \`import '@embedhq/node/shims/${shims.kind}'\` after \`import '@embedhq/node/shims/${kind}'\``,
     );
   }
   auto = options.auto;
