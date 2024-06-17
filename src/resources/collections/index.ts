@@ -3,7 +3,6 @@
 export {
   Collection,
   CollectionListResponse,
-  CollectionDisableResponse,
   CollectionQueryResponse,
   CollectionRetrieveParams,
   CollectionUpdateParams,
