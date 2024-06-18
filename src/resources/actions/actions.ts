@@ -3,10 +3,12 @@
 import * as Core from '@embedhq/node/core';
 import { APIResource } from '@embedhq/node/resource';
 import * as ActionsAPI from '@embedhq/node/resources/actions/actions';
+import * as RunsAPI from '@embedhq/node/resources/actions/runs';
 import * as SchemasAPI from '@embedhq/node/resources/actions/schemas';
 
 export class Actions extends APIResource {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
+  runs: RunsAPI.Runs = new RunsAPI.Runs(this._client);
 
   /**
    * Returns an action.
@@ -196,4 +198,9 @@ export namespace Actions {
   export import SchemaListResponse = SchemasAPI.SchemaListResponse;
   export import SchemaRetrieveParams = SchemasAPI.SchemaRetrieveParams;
   export import SchemaListParams = SchemasAPI.SchemaListParams;
+  export import Runs = RunsAPI.Runs;
+  export import ActionRun = RunsAPI.ActionRun;
+  export import RunListResponse = RunsAPI.RunListResponse;
+  export import RunRetrieveParams = RunsAPI.RunRetrieveParams;
+  export import RunListParams = RunsAPI.RunListParams;
 }
