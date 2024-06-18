@@ -193,7 +193,6 @@ export namespace Embed {
 
   export import Connections = API.Connections;
   export import Connection = API.Connection;
-  export import ConnectionUpdateResponse = API.ConnectionUpdateResponse;
   export import ConnectionListResponse = API.ConnectionListResponse;
   export import ConnectionDeleteResponse = API.ConnectionDeleteResponse;
   export import ConnectionRetrieveParams = API.ConnectionRetrieveParams;
