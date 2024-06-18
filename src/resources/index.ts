@@ -26,7 +26,6 @@ export {
 } from './collections/collections';
 export {
   Connection,
-  ConnectionUpdateResponse,
   ConnectionListResponse,
   ConnectionDeleteResponse,
   ConnectionRetrieveParams,
