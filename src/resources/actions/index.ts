@@ -12,4 +12,5 @@ export {
   ActionTriggerParams,
   Actions,
 } from './actions';
+export { ActionRun, RunListResponse, RunRetrieveParams, RunListParams, Runs } from './runs';
 export { ActionSchema, SchemaListResponse, SchemaRetrieveParams, SchemaListParams, Schemas } from './schemas';

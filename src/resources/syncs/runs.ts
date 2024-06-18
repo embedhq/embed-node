@@ -6,6 +6,18 @@ import * as RunsAPI from '@embedhq/node/resources/syncs/runs';
 
 export class Runs extends APIResource {
   /**
+   * Returns a sync run.
+   */
+  retrieve(
+    collectionKey: string,
+    syncRunId: string,
+    query: RunRetrieveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SyncRun> {
+    return this._client.get(`/syncs/${collectionKey}/runs/${syncRunId}`, { query, ...options });
+  }
+
+  /**
    * Returns a list of recent sync runs.
    */
   list(
@@ -83,6 +95,18 @@ export interface RunListResponse {
   object: 'list';
 }
 
+export interface RunRetrieveParams {
+  /**
+   * The ID of the connection to which the sync run belongs.
+   */
+  connection_id: string;
+
+  /**
+   * The ID of the integration to which the sync run belongs.
+   */
+  integration_id: string;
+}
+
 export interface RunListParams {
   /**
    * The ID of the connection to which the sync runs belong.
@@ -98,5 +122,6 @@ export interface RunListParams {
 export namespace Runs {
   export import SyncRun = RunsAPI.SyncRun;
   export import RunListResponse = RunsAPI.RunListResponse;
+  export import RunRetrieveParams = RunsAPI.RunRetrieveParams;
   export import RunListParams = RunsAPI.RunListParams;
 }
