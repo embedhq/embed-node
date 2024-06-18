@@ -51,7 +51,7 @@ export interface ActionRun {
   /**
    * The duration of the action run (in seconds).
    */
-  duration: number | null;
+  duration: number;
 
   /**
    * The input parameters for the action run.
@@ -79,7 +79,7 @@ export interface ActionRun {
   status: 'running' | 'succeeded' | 'failed';
 
   /**
-   * The Unix timestamp (in seconds) for when the action run started.
+   * The Unix timestamp (in seconds) for when the action ran.
    */
   timestamp: number;
 }
