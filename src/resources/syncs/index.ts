@@ -11,4 +11,4 @@ export {
   SyncTriggerParams,
   Syncs,
 } from './syncs';
-export { SyncRun, RunListResponse, RunRetrieveParams, RunListParams, Runs } from './runs';
+export { SyncRun, RunListResponse, RunListParams, Runs } from './runs';

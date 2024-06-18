@@ -234,6 +234,5 @@ export namespace Syncs {
   export import Runs = RunsAPI.Runs;
   export import SyncRun = RunsAPI.SyncRun;
   export import RunListResponse = RunsAPI.RunListResponse;
-  export import RunRetrieveParams = RunsAPI.RunRetrieveParams;
   export import RunListParams = RunsAPI.RunListParams;
 }
