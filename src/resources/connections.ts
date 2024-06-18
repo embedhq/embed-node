@@ -24,7 +24,7 @@ export class Connections extends APIResource {
     connectionId: string,
     params: ConnectionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionUpdateResponse> {
+  ): Core.APIPromise<Connection> {
     const { integration_id, ...body } = params;
     return this._client.put(`/connections/${connectionId}`, { query: { integration_id }, body, ...options });
   }
@@ -119,13 +119,6 @@ export interface Connection {
    * The Unix timestamp (in seconds) for when the connection was updated.
    */
   updated_at: number;
-}
-
-/**
- * Represents an account connected to an integration.
- */
-export interface ConnectionUpdateResponse extends Connection {
-  metadata?: Record<string, unknown>;
 }
 
 export interface ConnectionListResponse {
@@ -315,7 +308,6 @@ export namespace ConnectionUpsertParams {
 
 export namespace Connections {
   export import Connection = ConnectionsAPI.Connection;
-  export import ConnectionUpdateResponse = ConnectionsAPI.ConnectionUpdateResponse;
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
   export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionRetrieveParams = ConnectionsAPI.ConnectionRetrieveParams;

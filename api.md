@@ -21,14 +21,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/connections.ts">Connection</a></code>
-- <code><a href="./src/resources/connections.ts">ConnectionUpdateResponse</a></code>
 - <code><a href="./src/resources/connections.ts">ConnectionListResponse</a></code>
 - <code><a href="./src/resources/connections.ts">ConnectionDeleteResponse</a></code>
 
 Methods:
 
 - <code title="get /connections/{connection_id}">client.connections.<a href="./src/resources/connections.ts">retrieve</a>(connectionId, { ...params }) -> Connection</code>
-- <code title="put /connections/{connection_id}">client.connections.<a href="./src/resources/connections.ts">update</a>(connectionId, { ...params }) -> ConnectionUpdateResponse</code>
+- <code title="put /connections/{connection_id}">client.connections.<a href="./src/resources/connections.ts">update</a>(connectionId, { ...params }) -> Connection</code>
 - <code title="get /connections">client.connections.<a href="./src/resources/connections.ts">list</a>({ ...params }) -> ConnectionListResponse</code>
 - <code title="delete /connections/{connection_id}">client.connections.<a href="./src/resources/connections.ts">delete</a>(connectionId, { ...params }) -> ConnectionDeleteResponse</code>
 - <code title="post /connections">client.connections.<a href="./src/resources/connections.ts">upsert</a>({ ...params }) -> Connection</code>
