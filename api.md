@@ -113,7 +113,6 @@ Types:
 
 Methods:
 
-- <code title="get /syncs/{collection_key}/runs/{run_id}">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">retrieve</a>(collectionKey, runId, { ...params }) -> SyncRun</code>
 - <code title="get /syncs/{collection_key}/runs">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">list</a>(collectionKey, { ...params }) -> RunListResponse</code>
 
 # Actions
