@@ -6,18 +6,6 @@ import * as RunsAPI from '@embedhq/node/resources/syncs/runs';
 
 export class Runs extends APIResource {
   /**
-   * Returns a sync run.
-   */
-  retrieve(
-    collectionKey: string,
-    runId: string,
-    query: RunRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SyncRun> {
-    return this._client.get(`/syncs/${collectionKey}/runs/${runId}`, { query, ...options });
-  }
-
-  /**
    * Returns a list of recent sync runs.
    */
   list(
@@ -49,11 +37,6 @@ export interface SyncRun {
   connection_id: string;
 
   /**
-   * The Unix timestamp (in seconds) for when the sync run was created.
-   */
-  created_at: number;
-
-  /**
    * The unique identifier of the integration to which the sync belongs.
    */
   integration_id: string;
@@ -81,30 +64,23 @@ export interface SyncRun {
   /**
    * The status of the sync run.
    */
-  status: 'running' | 'stopped' | 'completed' | 'failed';
+  status: 'running' | 'stopped' | 'succeeded' | 'failed';
 
   /**
-   * The Unix timestamp (in seconds) for when the sync run was updated.
+   * The duration of the sync run (in seconds).
    */
-  updated_at: number;
+  duration?: number | null;
+
+  /**
+   * The Unix timestamp (in seconds) for when the sync run started.
+   */
+  timestamp?: number;
 }
 
 export interface RunListResponse {
   data: Array<SyncRun>;
 
   object: 'list';
-}
-
-export interface RunRetrieveParams {
-  /**
-   * The ID of the connection to which the sync run belongs.
-   */
-  connection_id: string;
-
-  /**
-   * The ID of the integration to which the sync run belongs.
-   */
-  integration_id: string;
 }
 
 export interface RunListParams {
@@ -122,6 +98,5 @@ export interface RunListParams {
 export namespace Runs {
   export import SyncRun = RunsAPI.SyncRun;
   export import RunListResponse = RunsAPI.RunListResponse;
-  export import RunRetrieveParams = RunsAPI.RunRetrieveParams;
   export import RunListParams = RunsAPI.RunListParams;
 }
