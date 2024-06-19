@@ -61,11 +61,6 @@ export namespace Provider {
      */
     name: string;
 
-    /**
-     * The unique key of the integration provider.
-     */
-    unique_key: string;
-
     actions?: Array<SchemasAPI.ActionSchema>;
 
     collections?: Array<CollectionsSchemasAPI.CollectionSchema>;

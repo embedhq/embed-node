@@ -210,11 +210,6 @@ export interface ConnectionDeleteParams {
 
 export interface ConnectionUpsertParams {
   /**
-   * The unique identifier for the connection.
-   */
-  id: string;
-
-  /**
    * The authentication scheme the connection should use.
    */
   auth_scheme: 'oauth2' | 'oauth1' | 'basic' | 'api_key';
@@ -232,6 +227,11 @@ export interface ConnectionUpsertParams {
    * The unique identifier of the integration used by the connection.
    */
   integration_id: string;
+
+  /**
+   * The unique identifier for the connection.
+   */
+  id?: string;
 
   /**
    * Configuration options for the connection.
@@ -264,14 +264,14 @@ export namespace ConnectionUpsertParams {
     access_token: string;
 
     /**
-     * The timestamp when the access token expires.
-     */
-    expires_at: number;
-
-    /**
      * The OAuth 2.0 refresh token.
      */
     refresh_token: string;
+
+    /**
+     * The unix timestamp (in seconds) for when the access token expires.
+     */
+    expires_at?: number;
   }
 
   export interface OAuth1Credentials {
@@ -283,7 +283,7 @@ export namespace ConnectionUpsertParams {
     /**
      * The OAuth 1.0a token.
      */
-    token_secret: string;
+    oauth_token_secret: string;
   }
 
   export interface BasicCredentials {
