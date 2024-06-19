@@ -89,9 +89,8 @@ describe('resource connections', () => {
 
   test('upsert: only required params', async () => {
     const responsePromise = embed.connections.upsert({
-      id: 'string',
       auth_scheme: 'oauth2',
-      credentials: { access_token: 'string', refresh_token: 'string', expires_at: 0 },
+      credentials: { access_token: 'string', refresh_token: 'string' },
       integration_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -105,10 +104,10 @@ describe('resource connections', () => {
 
   test('upsert: required and optional params', async () => {
     const response = await embed.connections.upsert({
-      id: 'string',
       auth_scheme: 'oauth2',
       credentials: { access_token: 'string', refresh_token: 'string', expires_at: 0 },
       integration_id: 'string',
+      id: 'string',
       configuration: { foo: 'bar' },
       exclusions: { foo: 'bar' },
       inclusions: { foo: 'bar' },

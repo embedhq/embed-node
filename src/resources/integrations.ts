@@ -81,11 +81,6 @@ export interface Integration {
   id: string;
 
   /**
-   * The authentication scheme the integration uses.
-   */
-  auth_scheme: 'oauth2' | 'oauth1' | 'basic' | 'api_key';
-
-  /**
    * The Unix timestamp (in seconds) for when the integration was created.
    */
   created_at: number;
@@ -138,6 +133,11 @@ export interface Integration {
   updated_at: number;
 
   /**
+   * The authentication schemes the integration supports.
+   */
+  auth_schemes?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
+
+  /**
    * The URL of the integration provider's logo suitable for dark mode.
    */
   logo_url_dark_mode?: string | null;
@@ -175,10 +175,9 @@ export interface IntegrationCreateParams {
   id?: string;
 
   /**
-   * The authentication scheme the integration should use. Only applicable for
-   * providers that support multiple auth schemes.
+   * The authentication schemes the integration supports.
    */
-  auth_scheme?: 'oauth1' | 'oauth2' | 'basic' | 'api_key';
+  auth_schemes?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
 
   /**
    * The OAuth Client ID. Required for integrations that use OAuth.

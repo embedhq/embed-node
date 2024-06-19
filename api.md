@@ -113,7 +113,7 @@ Types:
 
 Methods:
 
-- <code title="get /syncs/{collection_key}/runs/{run_id}">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">retrieve</a>(collectionKey, runId, { ...params }) -> SyncRun</code>
+- <code title="get /syncs/{collection_key}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">retrieve</a>(collectionKey, syncRunId, { ...params }) -> SyncRun</code>
 - <code title="get /syncs/{collection_key}/runs">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">list</a>(collectionKey, { ...params }) -> RunListResponse</code>
 
 # Actions
@@ -144,6 +144,18 @@ Methods:
 
 - <code title="get /actions/{action_key}/schema">client.actions.schemas.<a href="./src/resources/actions/schemas.ts">retrieve</a>(actionKey, { ...params }) -> ActionSchema</code>
 - <code title="get /actions/schemas">client.actions.schemas.<a href="./src/resources/actions/schemas.ts">list</a>({ ...params }) -> SchemaListResponse</code>
+
+## Runs
+
+Types:
+
+- <code><a href="./src/resources/actions/runs.ts">ActionRun</a></code>
+- <code><a href="./src/resources/actions/runs.ts">RunListResponse</a></code>
+
+Methods:
+
+- <code title="get /actions/{action_key}/runs/{action_run_id}">client.actions.runs.<a href="./src/resources/actions/runs.ts">retrieve</a>(actionKey, actionRunId, { ...params }) -> ActionRun</code>
+- <code title="get /actions/{action_key}/runs">client.actions.runs.<a href="./src/resources/actions/runs.ts">list</a>(actionKey, { ...params }) -> RunListResponse</code>
 
 # Proxy
 

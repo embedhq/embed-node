@@ -10,11 +10,11 @@ export class Runs extends APIResource {
    */
   retrieve(
     collectionKey: string,
-    runId: string,
+    syncRunId: string,
     query: RunRetrieveParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SyncRun> {
-    return this._client.get(`/syncs/${collectionKey}/runs/${runId}`, { query, ...options });
+    return this._client.get(`/syncs/${collectionKey}/runs/${syncRunId}`, { query, ...options });
   }
 
   /**
@@ -49,11 +49,6 @@ export interface SyncRun {
   connection_id: string;
 
   /**
-   * The Unix timestamp (in seconds) for when the sync run was created.
-   */
-  created_at: number;
-
-  /**
    * The unique identifier of the integration to which the sync belongs.
    */
   integration_id: string;
@@ -81,12 +76,17 @@ export interface SyncRun {
   /**
    * The status of the sync run.
    */
-  status: 'running' | 'stopped' | 'completed' | 'failed';
+  status: 'running' | 'stopped' | 'succeeded' | 'failed';
 
   /**
-   * The Unix timestamp (in seconds) for when the sync run was updated.
+   * The duration of the sync run (in seconds).
    */
-  updated_at: number;
+  duration?: number | null;
+
+  /**
+   * The Unix timestamp (in seconds) for when the sync run started.
+   */
+  timestamp?: number;
 }
 
 export interface RunListResponse {

@@ -10,7 +10,7 @@ const embed = new Embed({
 
 describe('resource runs', () => {
   test('retrieve: only required params', async () => {
-    const responsePromise = embed.syncs.runs.retrieve('issues', 'sync-run-123', {
+    const responsePromise = embed.actions.runs.retrieve('create-issue', 'action-run-123', {
       connection_id: 'user-123',
       integration_id: 'github-123',
     });
@@ -24,14 +24,14 @@ describe('resource runs', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await embed.syncs.runs.retrieve('issues', 'sync-run-123', {
+    const response = await embed.actions.runs.retrieve('create-issue', 'action-run-123', {
       connection_id: 'user-123',
       integration_id: 'github-123',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = embed.syncs.runs.list('issues', {
+    const responsePromise = embed.actions.runs.list('create-issue', {
       connection_id: 'user-123',
       integration_id: 'github-123',
     });
@@ -45,7 +45,7 @@ describe('resource runs', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await embed.syncs.runs.list('issues', {
+    const response = await embed.actions.runs.list('create-issue', {
       connection_id: 'user-123',
       integration_id: 'github-123',
     });
