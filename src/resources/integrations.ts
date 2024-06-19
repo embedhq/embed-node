@@ -175,10 +175,9 @@ export interface IntegrationCreateParams {
   id?: string;
 
   /**
-   * The authentication scheme the integration should use. Only applicable for
-   * providers that support multiple auth schemes.
+   * The authentication schemes the integration supports.
    */
-  auth_scheme?: 'oauth1' | 'oauth2' | 'basic' | 'api_key';
+  auth_schemes?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
 
   /**
    * The OAuth Client ID. Required for integrations that use OAuth.
