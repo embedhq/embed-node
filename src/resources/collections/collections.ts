@@ -139,6 +139,11 @@ export interface Collection {
    * The Unix timestamp (in seconds) for when the collection was updated.
    */
   updated_at: number;
+
+  /**
+   * Configuration options for the collection.
+   */
+  configuration?: Record<string, unknown> | null;
 }
 
 export interface CollectionListResponse {

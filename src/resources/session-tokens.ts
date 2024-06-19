@@ -102,11 +102,6 @@ export interface SessionToken {
   redirect_url: string | null;
 
   /**
-   * The Unix timestamp (in seconds) for when the session token was updated.
-   */
-  updated_at: number;
-
-  /**
    * The magic link used to connect an account with the session token.
    */
   url: string;
@@ -144,7 +139,7 @@ export interface SessionTokenCreateParams {
   configuration?: Record<string, unknown> | null;
 
   /**
-   * The unique identifier to assign to the connection.
+   * The unique identifier of the connection.
    */
   connection_id?: string;
 
