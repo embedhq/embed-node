@@ -81,11 +81,6 @@ export interface Integration {
   id: string;
 
   /**
-   * The authentication scheme the integration uses.
-   */
-  auth_scheme: 'oauth2' | 'oauth1' | 'basic' | 'api_key';
-
-  /**
    * The Unix timestamp (in seconds) for when the integration was created.
    */
   created_at: number;
@@ -136,6 +131,11 @@ export interface Integration {
    * The Unix timestamp (in seconds) for when the integration was updated.
    */
   updated_at: number;
+
+  /**
+   * The authentication schemes the integration supports.
+   */
+  auth_schemes?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
 
   /**
    * The URL of the integration provider's logo suitable for dark mode.
