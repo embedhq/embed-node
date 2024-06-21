@@ -61,8 +61,14 @@ export namespace Provider {
      */
     name: string;
 
+    /**
+     * The actions supported by the integration provider.
+     */
     actions?: Array<SchemasAPI.ActionSchema>;
 
+    /**
+     * The collections supported by the integration provider.
+     */
     collections?: Array<CollectionsSchemasAPI.CollectionSchema>;
 
     /**
