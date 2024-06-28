@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
 import { APIResource } from '@embedhq/node/resource';
+import * as Core from '@embedhq/node/core';
 import * as RunsAPI from '@embedhq/node/resources/actions/runs';
 
 export class Runs extends APIResource {
@@ -51,7 +51,7 @@ export interface ActionRun {
   /**
    * The duration of the action run (in seconds).
    */
-  duration: number;
+  duration: number | null;
 
   /**
    * The input parameters for the action run.
