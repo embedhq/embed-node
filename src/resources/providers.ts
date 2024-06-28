@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
 import { APIResource } from '@embedhq/node/resource';
+import * as Core from '@embedhq/node/core';
 import * as ProvidersAPI from '@embedhq/node/resources/providers';
 import * as SchemasAPI from '@embedhq/node/resources/actions/schemas';
 import * as CollectionsSchemasAPI from '@embedhq/node/resources/collections/schemas';
@@ -61,8 +61,14 @@ export namespace Provider {
      */
     name: string;
 
+    /**
+     * The actions supported by the integration provider.
+     */
     actions?: Array<SchemasAPI.ActionSchema>;
 
+    /**
+     * The collections supported by the integration provider.
+     */
     collections?: Array<CollectionsSchemasAPI.CollectionSchema>;
 
     /**

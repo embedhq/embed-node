@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
 import { APIResource } from '@embedhq/node/resource';
+import * as Core from '@embedhq/node/core';
 import * as WebhooksAPI from '@embedhq/node/resources/webhooks/webhooks';
 import * as EventsAPI from '@embedhq/node/resources/webhooks/events';
 

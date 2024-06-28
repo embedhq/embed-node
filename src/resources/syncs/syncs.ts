@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
 import { APIResource } from '@embedhq/node/resource';
+import * as Core from '@embedhq/node/core';
 import * as SyncsAPI from '@embedhq/node/resources/syncs/syncs';
 import * as RunsAPI from '@embedhq/node/resources/syncs/runs';
 
