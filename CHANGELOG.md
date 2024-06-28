@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2024-06-28)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/embedhq/embed-node/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#23](https://github.com/embedhq/embed-node/issues/23)) ([f4eed0a](https://github.com/embedhq/embed-node/commit/f4eed0a228e56c6f394b28565fa7de225349ae1c))
+* **api:** OpenAPI spec update via Stainless API ([#25](https://github.com/embedhq/embed-node/issues/25)) ([b4b6b52](https://github.com/embedhq/embed-node/commit/b4b6b52502cd5dc4d5428ab751f438b71b28443b))
+* **api:** OpenAPI spec update via Stainless API ([#26](https://github.com/embedhq/embed-node/issues/26)) ([ba0092b](https://github.com/embedhq/embed-node/commit/ba0092b3848a6117ba78f91e78f985a1f43b8731))
+
 ## 0.1.0-alpha.4 (2024-06-19)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/embedhq/embed-node/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
