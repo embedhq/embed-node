@@ -9,6 +9,13 @@ export class Actions extends APIResource {
   runs: RunsAPI.Runs = new RunsAPI.Runs(this._client);
 
   /**
+   * Creates an action from a template.
+   */
+  create(body: ActionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Action> {
+    return this._client.post('/actions', { body, ...options });
+  }
+
+  /**
    * Returns an action.
    */
   retrieve(
@@ -20,10 +27,34 @@ export class Actions extends APIResource {
   }
 
   /**
+   * Updates an action.
+   */
+  update(action: string, params: ActionUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Action> {
+    const { integration, action_version, ...body } = params;
+    return this._client.put(`/actions/${action}`, {
+      query: { integration, action_version },
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Returns a list of actions.
    */
   list(query: ActionListParams, options?: Core.RequestOptions): Core.APIPromise<ActionListResponse> {
     return this._client.get('/actions', { query, ...options });
+  }
+
+  /**
+   * Deletes an action.
+   */
+  delete(
+    action: string,
+    params: ActionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActionDeleteResponse> {
+    const { integration, action_version } = params;
+    return this._client.delete(`/actions/${action}`, { query: { integration, action_version }, ...options });
   }
 
   /**
@@ -104,10 +135,51 @@ export interface ActionListResponse {
   object: 'list';
 }
 
+export interface ActionDeleteResponse {
+  deleted: boolean;
+
+  object: 'action';
+
+  slug: string;
+}
+
 /**
  * The action response.
  */
 export type ActionTriggerResponse = Record<string, unknown>;
+
+export interface ActionCreateParams {
+  /**
+   * The slug of the action template to use.
+   */
+  action_template: string;
+
+  /**
+   * The slug of the integration to which the action belongs.
+   */
+  integration: string;
+
+  /**
+   * Configuration options for the action.
+   */
+  configuration?: Record<string, unknown> | null;
+
+  /**
+   * The display name of the action (defaults to the action template name).
+   */
+  name?: string;
+
+  /**
+   * The OAuth scopes required to trigger the action (defaults to the action template
+   * scopes, if applicable).
+   */
+  required_scopes?: Array<string>;
+
+  /**
+   * The unique slug of the action (defaults to the action template slug).
+   */
+  slug?: string;
+}
 
 export interface ActionRetrieveParams {
   /**
@@ -121,11 +193,55 @@ export interface ActionRetrieveParams {
   action_version?: string;
 }
 
+export interface ActionUpdateParams {
+  /**
+   * Query param: The slug of the integration to which the action belongs.
+   */
+  integration: string;
+
+  /**
+   * Query param: The version of the action to update (defaults to latest).
+   */
+  action_version?: string;
+
+  /**
+   * Body param: Configuration options for the action.
+   */
+  configuration?: Record<string, unknown> | null;
+
+  /**
+   * Body param: Whether the action is enabled.
+   */
+  is_enabled?: boolean;
+
+  /**
+   * Body param: The display name of the action.
+   */
+  name?: string;
+
+  /**
+   * Body param: The OAuth scopes required to trigger the action.
+   */
+  required_scopes?: Array<string>;
+}
+
 export interface ActionListParams {
   /**
    * The slug of the integration to which the actions belong.
    */
   integration: string;
+}
+
+export interface ActionDeleteParams {
+  /**
+   * The slug of the integration to which the action belongs.
+   */
+  integration: string;
+
+  /**
+   * The version of the action to delete (defaults to latest).
+   */
+  action_version?: string;
 }
 
 export interface ActionTriggerParams {
@@ -153,9 +269,13 @@ export interface ActionTriggerParams {
 export namespace Actions {
   export import Action = ActionsAPI.Action;
   export import ActionListResponse = ActionsAPI.ActionListResponse;
+  export import ActionDeleteResponse = ActionsAPI.ActionDeleteResponse;
   export import ActionTriggerResponse = ActionsAPI.ActionTriggerResponse;
+  export import ActionCreateParams = ActionsAPI.ActionCreateParams;
   export import ActionRetrieveParams = ActionsAPI.ActionRetrieveParams;
+  export import ActionUpdateParams = ActionsAPI.ActionUpdateParams;
   export import ActionListParams = ActionsAPI.ActionListParams;
+  export import ActionDeleteParams = ActionsAPI.ActionDeleteParams;
   export import ActionTriggerParams = ActionsAPI.ActionTriggerParams;
   export import Runs = RunsAPI.Runs;
   export import ActionRun = RunsAPI.ActionRun;
