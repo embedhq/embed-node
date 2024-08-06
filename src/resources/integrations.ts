@@ -14,24 +14,6 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Returns an integration.
-   */
-  retrieve(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<Integration> {
-    return this._client.get(`/integrations/${integrationId}`, options);
-  }
-
-  /**
-   * Updates an integration.
-   */
-  update(
-    integrationId: string,
-    body: IntegrationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Integration> {
-    return this._client.put(`/integrations/${integrationId}`, { body, ...options });
-  }
-
-  /**
    * Returns a list of integrations.
    */
   list(
@@ -48,38 +30,12 @@ export class Integrations extends APIResource {
     }
     return this._client.get('/integrations', { query, ...options });
   }
-
-  /**
-   * Deletes an integration.
-   */
-  delete(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationDeleteResponse> {
-    return this._client.delete(`/integrations/${integrationId}`, options);
-  }
-
-  /**
-   * Disables an integration.
-   */
-  disable(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<Integration> {
-    return this._client.post(`/integrations/${integrationId}/disable`, options);
-  }
-
-  /**
-   * Enables an integration.
-   */
-  enable(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<Integration> {
-    return this._client.post(`/integrations/${integrationId}/enable`, options);
-  }
 }
 
 /**
  * Represents an integration with a third-party provider.
  */
 export interface Integration {
-  /**
-   * The unique identifier for the integration.
-   */
-  id: string;
-
   /**
    * The Unix timestamp (in seconds) for when the integration was created.
    */
@@ -123,9 +79,9 @@ export interface Integration {
   object: 'integration';
 
   /**
-   * The unique key of the integration provider.
+   * The unique slug of the provider.
    */
-  provider_key: string;
+  provider: string;
 
   /**
    * The Unix timestamp (in seconds) for when the integration was updated.
@@ -141,6 +97,11 @@ export interface Integration {
    * The URL of the integration provider's logo suitable for dark mode.
    */
   logo_url_dark_mode?: string | null;
+
+  /**
+   * The unique slug of the integration.
+   */
+  slug?: string;
 }
 
 export interface IntegrationListResponse {
@@ -148,36 +109,23 @@ export interface IntegrationListResponse {
 
   object: 'list';
 
-  first_id?: string | null;
+  first?: string | null;
 
   has_more?: boolean;
 
-  last_id?: string | null;
-}
-
-export interface IntegrationDeleteResponse {
-  id: string;
-
-  deleted: boolean;
-
-  object: 'integration';
+  last?: string | null;
 }
 
 export interface IntegrationCreateParams {
   /**
-   * The unique key of the integration provider.
+   * The unique slug of the integration provider.
    */
-  provider_key: string;
+  provider: string;
 
   /**
-   * The unique identifier for the integration.
+   * The display name of the integration (defaults to provider name).
    */
-  id?: string;
-
-  /**
-   * The authentication schemes the integration supports.
-   */
-  auth_schemes?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
+  name?: string;
 
   /**
    * The OAuth Client ID. Required for integrations that use OAuth.
@@ -197,46 +145,26 @@ export interface IntegrationCreateParams {
   oauth_scopes?: Array<string>;
 
   /**
-   * Use test credentials provided by Embed. Only available in staging environment.
+   * The unique slug of the integration (defaults to provider slug).
+   */
+  slug?: string;
+
+  /**
+   * Use test credentials provided by Embed.
    */
   use_test_credentials?: boolean;
 }
 
-export interface IntegrationUpdateParams {
-  /**
-   * Whether the integration is using test credentials provided by Embed.
-   */
-  is_using_test_credentials?: boolean;
-
-  /**
-   * The OAuth Client ID. Required for integrations that use OAuth authentication.
-   */
-  oauth_client_id?: string | null;
-
-  /**
-   * The OAuth Client Secret. Required for integrations that use OAuth
-   * authentication.
-   */
-  oauth_client_secret?: string | null;
-
-  /**
-   * Additional OAuth scopes to request from the user. By default, Embed will request
-   * the minimum required scopes for the collections and actions enabled on the
-   * integration.
-   */
-  oauth_scopes?: Array<string>;
-}
-
 export interface IntegrationListParams {
   /**
-   * A cursor for use in pagination. `after` is an object ID that defines your place
-   * in the list.
+   * A cursor for use in pagination. `after` is an object ID or slug that defines
+   * your place in the list.
    */
   after?: string;
 
   /**
-   * A cursor for use in pagination. `before` is an object ID that defines your place
-   * in the list.
+   * A cursor for use in pagination. `before` is an object ID or slug that defines
+   * your place in the list.
    */
   before?: string;
 
@@ -254,8 +182,6 @@ export interface IntegrationListParams {
 export namespace Integrations {
   export import Integration = IntegrationsAPI.Integration;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
 }

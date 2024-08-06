@@ -9,11 +9,8 @@ const embed = new Embed({
 });
 
 describe('resource syncs', () => {
-  test('retrieve: only required params', async () => {
-    const responsePromise = embed.syncs.retrieve('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
+  test('list', async () => {
+    const responsePromise = embed.syncs.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,110 +20,18 @@ describe('resource syncs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('retrieve: required and optional params', async () => {
-    const response = await embed.syncs.retrieve('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(embed.syncs.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(Embed.NotFoundError);
   });
 
-  test('update: only required params', async () => {
-    const responsePromise = embed.syncs.update('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: required and optional params', async () => {
-    const response = await embed.syncs.update('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-      frequency: 'daily',
-    });
-  });
-
-  test('list: only required params', async () => {
-    const responsePromise = embed.syncs.list({ connection_id: 'user-123', integration_id: 'github-123' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: required and optional params', async () => {
-    const response = await embed.syncs.list({ connection_id: 'user-123', integration_id: 'github-123' });
-  });
-
-  test('start: only required params', async () => {
-    const responsePromise = embed.syncs.start('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('start: required and optional params', async () => {
-    const response = await embed.syncs.start('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
-  });
-
-  test('stop: only required params', async () => {
-    const responsePromise = embed.syncs.stop('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('stop: required and optional params', async () => {
-    const response = await embed.syncs.stop('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
-  });
-
-  test('trigger: only required params', async () => {
-    const responsePromise = embed.syncs.trigger('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('trigger: required and optional params', async () => {
-    const response = await embed.syncs.trigger('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-    });
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      embed.syncs.list(
+        { connected_account_id: 'user-123', integration: 'github-123' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Embed.NotFoundError);
   });
 });

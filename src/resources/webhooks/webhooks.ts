@@ -46,20 +46,6 @@ export class Webhooks extends APIResource {
   delete(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
     return this._client.delete(`/webhooks/${webhookId}`, options);
   }
-
-  /**
-   * Disables a webhook.
-   */
-  disable(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<Webhook> {
-    return this._client.post(`/webhooks/${webhookId}/disable`, options);
-  }
-
-  /**
-   * Enables a webhook.
-   */
-  enable(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<Webhook> {
-    return this._client.post(`/webhooks/${webhookId}/enable`, options);
-  }
 }
 
 /**

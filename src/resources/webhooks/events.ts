@@ -6,17 +6,6 @@ import * as EventsAPI from '@embedhq/node/resources/webhooks/events';
 
 export class Events extends APIResource {
   /**
-   * Returns a webhook event.
-   */
-  retrieve(
-    webhookId: string,
-    eventId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookEventObject> {
-    return this._client.get(`/webhooks/${webhookId}/events/${eventId}`, options);
-  }
-
-  /**
    * Returns a list of recent events for a webhook.
    */
   list(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<EventListResponse> {

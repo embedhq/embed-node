@@ -12,8 +12,8 @@ describe('resource proxy', () => {
   test('delete: only required params', async () => {
     const responsePromise = embed.proxy.delete('string', {
       body: { foo: 'bar' },
-      connection_id: 'string',
-      integration_id: 'string',
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,15 +27,18 @@ describe('resource proxy', () => {
   test('delete: required and optional params', async () => {
     const response = await embed.proxy.delete('string', {
       body: { foo: 'bar' },
-      connection_id: 'string',
-      integration_id: 'string',
-      base_url_override: 'string',
-      retries: 0,
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
+      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Retries': 0,
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = embed.proxy.get('string', { connection_id: 'string', integration_id: 'string' });
+    const responsePromise = embed.proxy.get('string', {
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,18 +50,18 @@ describe('resource proxy', () => {
 
   test('get: required and optional params', async () => {
     const response = await embed.proxy.get('string', {
-      connection_id: 'string',
-      integration_id: 'string',
-      base_url_override: 'string',
-      retries: 0,
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
+      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Retries': 0,
     });
   });
 
   test('post: only required params', async () => {
     const responsePromise = embed.proxy.post('string', {
       body: { foo: 'bar' },
-      connection_id: 'string',
-      integration_id: 'string',
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,18 +75,18 @@ describe('resource proxy', () => {
   test('post: required and optional params', async () => {
     const response = await embed.proxy.post('string', {
       body: { foo: 'bar' },
-      connection_id: 'string',
-      integration_id: 'string',
-      base_url_override: 'string',
-      retries: 0,
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
+      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Retries': 0,
     });
   });
 
   test('put: only required params', async () => {
     const responsePromise = embed.proxy.put('string', {
       body: { foo: 'bar' },
-      connection_id: 'string',
-      integration_id: 'string',
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -97,10 +100,10 @@ describe('resource proxy', () => {
   test('put: required and optional params', async () => {
     const response = await embed.proxy.put('string', {
       body: { foo: 'bar' },
-      connection_id: 'string',
-      integration_id: 'string',
-      base_url_override: 'string',
-      retries: 0,
+      'X-Embed-Connected-Account-Id': 'string',
+      'X-Embed-Integration': 'string',
+      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Retries': 0,
     });
   });
 });

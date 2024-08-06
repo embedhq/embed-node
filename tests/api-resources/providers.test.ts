@@ -9,24 +9,6 @@ const embed = new Embed({
 });
 
 describe('resource providers', () => {
-  test('retrieve', async () => {
-    const responsePromise = embed.providers.retrieve('github');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.providers.retrieve('github', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Embed.NotFoundError,
-    );
-  });
-
   test('list', async () => {
     const responsePromise = embed.providers.list();
     const rawResponse = await responsePromise.asResponse();
@@ -43,5 +25,15 @@ describe('resource providers', () => {
     await expect(embed.providers.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
+  });
+
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      embed.providers.list(
+        { include_action_templates: false, include_collection_templates: false },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Embed.NotFoundError);
   });
 });

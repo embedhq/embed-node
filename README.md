@@ -27,9 +27,9 @@ const embed = new Embed({
 });
 
 async function main() {
-  const integration = await embed.integrations.create({ provider_key: 'github' });
+  const integration = await embed.integrations.create({ provider: 'github' });
 
-  console.log(integration.id);
+  console.log(integration.oauth_client_id);
 }
 
 main();
@@ -48,7 +48,7 @@ const embed = new Embed({
 });
 
 async function main() {
-  const params: Embed.IntegrationCreateParams = { provider_key: 'github' };
+  const params: Embed.IntegrationCreateParams = { provider: 'github' };
   const integration: Embed.Integration = await embed.integrations.create(params);
 }
 
@@ -66,7 +66,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const integration = await embed.integrations.create({ provider_key: 'github' }).catch(async (err) => {
+  const integration = await embed.integrations.create({ provider: 'github' }).catch(async (err) => {
     if (err instanceof Embed.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -109,7 +109,7 @@ const embed = new Embed({
 });
 
 // Or, configure per-request:
-await embed.integrations.create({ provider_key: 'github' }, {
+await embed.integrations.create({ provider: 'github' }, {
   maxRetries: 5,
 });
 ```
@@ -126,7 +126,7 @@ const embed = new Embed({
 });
 
 // Override per-request:
-await embed.integrations.create({ provider_key: 'github' }, {
+await embed.integrations.create({ provider: 'github' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -147,15 +147,15 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const embed = new Embed();
 
-const response = await embed.integrations.create({ provider_key: 'github' }).asResponse();
+const response = await embed.integrations.create({ provider: 'github' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: integration, response: raw } = await embed.integrations
-  .create({ provider_key: 'github' })
+  .create({ provider: 'github' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(integration.id);
+console.log(integration.oauth_client_id);
 ```
 
 ### Making custom/undocumented requests
@@ -260,7 +260,7 @@ const embed = new Embed({
 
 // Override per-request:
 await embed.integrations.create(
-  { provider_key: 'github' },
+  { provider: 'github' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },

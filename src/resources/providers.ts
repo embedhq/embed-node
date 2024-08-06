@@ -1,24 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '@embedhq/node/resource';
+import { isRequestOptions } from '@embedhq/node/core';
 import * as Core from '@embedhq/node/core';
 import * as ProvidersAPI from '@embedhq/node/resources/providers';
-import * as SchemasAPI from '@embedhq/node/resources/actions/schemas';
-import * as CollectionsSchemasAPI from '@embedhq/node/resources/collections/schemas';
 
 export class Providers extends APIResource {
   /**
-   * Returns a provider.
-   */
-  retrieve(providerKey: string, options?: Core.RequestOptions): Core.APIPromise<Provider> {
-    return this._client.get(`/providers/${providerKey}`, options);
-  }
-
-  /**
    * Returns a list of integration providers.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<ProviderListResponse> {
-    return this._client.get('/providers', options);
+  list(query?: ProviderListParams, options?: Core.RequestOptions): Core.APIPromise<ProviderListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ProviderListResponse>;
+  list(
+    query: ProviderListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProviderListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list({}, query);
+    }
+    return this._client.get('/providers', { query, ...options });
   }
 }
 
@@ -27,60 +27,65 @@ export class Providers extends APIResource {
  */
 export interface Provider {
   /**
+   * The authentication methods supported by the provider.
+   */
+  auth_methods: Array<string>;
+
+  /**
+   * The base URL of the provider's API.
+   */
+  base_url: string;
+
+  /**
+   * The URL to the provider's API documentation.
+   */
+  docs_url: string | null;
+
+  /**
+   * Headers to attach to requests made to the provider.
+   */
+  headers: Record<string, unknown> | null;
+
+  /**
+   * The URL to the provider's logo.
+   */
+  logo_url: string | null;
+
+  /**
+   * The URL to the provider's logo, optimized for dark mode.
+   */
+  logo_url_dark_mode: string;
+
+  /**
+   * The display name of the provider.
+   */
+  name: string;
+
+  /**
+   * The configuration details required for OAuth authentication.
+   */
+  oauth_configuration: Record<string, unknown> | null;
+
+  /**
    * The object type, which is always `provider`.
    */
   object: 'provider';
 
-  schema: Provider.Schema;
+  /**
+   * The configuration details required to handle rate limits imposed by the
+   * provider.
+   */
+  rate_limit_configuration: Record<string, unknown> | null;
 
   /**
-   * The unique key of the integration provider.
+   * The unique slug of the integration provider.
    */
-  unique_key: string;
-}
+  slug: string;
 
-export namespace Provider {
-  export interface Schema {
-    /**
-     * The authentication schemes supported by the integration provider.
-     */
-    auth: Array<Record<string, unknown>>;
-
-    /**
-     * The base URL of the integration provider.
-     */
-    base_url: string;
-
-    /**
-     * The URL of the logo of the integration provider.
-     */
-    logo_url: string;
-
-    /**
-     * The name of the integration provider.
-     */
-    name: string;
-
-    /**
-     * The actions supported by the integration provider.
-     */
-    actions?: Array<SchemasAPI.ActionSchema>;
-
-    /**
-     * The collections supported by the integration provider.
-     */
-    collections?: Array<CollectionsSchemasAPI.CollectionSchema>;
-
-    /**
-     * The documentation URL of the integration provider.
-     */
-    docs_url?: string;
-
-    /**
-     * The URL of the dark mode logo of the integration provider.
-     */
-    logo_url_dark_mode?: string;
-  }
+  /**
+   * Whether the provider is public or private.
+   */
+  visibility: 'public' | 'private';
 }
 
 export interface ProviderListResponse {
@@ -89,7 +94,20 @@ export interface ProviderListResponse {
   object: 'list';
 }
 
+export interface ProviderListParams {
+  /**
+   * Include action templates for each provider in the response.
+   */
+  include_action_templates?: boolean;
+
+  /**
+   * Include collection templates for each provider in the response.
+   */
+  include_collection_templates?: boolean;
+}
+
 export namespace Providers {
   export import Provider = ProvidersAPI.Provider;
   export import ProviderListResponse = ProvidersAPI.ProviderListResponse;
+  export import ProviderListParams = ProvidersAPI.ProviderListParams;
 }
