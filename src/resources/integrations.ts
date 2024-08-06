@@ -114,9 +114,9 @@ export interface Integration {
   updated_at: number;
 
   /**
-   * The authentication schemes the integration supports.
+   * The authentication methods the integration supports.
    */
-  auth_schemes?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
+  auth_methods?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
 
   /**
    * The URL of the integration provider's logo suitable for dark mode.
