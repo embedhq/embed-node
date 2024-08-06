@@ -13,8 +13,8 @@ describe('resource proxy', () => {
     const responsePromise = client.proxy.delete({
       endpoint: 'endpoint',
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,18 +29,18 @@ describe('resource proxy', () => {
     const response = await client.proxy.delete({
       endpoint: 'endpoint',
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
-      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
-      'X-Embed-Retries': 0,
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
+      base_url_override: 'base_url_override',
+      retries: 0,
     });
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.proxy.get({
       endpoint: 'endpoint',
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,10 +54,10 @@ describe('resource proxy', () => {
   test('get: required and optional params', async () => {
     const response = await client.proxy.get({
       endpoint: 'endpoint',
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
-      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
-      'X-Embed-Retries': 0,
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
+      base_url_override: 'base_url_override',
+      retries: 0,
     });
   });
 
@@ -65,8 +65,8 @@ describe('resource proxy', () => {
     const responsePromise = client.proxy.post({
       endpoint: 'endpoint',
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -81,10 +81,10 @@ describe('resource proxy', () => {
     const response = await client.proxy.post({
       endpoint: 'endpoint',
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
-      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
-      'X-Embed-Retries': 0,
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
+      base_url_override: 'base_url_override',
+      retries: 0,
     });
   });
 
@@ -92,8 +92,8 @@ describe('resource proxy', () => {
     const responsePromise = client.proxy.put({
       endpoint: 'endpoint',
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -108,10 +108,10 @@ describe('resource proxy', () => {
     const response = await client.proxy.put({
       endpoint: 'endpoint',
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
-      'X-Embed-Integration': 'X-Embed-Integration',
-      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
-      'X-Embed-Retries': 0,
+      connected_account_id: 'connected_account_id',
+      integration: 'integration',
+      base_url_override: 'base_url_override',
+      retries: 0,
     });
   });
 });
