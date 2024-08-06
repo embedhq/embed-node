@@ -1,11 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
-import * as Core from '../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as Core from '../../core';
 import * as ProvidersAPI from './providers';
+import * as ActionTemplatesAPI from './action-templates';
+import * as CollectionTemplatesAPI from './collection-templates';
 
 export class Providers extends APIResource {
+  collectionTemplates: CollectionTemplatesAPI.CollectionTemplates =
+    new CollectionTemplatesAPI.CollectionTemplates(this._client);
+  actionTemplates: ActionTemplatesAPI.ActionTemplates = new ActionTemplatesAPI.ActionTemplates(this._client);
+
   /**
    * Returns a provider.
    */
@@ -143,4 +149,10 @@ export namespace Providers {
   export import ProviderListResponse = ProvidersAPI.ProviderListResponse;
   export import ProviderRetrieveParams = ProvidersAPI.ProviderRetrieveParams;
   export import ProviderListParams = ProvidersAPI.ProviderListParams;
+  export import CollectionTemplates = CollectionTemplatesAPI.CollectionTemplates;
+  export import CollectionTemplateRetrieveResponse = CollectionTemplatesAPI.CollectionTemplateRetrieveResponse;
+  export import CollectionTemplateListResponse = CollectionTemplatesAPI.CollectionTemplateListResponse;
+  export import ActionTemplates = ActionTemplatesAPI.ActionTemplates;
+  export import ActionTemplateRetrieveResponse = ActionTemplatesAPI.ActionTemplateRetrieveResponse;
+  export import ActionTemplateListResponse = ActionTemplatesAPI.ActionTemplateListResponse;
 }

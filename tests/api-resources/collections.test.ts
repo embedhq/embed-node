@@ -9,6 +9,31 @@ const client = new Embed({
 });
 
 describe('resource collections', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.collections.create({
+      collection_template: 'issues',
+      integration: 'github-123',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.collections.create({
+      collection_template: 'issues',
+      integration: 'github-123',
+      configuration: { foo: 'bar' },
+      name: 'Issues',
+      required_scopes: ['repo'],
+      slug: 'issues',
+    });
+  });
+
   test('retrieve: only required params', async () => {
     const responsePromise = client.collections.retrieve('issues', { integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
@@ -62,5 +87,23 @@ describe('resource collections', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.collections.list({ integration: 'github-123' });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.collections.delete('issues', { integration: 'github-123' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.collections.delete('issues', {
+      integration: 'github-123',
+      collection_version: '1.2',
+    });
   });
 });

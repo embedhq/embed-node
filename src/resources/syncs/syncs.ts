@@ -10,6 +10,13 @@ export class Syncs extends APIResource {
   runs: RunsAPI.Runs = new RunsAPI.Runs(this._client);
 
   /**
+   * Creates a sync.
+   */
+  create(body: SyncCreateParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
+    return this._client.post('/syncs', { body, ...options });
+  }
+
+  /**
    * Returns a sync.
    */
   retrieve(
@@ -45,6 +52,21 @@ export class Syncs extends APIResource {
       return this.list({}, query);
     }
     return this._client.get('/syncs', { query, ...options });
+  }
+
+  /**
+   * Deletes a sync.
+   */
+  delete(
+    collection: string,
+    params: SyncDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SyncDeleteResponse> {
+    const { connected_account_id, integration, collection_version } = params;
+    return this._client.delete(`/syncs/${collection}`, {
+      query: { connected_account_id, integration, collection_version },
+      ...options,
+    });
   }
 
   /**
@@ -158,6 +180,53 @@ export interface SyncListResponse {
   object: 'list';
 }
 
+export interface SyncDeleteResponse {
+  collection: string;
+
+  deleted: boolean;
+
+  object: 'sync';
+}
+
+export interface SyncCreateParams {
+  /**
+   * The unique slug of the collection.
+   */
+  collection: string;
+
+  /**
+   * The unique identifier of the connected account.
+   */
+  connected_account_id: string;
+
+  /**
+   * The unique slug of the integration.
+   */
+  integration: string;
+
+  /**
+   * The collection version used for the sync (defaults to latest).
+   */
+  collection_version?: string;
+
+  /**
+   * Array of IDs to exclude from the sync. If present, objects with matching IDs
+   * will not be synced.
+   */
+  exclusions?: Array<string>;
+
+  /**
+   * The frequency of the sync.
+   */
+  frequency?: string;
+
+  /**
+   * Array of IDs to include in the sync. If present, only objects with matching IDs
+   * will be synced.
+   */
+  inclusions?: Array<string>;
+}
+
 export interface SyncRetrieveParams {
   /**
    * The ID of the connected account to which the syncs belong.
@@ -221,6 +290,23 @@ export interface SyncListParams {
   integration?: string;
 }
 
+export interface SyncDeleteParams {
+  /**
+   * The ID of the connected account to which the syncs belong.
+   */
+  connected_account_id: string;
+
+  /**
+   * The slug of the integration to which the sync belongs.
+   */
+  integration: string;
+
+  /**
+   * The collection version (defaults to latest).
+   */
+  collection_version?: string;
+}
+
 export interface SyncStartParams {
   /**
    * The ID of the connected account to which the syncs belong.
@@ -275,9 +361,12 @@ export interface SyncTriggerParams {
 export namespace Syncs {
   export import Sync = SyncsAPI.Sync;
   export import SyncListResponse = SyncsAPI.SyncListResponse;
+  export import SyncDeleteResponse = SyncsAPI.SyncDeleteResponse;
+  export import SyncCreateParams = SyncsAPI.SyncCreateParams;
   export import SyncRetrieveParams = SyncsAPI.SyncRetrieveParams;
   export import SyncUpdateParams = SyncsAPI.SyncUpdateParams;
   export import SyncListParams = SyncsAPI.SyncListParams;
+  export import SyncDeleteParams = SyncsAPI.SyncDeleteParams;
   export import SyncStartParams = SyncsAPI.SyncStartParams;
   export import SyncStopParams = SyncsAPI.SyncStopParams;
   export import SyncTriggerParams = SyncsAPI.SyncTriggerParams;

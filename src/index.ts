@@ -220,16 +220,22 @@ export namespace Embed {
   export import Collections = API.Collections;
   export import Collection = API.Collection;
   export import CollectionListResponse = API.CollectionListResponse;
+  export import CollectionDeleteResponse = API.CollectionDeleteResponse;
+  export import CollectionCreateParams = API.CollectionCreateParams;
   export import CollectionRetrieveParams = API.CollectionRetrieveParams;
   export import CollectionUpdateParams = API.CollectionUpdateParams;
   export import CollectionListParams = API.CollectionListParams;
+  export import CollectionDeleteParams = API.CollectionDeleteParams;
 
   export import Syncs = API.Syncs;
   export import Sync = API.Sync;
   export import SyncListResponse = API.SyncListResponse;
+  export import SyncDeleteResponse = API.SyncDeleteResponse;
+  export import SyncCreateParams = API.SyncCreateParams;
   export import SyncRetrieveParams = API.SyncRetrieveParams;
   export import SyncUpdateParams = API.SyncUpdateParams;
   export import SyncListParams = API.SyncListParams;
+  export import SyncDeleteParams = API.SyncDeleteParams;
   export import SyncStartParams = API.SyncStartParams;
   export import SyncStopParams = API.SyncStopParams;
   export import SyncTriggerParams = API.SyncTriggerParams;
@@ -237,9 +243,13 @@ export namespace Embed {
   export import Actions = API.Actions;
   export import Action = API.Action;
   export import ActionListResponse = API.ActionListResponse;
+  export import ActionDeleteResponse = API.ActionDeleteResponse;
   export import ActionTriggerResponse = API.ActionTriggerResponse;
+  export import ActionCreateParams = API.ActionCreateParams;
   export import ActionRetrieveParams = API.ActionRetrieveParams;
+  export import ActionUpdateParams = API.ActionUpdateParams;
   export import ActionListParams = API.ActionListParams;
+  export import ActionDeleteParams = API.ActionDeleteParams;
   export import ActionTriggerParams = API.ActionTriggerParams;
 
   export import Proxy = API.Proxy;

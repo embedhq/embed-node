@@ -9,6 +9,33 @@ const client = new Embed({
 });
 
 describe('resource syncs', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.syncs.create({
+      collection: 'issues',
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.syncs.create({
+      collection: 'issues',
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
+      exclusions: ['string', 'string', 'string'],
+      frequency: 'Every 6 hours',
+      inclusions: ['string', 'string', 'string'],
+    });
+  });
+
   test('retrieve: only required params', async () => {
     const responsePromise = client.syncs.retrieve('issues', {
       connected_account_id: 'user-123',
@@ -82,6 +109,28 @@ describe('resource syncs', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Embed.NotFoundError);
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.syncs.delete('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.syncs.delete('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
+    });
   });
 
   test('start: only required params', async () => {
