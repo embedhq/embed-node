@@ -10,7 +10,8 @@ const client = new Embed({
 
 describe('resource proxy', () => {
   test('delete: only required params', async () => {
-    const responsePromise = client.proxy.delete('endpoint', {
+    const responsePromise = client.proxy.delete({
+      endpoint: 'endpoint',
       body: { foo: 'bar' },
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
@@ -25,7 +26,8 @@ describe('resource proxy', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.proxy.delete('endpoint', {
+    const response = await client.proxy.delete({
+      endpoint: 'endpoint',
       body: { foo: 'bar' },
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
@@ -35,7 +37,8 @@ describe('resource proxy', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.proxy.get('endpoint', {
+    const responsePromise = client.proxy.get({
+      endpoint: 'endpoint',
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
     });
@@ -49,7 +52,8 @@ describe('resource proxy', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.proxy.get('endpoint', {
+    const response = await client.proxy.get({
+      endpoint: 'endpoint',
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
       'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
@@ -58,7 +62,8 @@ describe('resource proxy', () => {
   });
 
   test('post: only required params', async () => {
-    const responsePromise = client.proxy.post('endpoint', {
+    const responsePromise = client.proxy.post({
+      endpoint: 'endpoint',
       body: { foo: 'bar' },
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
@@ -73,7 +78,8 @@ describe('resource proxy', () => {
   });
 
   test('post: required and optional params', async () => {
-    const response = await client.proxy.post('endpoint', {
+    const response = await client.proxy.post({
+      endpoint: 'endpoint',
       body: { foo: 'bar' },
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
@@ -83,7 +89,8 @@ describe('resource proxy', () => {
   });
 
   test('put: only required params', async () => {
-    const responsePromise = client.proxy.put('endpoint', {
+    const responsePromise = client.proxy.put({
+      endpoint: 'endpoint',
       body: { foo: 'bar' },
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',
@@ -98,7 +105,8 @@ describe('resource proxy', () => {
   });
 
   test('put: required and optional params', async () => {
-    const response = await client.proxy.put('endpoint', {
+    const response = await client.proxy.put({
+      endpoint: 'endpoint',
       body: { foo: 'bar' },
       'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
       'X-Embed-Integration': 'X-Embed-Integration',

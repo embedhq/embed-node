@@ -18,19 +18,16 @@ export class Actions extends APIResource {
   /**
    * Returns an action.
    */
-  retrieve(
-    action: string,
-    query: ActionRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Action> {
+  retrieve(params: ActionRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<Action> {
+    const { action, ...query } = params;
     return this._client.get(`/actions/${action}`, { query, ...options });
   }
 
   /**
    * Updates an action.
    */
-  update(action: string, params: ActionUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Action> {
-    const { integration, action_version, ...body } = params;
+  update(params: ActionUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Action> {
+    const { action, integration, action_version, ...body } = params;
     return this._client.put(`/actions/${action}`, {
       query: { integration, action_version },
       body,
@@ -48,12 +45,8 @@ export class Actions extends APIResource {
   /**
    * Deletes an action.
    */
-  delete(
-    action: string,
-    params: ActionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ActionDeleteResponse> {
-    const { integration, action_version } = params;
+  delete(params: ActionDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ActionDeleteResponse> {
+    const { action, integration, action_version } = params;
     return this._client.delete(`/actions/${action}`, { query: { integration, action_version }, ...options });
   }
 
@@ -61,11 +54,10 @@ export class Actions extends APIResource {
    * Triggers an action.
    */
   trigger(
-    action: string,
     params: ActionTriggerParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActionTriggerResponse> {
-    const { connected_account_id, integration, action_version, ...body } = params;
+    const { action, connected_account_id, integration, action_version, ...body } = params;
     return this._client.post(`/actions/${action}/trigger`, {
       query: { connected_account_id, integration, action_version },
       body,
@@ -183,17 +175,27 @@ export interface ActionCreateParams {
 
 export interface ActionRetrieveParams {
   /**
-   * The slug of the integration to which the action belongs.
+   * Path param: The unique slug of the action.
+   */
+  action: string;
+
+  /**
+   * Query param: The slug of the integration to which the action belongs.
    */
   integration: string;
 
   /**
-   * The version of the action to retrieve (defaults to latest).
+   * Query param: The version of the action to retrieve (defaults to latest).
    */
   action_version?: string;
 }
 
 export interface ActionUpdateParams {
+  /**
+   * Path param: The unique slug of the action.
+   */
+  action: string;
+
   /**
    * Query param: The slug of the integration to which the action belongs.
    */
@@ -234,17 +236,27 @@ export interface ActionListParams {
 
 export interface ActionDeleteParams {
   /**
-   * The slug of the integration to which the action belongs.
+   * Path param: The unique slug of the action.
+   */
+  action: string;
+
+  /**
+   * Query param: The slug of the integration to which the action belongs.
    */
   integration: string;
 
   /**
-   * The version of the action to delete (defaults to latest).
+   * Query param: The version of the action to delete (defaults to latest).
    */
   action_version?: string;
 }
 
 export interface ActionTriggerParams {
+  /**
+   * Path param: The unique slug of the action.
+   */
+  action: string;
+
   /**
    * Query param: The ID of the connected account used to trigger the action.
    */

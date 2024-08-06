@@ -19,19 +19,16 @@ export class Syncs extends APIResource {
   /**
    * Returns a sync.
    */
-  retrieve(
-    collection: string,
-    query: SyncRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Sync> {
+  retrieve(params: SyncRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
+    const { collection, ...query } = params;
     return this._client.get(`/syncs/${collection}`, { query, ...options });
   }
 
   /**
    * Updates a sync.
    */
-  update(collection: string, params: SyncUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
-    const { connected_account_id, integration, collection_version, ...body } = params;
+  update(params: SyncUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
+    const { collection, connected_account_id, integration, collection_version, ...body } = params;
     return this._client.put(`/syncs/${collection}`, {
       query: { connected_account_id, integration, collection_version },
       body,
@@ -57,12 +54,8 @@ export class Syncs extends APIResource {
   /**
    * Deletes a sync.
    */
-  delete(
-    collection: string,
-    params: SyncDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SyncDeleteResponse> {
-    const { connected_account_id, integration, collection_version } = params;
+  delete(params: SyncDeleteParams, options?: Core.RequestOptions): Core.APIPromise<SyncDeleteResponse> {
+    const { collection, connected_account_id, integration, collection_version } = params;
     return this._client.delete(`/syncs/${collection}`, {
       query: { connected_account_id, integration, collection_version },
       ...options,
@@ -72,8 +65,8 @@ export class Syncs extends APIResource {
   /**
    * Starts a sync.
    */
-  start(collection: string, params: SyncStartParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
-    const { connected_account_id, integration, collection_version } = params;
+  start(params: SyncStartParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
+    const { collection, connected_account_id, integration, collection_version } = params;
     return this._client.post(`/syncs/${collection}/start`, {
       query: { connected_account_id, integration, collection_version },
       ...options,
@@ -83,8 +76,8 @@ export class Syncs extends APIResource {
   /**
    * Stops a sync.
    */
-  stop(collection: string, params: SyncStopParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
-    const { connected_account_id, integration, collection_version } = params;
+  stop(params: SyncStopParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
+    const { collection, connected_account_id, integration, collection_version } = params;
     return this._client.post(`/syncs/${collection}/stop`, {
       query: { connected_account_id, integration, collection_version },
       ...options,
@@ -94,12 +87,8 @@ export class Syncs extends APIResource {
   /**
    * Triggers a one-time sync run.
    */
-  trigger(
-    collection: string,
-    params: SyncTriggerParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Sync> {
-    const { connected_account_id, integration, collection_version } = params;
+  trigger(params: SyncTriggerParams, options?: Core.RequestOptions): Core.APIPromise<Sync> {
+    const { collection, connected_account_id, integration, collection_version } = params;
     return this._client.post(`/syncs/${collection}/trigger`, {
       query: { connected_account_id, integration, collection_version },
       ...options,
@@ -229,22 +218,32 @@ export interface SyncCreateParams {
 
 export interface SyncRetrieveParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }
 
 export interface SyncUpdateParams {
+  /**
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
   /**
    * Query param: The ID of the connected account to which the syncs belong.
    */
@@ -292,68 +291,88 @@ export interface SyncListParams {
 
 export interface SyncDeleteParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }
 
 export interface SyncStartParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }
 
 export interface SyncStopParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }
 
 export interface SyncTriggerParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }

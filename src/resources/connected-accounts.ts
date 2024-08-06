@@ -10,23 +10,22 @@ export class ConnectedAccounts extends APIResource {
    * Returns a connected account.
    */
   retrieve(
-    connectedAccountId: string,
-    query: ConnectedAccountRetrieveParams,
+    params: ConnectedAccountRetrieveParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectedAccount> {
-    return this._client.get(`/connected-accounts/${connectedAccountId}`, { query, ...options });
+    const { connected_account_id, ...query } = params;
+    return this._client.get(`/connected-accounts/${connected_account_id}`, { query, ...options });
   }
 
   /**
    * Updates a connected account.
    */
   update(
-    connectedAccountId: string,
     params: ConnectedAccountUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectedAccount> {
-    const { integration, ...body } = params;
-    return this._client.put(`/connected-accounts/${connectedAccountId}`, {
+    const { connected_account_id, integration, ...body } = params;
+    return this._client.put(`/connected-accounts/${connected_account_id}`, {
       query: { integration },
       body,
       ...options,
@@ -55,12 +54,11 @@ export class ConnectedAccounts extends APIResource {
    * Deletes a connected account.
    */
   delete(
-    connectedAccountId: string,
     params: ConnectedAccountDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectedAccountDeleteResponse> {
-    const { integration } = params;
-    return this._client.delete(`/connected-accounts/${connectedAccountId}`, {
+    const { connected_account_id, integration } = params;
+    return this._client.delete(`/connected-accounts/${connected_account_id}`, {
       query: { integration },
       ...options,
     });
@@ -152,12 +150,22 @@ export interface ConnectedAccountDeleteResponse {
 
 export interface ConnectedAccountRetrieveParams {
   /**
-   * The slug of the integration to which the connected account belongs.
+   * Path param: The unique identifier for the connected account.
+   */
+  connected_account_id: string;
+
+  /**
+   * Query param: The slug of the integration to which the connected account belongs.
    */
   integration: string;
 }
 
 export interface ConnectedAccountUpdateParams {
+  /**
+   * Path param: The unique identifier for the connected account.
+   */
+  connected_account_id: string;
+
   /**
    * Query param: The slug of the integration to which the connected account belongs.
    */
@@ -210,7 +218,12 @@ export interface ConnectedAccountListParams {
 
 export interface ConnectedAccountDeleteParams {
   /**
-   * The slug of the integration to which the connected account belongs.
+   * Path param: The unique identifier for the connected account.
+   */
+  connected_account_id: string;
+
+  /**
+   * Query param: The slug of the integration to which the connected account belongs.
    */
   integration: string;
 }
