@@ -1,21 +1,56 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Action, ActionListResponse, ActionListParams, Actions } from './actions/actions';
+export {
+  Action,
+  ActionListResponse,
+  ActionTriggerResponse,
+  ActionRetrieveParams,
+  ActionListParams,
+  ActionTriggerParams,
+  Actions,
+} from './actions/actions';
 export {
   Collection,
   CollectionListResponse,
+  CollectionRetrieveParams,
+  CollectionUpdateParams,
   CollectionListParams,
   Collections,
-} from './collections/collections';
-export { Connections } from './connections';
+} from './collections';
+export {
+  ConnectSession,
+  ConnectSessionListResponse,
+  ConnectSessionDeleteResponse,
+  ConnectSessionCreateParams,
+  ConnectSessions,
+} from './connect-sessions';
+export {
+  ConnectedAccount,
+  ConnectedAccountListResponse,
+  ConnectedAccountDeleteResponse,
+  ConnectedAccountRetrieveParams,
+  ConnectedAccountUpdateParams,
+  ConnectedAccountListParams,
+  ConnectedAccountDeleteParams,
+  ConnectedAccountUpsertParams,
+  ConnectedAccounts,
+} from './connected-accounts';
 export {
   Integration,
   IntegrationListResponse,
+  IntegrationDeleteResponse,
   IntegrationCreateParams,
+  IntegrationUpdateParams,
   IntegrationListParams,
   Integrations,
 } from './integrations';
-export { Provider, ProviderListResponse, ProviderListParams, Providers } from './providers';
+export {
+  Provider,
+  ProviderListResponse,
+  ProviderRetrieveParams,
+  ProviderListParams,
+  Providers,
+} from './providers';
 export {
   ProxyDeleteResponse,
   ProxyGetResponse,
@@ -27,8 +62,17 @@ export {
   ProxyPutParams,
   Proxy,
 } from './proxy';
-export { SessionTokens } from './session-tokens';
-export { Sync, SyncListResponse, SyncListParams, Syncs } from './syncs/syncs';
+export {
+  Sync,
+  SyncListResponse,
+  SyncRetrieveParams,
+  SyncUpdateParams,
+  SyncListParams,
+  SyncStartParams,
+  SyncStopParams,
+  SyncTriggerParams,
+  Syncs,
+} from './syncs/syncs';
 export {
   Webhook,
   WebhookListResponse,

@@ -8,12 +8,9 @@ const client = new Embed({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource syncs', () => {
+describe('resource connectedAccounts', () => {
   test('retrieve: only required params', async () => {
-    const responsePromise = client.syncs.retrieve('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-    });
+    const responsePromise = client.connectedAccounts.retrieve('user-123', { integration: 'integration' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,18 +21,11 @@ describe('resource syncs', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await client.syncs.retrieve('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-      collection_version: '1.2',
-    });
+    const response = await client.connectedAccounts.retrieve('user-123', { integration: 'integration' });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.syncs.update('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-    });
+    const responsePromise = client.connectedAccounts.update('user-123', { integration: 'integration' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,18 +36,16 @@ describe('resource syncs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.syncs.update('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-      collection_version: '1.2',
-      exclusions: ['string', 'string', 'string'],
-      frequency: 'Every 6 hours',
-      inclusions: ['string', 'string', 'string'],
+    const response = await client.connectedAccounts.update('user-123', {
+      integration: 'integration',
+      configuration: { foo: 'bar' },
+      metadata: { foo: 'bar' },
+      name: 'Octocat',
     });
   });
 
   test('list', async () => {
-    const responsePromise = client.syncs.list();
+    const responsePromise = client.connectedAccounts.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,7 +57,7 @@ describe('resource syncs', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.syncs.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.connectedAccounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
@@ -77,17 +65,34 @@ describe('resource syncs', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.syncs.list(
-        { connected_account_id: 'user-123', integration: 'github-123' },
+      client.connectedAccounts.list(
+        { after: 'after', before: 'before', integration: 'integration', limit: 20, order: 'desc' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Embed.NotFoundError);
   });
 
-  test('start: only required params', async () => {
-    const responsePromise = client.syncs.start('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
+  test('delete: only required params', async () => {
+    const responsePromise = client.connectedAccounts.delete('user-123', { integration: 'integration' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.connectedAccounts.delete('user-123', { integration: 'integration' });
+  });
+
+  test('upsert: only required params', async () => {
+    const responsePromise = client.connectedAccounts.upsert({
+      id: 'id',
+      auth_method: 'oauth2',
+      credentials: { access_token: 'access_token', refresh_token: 'refresh_token' },
+      integration: 'integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -98,55 +103,14 @@ describe('resource syncs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('start: required and optional params', async () => {
-    const response = await client.syncs.start('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-      collection_version: '1.2',
-    });
-  });
-
-  test('stop: only required params', async () => {
-    const responsePromise = client.syncs.stop('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('stop: required and optional params', async () => {
-    const response = await client.syncs.stop('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-      collection_version: '1.2',
-    });
-  });
-
-  test('trigger: only required params', async () => {
-    const responsePromise = client.syncs.trigger('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('trigger: required and optional params', async () => {
-    const response = await client.syncs.trigger('issues', {
-      connected_account_id: 'user-123',
-      integration: 'github-123',
-      collection_version: '1.2',
+  test('upsert: required and optional params', async () => {
+    const response = await client.connectedAccounts.upsert({
+      id: 'id',
+      auth_method: 'oauth2',
+      credentials: { access_token: 'access_token', refresh_token: 'refresh_token', expires_at: 0 },
+      integration: 'integration',
+      configuration: { foo: 'bar' },
+      metadata: { foo: 'bar' },
     });
   });
 });
