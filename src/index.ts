@@ -189,62 +189,32 @@ export namespace Embed {
   export import Integrations = API.Integrations;
   export import Integration = API.Integration;
   export import IntegrationListResponse = API.IntegrationListResponse;
-  export import IntegrationDeleteResponse = API.IntegrationDeleteResponse;
   export import IntegrationCreateParams = API.IntegrationCreateParams;
-  export import IntegrationUpdateParams = API.IntegrationUpdateParams;
   export import IntegrationListParams = API.IntegrationListParams;
 
   export import Connections = API.Connections;
-  export import Connection = API.Connection;
-  export import ConnectionListResponse = API.ConnectionListResponse;
-  export import ConnectionDeleteResponse = API.ConnectionDeleteResponse;
-  export import ConnectionRetrieveParams = API.ConnectionRetrieveParams;
-  export import ConnectionUpdateParams = API.ConnectionUpdateParams;
-  export import ConnectionListParams = API.ConnectionListParams;
-  export import ConnectionDeleteParams = API.ConnectionDeleteParams;
-  export import ConnectionUpsertParams = API.ConnectionUpsertParams;
 
   export import SessionTokens = API.SessionTokens;
-  export import SessionToken = API.SessionToken;
-  export import SessionTokenListResponse = API.SessionTokenListResponse;
-  export import SessionTokenDeleteResponse = API.SessionTokenDeleteResponse;
-  export import SessionTokenCreateParams = API.SessionTokenCreateParams;
 
   export import Providers = API.Providers;
   export import Provider = API.Provider;
   export import ProviderListResponse = API.ProviderListResponse;
+  export import ProviderListParams = API.ProviderListParams;
 
   export import Collections = API.Collections;
   export import Collection = API.Collection;
   export import CollectionListResponse = API.CollectionListResponse;
-  export import CollectionQueryResponse = API.CollectionQueryResponse;
-  export import CollectionRetrieveParams = API.CollectionRetrieveParams;
-  export import CollectionUpdateParams = API.CollectionUpdateParams;
   export import CollectionListParams = API.CollectionListParams;
-  export import CollectionDisableParams = API.CollectionDisableParams;
-  export import CollectionEnableParams = API.CollectionEnableParams;
-  export import CollectionQueryParams = API.CollectionQueryParams;
 
   export import Syncs = API.Syncs;
   export import Sync = API.Sync;
   export import SyncListResponse = API.SyncListResponse;
-  export import SyncRetrieveParams = API.SyncRetrieveParams;
-  export import SyncUpdateParams = API.SyncUpdateParams;
   export import SyncListParams = API.SyncListParams;
-  export import SyncStartParams = API.SyncStartParams;
-  export import SyncStopParams = API.SyncStopParams;
-  export import SyncTriggerParams = API.SyncTriggerParams;
 
   export import Actions = API.Actions;
   export import Action = API.Action;
   export import ActionListResponse = API.ActionListResponse;
-  export import ActionTriggerResponse = API.ActionTriggerResponse;
-  export import ActionRetrieveParams = API.ActionRetrieveParams;
   export import ActionListParams = API.ActionListParams;
-  export import ActionDisableParams = API.ActionDisableParams;
-  export import ActionEnableParams = API.ActionEnableParams;
-  export import ActionSchemaParams = API.ActionSchemaParams;
-  export import ActionTriggerParams = API.ActionTriggerParams;
 
   export import Proxy = API.Proxy;
   export import ProxyDeleteResponse = API.ProxyDeleteResponse;

@@ -11,7 +11,7 @@ const embed = new Embed({
 describe('resource webhooks', () => {
   test('create: only required params', async () => {
     const responsePromise = embed.webhooks.create({
-      events: ['sync.succeeded', 'sync.failed'],
+      events: ['sync_run.succeeded', 'sync_run.failed'],
       url: 'https://my-app.com/webhook',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,13 +25,13 @@ describe('resource webhooks', () => {
 
   test('create: required and optional params', async () => {
     const response = await embed.webhooks.create({
-      events: ['sync.succeeded', 'sync.failed'],
+      events: ['sync_run.succeeded', 'sync_run.failed'],
       url: 'https://my-app.com/webhook',
     });
   });
 
   test('retrieve', async () => {
-    const responsePromise = embed.webhooks.retrieve('webhook-123');
+    const responsePromise = embed.webhooks.retrieve('wh_1a2b3c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,13 +43,13 @@ describe('resource webhooks', () => {
 
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      embed.webhooks.retrieve('webhook-123', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Embed.NotFoundError);
+    await expect(embed.webhooks.retrieve('wh_1a2b3c', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Embed.NotFoundError,
+    );
   });
 
   test('update', async () => {
-    const responsePromise = embed.webhooks.update('webhook-123', {});
+    const responsePromise = embed.webhooks.update('wh_1a2b3c', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,7 +78,7 @@ describe('resource webhooks', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = embed.webhooks.delete('webhook-123');
+    const responsePromise = embed.webhooks.delete('wh_1a2b3c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -90,43 +90,7 @@ describe('resource webhooks', () => {
 
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.webhooks.delete('webhook-123', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Embed.NotFoundError,
-    );
-  });
-
-  test('disable', async () => {
-    const responsePromise = embed.webhooks.disable('webhook-123');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('disable: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.webhooks.disable('webhook-123', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Embed.NotFoundError,
-    );
-  });
-
-  test('enable', async () => {
-    const responsePromise = embed.webhooks.enable('webhook-123');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('enable: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.webhooks.enable('webhook-123', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(embed.webhooks.delete('wh_1a2b3c', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
