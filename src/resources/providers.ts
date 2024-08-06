@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '@embedhq/node/resource';
-import { isRequestOptions } from '@embedhq/node/core';
-import * as Core from '@embedhq/node/core';
-import * as ProvidersAPI from '@embedhq/node/resources/providers';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as Core from '../core';
+import * as ProvidersAPI from './providers';
 
 export class Providers extends APIResource {
   /**

@@ -3,17 +3,17 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource proxy', () => {
   test('delete: only required params', async () => {
-    const responsePromise = embed.proxy.delete('string', {
+    const responsePromise = client.proxy.delete('endpoint', {
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,19 +25,19 @@ describe('resource proxy', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await embed.proxy.delete('string', {
+    const response = await client.proxy.delete('endpoint', {
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
-      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
+      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
       'X-Embed-Retries': 0,
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = embed.proxy.get('string', {
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
+    const responsePromise = client.proxy.get('endpoint', {
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,19 +49,19 @@ describe('resource proxy', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await embed.proxy.get('string', {
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
-      'X-Embed-Base-Url-Override': 'string',
+    const response = await client.proxy.get('endpoint', {
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
+      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
       'X-Embed-Retries': 0,
     });
   });
 
   test('post: only required params', async () => {
-    const responsePromise = embed.proxy.post('string', {
+    const responsePromise = client.proxy.post('endpoint', {
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,20 +73,20 @@ describe('resource proxy', () => {
   });
 
   test('post: required and optional params', async () => {
-    const response = await embed.proxy.post('string', {
+    const response = await client.proxy.post('endpoint', {
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
-      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
+      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
       'X-Embed-Retries': 0,
     });
   });
 
   test('put: only required params', async () => {
-    const responsePromise = embed.proxy.put('string', {
+    const responsePromise = client.proxy.put('endpoint', {
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -98,11 +98,11 @@ describe('resource proxy', () => {
   });
 
   test('put: required and optional params', async () => {
-    const response = await embed.proxy.put('string', {
+    const response = await client.proxy.put('endpoint', {
       body: { foo: 'bar' },
-      'X-Embed-Connected-Account-Id': 'string',
-      'X-Embed-Integration': 'string',
-      'X-Embed-Base-Url-Override': 'string',
+      'X-Embed-Connected-Account-Id': 'X-Embed-Connected-Account-Id',
+      'X-Embed-Integration': 'X-Embed-Integration',
+      'X-Embed-Base-Url-Override': 'X-Embed-Base-Url-Override',
       'X-Embed-Retries': 0,
     });
   });

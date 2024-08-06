@@ -3,14 +3,14 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource syncs', () => {
   test('list', async () => {
-    const responsePromise = embed.syncs.list();
+    const responsePromise = client.syncs.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,13 +22,15 @@ describe('resource syncs', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.syncs.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(Embed.NotFoundError);
+    await expect(client.syncs.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Embed.NotFoundError,
+    );
   });
 
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      embed.syncs.list(
+      client.syncs.list(
         { connected_account_id: 'user-123', integration: 'github-123' },
         { path: '/_stainless_unknown_path' },
       ),

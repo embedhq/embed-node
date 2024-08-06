@@ -3,14 +3,14 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource integrations', () => {
   test('create: only required params', async () => {
-    const responsePromise = embed.integrations.create({ provider: 'github' });
+    const responsePromise = client.integrations.create({ provider: 'github' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +21,11 @@ describe('resource integrations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await embed.integrations.create({
+    const response = await client.integrations.create({
       provider: 'github',
       name: 'GitHub',
-      oauth_client_id: 'string',
-      oauth_client_secret: 'string',
+      oauth_client_id: 'oauth_client_id',
+      oauth_client_secret: 'oauth_client_secret',
       oauth_scopes: ['string', 'string', 'string'],
       slug: 'github-123',
       use_test_credentials: false,
@@ -33,7 +33,7 @@ describe('resource integrations', () => {
   });
 
   test('list', async () => {
-    const responsePromise = embed.integrations.list();
+    const responsePromise = client.integrations.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,7 +45,7 @@ describe('resource integrations', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.integrations.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.integrations.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
@@ -53,8 +53,8 @@ describe('resource integrations', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      embed.integrations.list(
-        { after: 'string', before: 'string', limit: 20, order: 'desc' },
+      client.integrations.list(
+        { after: 'after', before: 'before', limit: 20, order: 'desc' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Embed.NotFoundError);
