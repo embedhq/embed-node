@@ -3,14 +3,14 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource providers', () => {
   test('list', async () => {
-    const responsePromise = embed.providers.list();
+    const responsePromise = client.providers.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource providers', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.providers.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.providers.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
@@ -30,7 +30,7 @@ describe('resource providers', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      embed.providers.list(
+      client.providers.list(
         { include_action_templates: false, include_collection_templates: false },
         { path: '/_stainless_unknown_path' },
       ),

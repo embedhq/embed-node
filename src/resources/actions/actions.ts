@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '@embedhq/node/resource';
-import * as Core from '@embedhq/node/core';
-import * as ActionsAPI from '@embedhq/node/resources/actions/actions';
-import * as RunsAPI from '@embedhq/node/resources/actions/runs';
-import * as SchemasAPI from '@embedhq/node/resources/actions/schemas';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as ActionsAPI from './actions';
+import * as RunsAPI from './runs';
+import * as SchemasAPI from './schemas';
 
 export class Actions extends APIResource {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);

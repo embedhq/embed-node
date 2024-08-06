@@ -3,14 +3,14 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource actions', () => {
   test('list: only required params', async () => {
-    const responsePromise = embed.actions.list({ integration: 'github-123' });
+    const responsePromise = client.actions.list({ integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,6 +21,6 @@ describe('resource actions', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await embed.actions.list({ integration: 'github-123' });
+    const response = await client.actions.list({ integration: 'github-123' });
   });
 });

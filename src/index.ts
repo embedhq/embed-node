@@ -3,8 +3,8 @@
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
-import * as Core from '@embedhq/node/core';
-import * as API from '@embedhq/node/resources/index';
+import * as Core from './core';
+import * as API from './resources/index';
 
 export interface ClientOptions {
   /**
@@ -145,6 +145,7 @@ export class Embed extends Core.APIClient {
   }
 
   static Embed = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static EmbedError = Errors.EmbedError;
   static APIError = Errors.APIError;
