@@ -6,6 +6,13 @@ import * as CollectionsAPI from './collections';
 
 export class Collections extends APIResource {
   /**
+   * Creates a collection from a template.
+   */
+  create(body: CollectionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Collection> {
+    return this._client.post('/collections', { body, ...options });
+  }
+
+  /**
    * Returns a collection.
    */
   retrieve(
@@ -37,6 +44,21 @@ export class Collections extends APIResource {
    */
   list(query: CollectionListParams, options?: Core.RequestOptions): Core.APIPromise<CollectionListResponse> {
     return this._client.get('/collections', { query, ...options });
+  }
+
+  /**
+   * Deletes a collection.
+   */
+  delete(
+    collection: string,
+    params: CollectionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CollectionDeleteResponse> {
+    const { integration, collection_version } = params;
+    return this._client.delete(`/collections/${collection}`, {
+      query: { integration, collection_version },
+      ...options,
+    });
   }
 }
 
@@ -106,6 +128,47 @@ export interface CollectionListResponse {
   object: 'list';
 }
 
+export interface CollectionDeleteResponse {
+  deleted: boolean;
+
+  object: 'collection';
+
+  slug: string;
+}
+
+export interface CollectionCreateParams {
+  /**
+   * The unique slug of the collection template to use.
+   */
+  collection_template: string;
+
+  /**
+   * The unique slug of the integration to which the collection belongs.
+   */
+  integration: string;
+
+  /**
+   * Configuration options for the collection.
+   */
+  configuration?: Record<string, unknown> | null;
+
+  /**
+   * The display name of the collection (defaults to the collection template name).
+   */
+  name?: string;
+
+  /**
+   * The OAuth scopes required to sync the collection (defaults to the collection
+   * template scopes, if applicable).
+   */
+  required_scopes?: Array<string>;
+
+  /**
+   * The unique slug of the collection (defaults to the collection template slug).
+   */
+  slug?: string;
+}
+
 export interface CollectionRetrieveParams {
   /**
    * The slug of the integration to which the collection belongs.
@@ -157,10 +220,25 @@ export interface CollectionListParams {
   integration: string;
 }
 
+export interface CollectionDeleteParams {
+  /**
+   * The slug of the integration to which the collection belongs.
+   */
+  integration: string;
+
+  /**
+   * The version of the collection to delete (defaults to latest).
+   */
+  collection_version?: string;
+}
+
 export namespace Collections {
   export import Collection = CollectionsAPI.Collection;
   export import CollectionListResponse = CollectionsAPI.CollectionListResponse;
+  export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
+  export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionRetrieveParams = CollectionsAPI.CollectionRetrieveParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
+  export import CollectionDeleteParams = CollectionsAPI.CollectionDeleteParams;
 }

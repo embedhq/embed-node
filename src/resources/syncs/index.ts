@@ -3,9 +3,12 @@
 export {
   Sync,
   SyncListResponse,
+  SyncDeleteResponse,
+  SyncCreateParams,
   SyncRetrieveParams,
   SyncUpdateParams,
   SyncListParams,
+  SyncDeleteParams,
   SyncStartParams,
   SyncStopParams,
   SyncTriggerParams,

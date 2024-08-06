@@ -49,13 +49,37 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/providers.ts">Provider</a></code>
-- <code><a href="./src/resources/providers.ts">ProviderListResponse</a></code>
+- <code><a href="./src/resources/providers/providers.ts">Provider</a></code>
+- <code><a href="./src/resources/providers/providers.ts">ProviderListResponse</a></code>
 
 Methods:
 
-- <code title="get /providers/{provider}">client.providers.<a href="./src/resources/providers.ts">retrieve</a>(provider, { ...params }) -> Provider</code>
-- <code title="get /providers">client.providers.<a href="./src/resources/providers.ts">list</a>({ ...params }) -> ProviderListResponse</code>
+- <code title="get /providers/{provider}">client.providers.<a href="./src/resources/providers/providers.ts">retrieve</a>(provider, { ...params }) -> Provider</code>
+- <code title="get /providers">client.providers.<a href="./src/resources/providers/providers.ts">list</a>({ ...params }) -> ProviderListResponse</code>
+
+## CollectionTemplates
+
+Types:
+
+- <code><a href="./src/resources/providers/collection-templates.ts">CollectionTemplateRetrieveResponse</a></code>
+- <code><a href="./src/resources/providers/collection-templates.ts">CollectionTemplateListResponse</a></code>
+
+Methods:
+
+- <code title="get /providers/{provider}/collection-templates/{collection}">client.providers.collectionTemplates.<a href="./src/resources/providers/collection-templates.ts">retrieve</a>(provider, collection) -> CollectionTemplateRetrieveResponse</code>
+- <code title="get /providers/{provider}/collection-templates">client.providers.collectionTemplates.<a href="./src/resources/providers/collection-templates.ts">list</a>(provider) -> CollectionTemplateListResponse</code>
+
+## ActionTemplates
+
+Types:
+
+- <code><a href="./src/resources/providers/action-templates.ts">ActionTemplateRetrieveResponse</a></code>
+- <code><a href="./src/resources/providers/action-templates.ts">ActionTemplateListResponse</a></code>
+
+Methods:
+
+- <code title="get /providers/{provider}/action-templates/{action}">client.providers.actionTemplates.<a href="./src/resources/providers/action-templates.ts">retrieve</a>(provider, action) -> ActionTemplateRetrieveResponse</code>
+- <code title="get /providers/{provider}/action-templates">client.providers.actionTemplates.<a href="./src/resources/providers/action-templates.ts">list</a>(provider) -> ActionTemplateListResponse</code>
 
 # Collections
 
@@ -63,12 +87,15 @@ Types:
 
 - <code><a href="./src/resources/collections.ts">Collection</a></code>
 - <code><a href="./src/resources/collections.ts">CollectionListResponse</a></code>
+- <code><a href="./src/resources/collections.ts">CollectionDeleteResponse</a></code>
 
 Methods:
 
+- <code title="post /collections">client.collections.<a href="./src/resources/collections.ts">create</a>({ ...params }) -> Collection</code>
 - <code title="get /collections/{collection}">client.collections.<a href="./src/resources/collections.ts">retrieve</a>(collection, { ...params }) -> Collection</code>
 - <code title="put /collections/{collection}">client.collections.<a href="./src/resources/collections.ts">update</a>(collection, { ...params }) -> Collection</code>
 - <code title="get /collections">client.collections.<a href="./src/resources/collections.ts">list</a>({ ...params }) -> CollectionListResponse</code>
+- <code title="delete /collections/{collection}">client.collections.<a href="./src/resources/collections.ts">delete</a>(collection, { ...params }) -> CollectionDeleteResponse</code>
 
 # Syncs
 
@@ -76,12 +103,15 @@ Types:
 
 - <code><a href="./src/resources/syncs/syncs.ts">Sync</a></code>
 - <code><a href="./src/resources/syncs/syncs.ts">SyncListResponse</a></code>
+- <code><a href="./src/resources/syncs/syncs.ts">SyncDeleteResponse</a></code>
 
 Methods:
 
+- <code title="post /syncs">client.syncs.<a href="./src/resources/syncs/syncs.ts">create</a>({ ...params }) -> Sync</code>
 - <code title="get /syncs/{collection}">client.syncs.<a href="./src/resources/syncs/syncs.ts">retrieve</a>(collection, { ...params }) -> Sync</code>
 - <code title="put /syncs/{collection}">client.syncs.<a href="./src/resources/syncs/syncs.ts">update</a>(collection, { ...params }) -> Sync</code>
 - <code title="get /syncs">client.syncs.<a href="./src/resources/syncs/syncs.ts">list</a>({ ...params }) -> SyncListResponse</code>
+- <code title="delete /syncs/{collection}">client.syncs.<a href="./src/resources/syncs/syncs.ts">delete</a>(collection, { ...params }) -> SyncDeleteResponse</code>
 - <code title="post /syncs/{collection}/start">client.syncs.<a href="./src/resources/syncs/syncs.ts">start</a>(collection, { ...params }) -> Sync</code>
 - <code title="post /syncs/{collection}/stop">client.syncs.<a href="./src/resources/syncs/syncs.ts">stop</a>(collection, { ...params }) -> Sync</code>
 - <code title="post /syncs/{collection}/trigger">client.syncs.<a href="./src/resources/syncs/syncs.ts">trigger</a>(collection, { ...params }) -> Sync</code>
@@ -104,12 +134,16 @@ Types:
 
 - <code><a href="./src/resources/actions/actions.ts">Action</a></code>
 - <code><a href="./src/resources/actions/actions.ts">ActionListResponse</a></code>
+- <code><a href="./src/resources/actions/actions.ts">ActionDeleteResponse</a></code>
 - <code><a href="./src/resources/actions/actions.ts">ActionTriggerResponse</a></code>
 
 Methods:
 
+- <code title="post /actions">client.actions.<a href="./src/resources/actions/actions.ts">create</a>({ ...params }) -> Action</code>
 - <code title="get /actions/{action}">client.actions.<a href="./src/resources/actions/actions.ts">retrieve</a>(action, { ...params }) -> Action</code>
+- <code title="put /actions/{action}">client.actions.<a href="./src/resources/actions/actions.ts">update</a>(action, { ...params }) -> Action</code>
 - <code title="get /actions">client.actions.<a href="./src/resources/actions/actions.ts">list</a>({ ...params }) -> ActionListResponse</code>
+- <code title="delete /actions/{action}">client.actions.<a href="./src/resources/actions/actions.ts">delete</a>(action, { ...params }) -> ActionDeleteResponse</code>
 - <code title="post /actions/{action}/trigger">client.actions.<a href="./src/resources/actions/actions.ts">trigger</a>(action, { ...params }) -> ActionTriggerResponse</code>
 
 ## Runs

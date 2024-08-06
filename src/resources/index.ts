@@ -3,18 +3,25 @@
 export {
   Action,
   ActionListResponse,
+  ActionDeleteResponse,
   ActionTriggerResponse,
+  ActionCreateParams,
   ActionRetrieveParams,
+  ActionUpdateParams,
   ActionListParams,
+  ActionDeleteParams,
   ActionTriggerParams,
   Actions,
 } from './actions/actions';
 export {
   Collection,
   CollectionListResponse,
+  CollectionDeleteResponse,
+  CollectionCreateParams,
   CollectionRetrieveParams,
   CollectionUpdateParams,
   CollectionListParams,
+  CollectionDeleteParams,
   Collections,
 } from './collections';
 export {
@@ -50,7 +57,7 @@ export {
   ProviderRetrieveParams,
   ProviderListParams,
   Providers,
-} from './providers';
+} from './providers/providers';
 export {
   ProxyDeleteResponse,
   ProxyGetResponse,
@@ -65,9 +72,12 @@ export {
 export {
   Sync,
   SyncListResponse,
+  SyncDeleteResponse,
+  SyncCreateParams,
   SyncRetrieveParams,
   SyncUpdateParams,
   SyncListParams,
+  SyncDeleteParams,
   SyncStartParams,
   SyncStopParams,
   SyncTriggerParams,

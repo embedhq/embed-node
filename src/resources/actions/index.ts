@@ -3,9 +3,13 @@
 export {
   Action,
   ActionListResponse,
+  ActionDeleteResponse,
   ActionTriggerResponse,
+  ActionCreateParams,
   ActionRetrieveParams,
+  ActionUpdateParams,
   ActionListParams,
+  ActionDeleteParams,
   ActionTriggerParams,
   Actions,
 } from './actions';
