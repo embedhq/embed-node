@@ -4,17 +4,42 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as ActionsAPI from './actions';
 import * as RunsAPI from './runs';
-import * as SchemasAPI from './schemas';
 
 export class Actions extends APIResource {
-  schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   runs: RunsAPI.Runs = new RunsAPI.Runs(this._client);
+
+  /**
+   * Returns an action.
+   */
+  retrieve(
+    action: string,
+    query: ActionRetrieveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Action> {
+    return this._client.get(`/actions/${action}`, { query, ...options });
+  }
 
   /**
    * Returns a list of actions.
    */
   list(query: ActionListParams, options?: Core.RequestOptions): Core.APIPromise<ActionListResponse> {
     return this._client.get('/actions', { query, ...options });
+  }
+
+  /**
+   * Triggers an action.
+   */
+  trigger(
+    action: string,
+    params: ActionTriggerParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActionTriggerResponse> {
+    const { connected_account_id, integration, action_version, ...body } = params;
+    return this._client.post(`/actions/${action}/trigger`, {
+      query: { connected_account_id, integration, action_version },
+      body,
+      ...options,
+    });
   }
 }
 
@@ -79,6 +104,23 @@ export interface ActionListResponse {
   object: 'list';
 }
 
+/**
+ * The action response.
+ */
+export type ActionTriggerResponse = Record<string, unknown>;
+
+export interface ActionRetrieveParams {
+  /**
+   * The slug of the integration to which the action belongs.
+   */
+  integration: string;
+
+  /**
+   * The version of the action to retrieve (defaults to latest).
+   */
+  action_version?: string;
+}
+
 export interface ActionListParams {
   /**
    * The slug of the integration to which the actions belong.
@@ -86,11 +128,38 @@ export interface ActionListParams {
   integration: string;
 }
 
+export interface ActionTriggerParams {
+  /**
+   * Query param: The ID of the connected account used to trigger the action.
+   */
+  connected_account_id: string;
+
+  /**
+   * Query param: The slug of the integration to which the action belongs.
+   */
+  integration: string;
+
+  /**
+   * Body param: The input parameters for the action.
+   */
+  input: Record<string, unknown>;
+
+  /**
+   * Query param: The version of the action to trigger (defaults to latest).
+   */
+  action_version?: string;
+}
+
 export namespace Actions {
   export import Action = ActionsAPI.Action;
   export import ActionListResponse = ActionsAPI.ActionListResponse;
+  export import ActionTriggerResponse = ActionsAPI.ActionTriggerResponse;
+  export import ActionRetrieveParams = ActionsAPI.ActionRetrieveParams;
   export import ActionListParams = ActionsAPI.ActionListParams;
-  export import Schemas = SchemasAPI.Schemas;
+  export import ActionTriggerParams = ActionsAPI.ActionTriggerParams;
   export import Runs = RunsAPI.Runs;
   export import ActionRun = RunsAPI.ActionRun;
+  export import RunListResponse = RunsAPI.RunListResponse;
+  export import RunRetrieveParams = RunsAPI.RunRetrieveParams;
+  export import RunListParams = RunsAPI.RunListParams;
 }
