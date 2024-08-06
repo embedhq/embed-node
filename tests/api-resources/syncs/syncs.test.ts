@@ -3,16 +3,43 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource syncs', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.syncs.create({
+      collection: 'issues',
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.syncs.create({
+      collection: 'issues',
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
+      exclusions: ['string', 'string', 'string'],
+      frequency: 'Every 6 hours',
+      inclusions: ['string', 'string', 'string'],
+    });
+  });
+
   test('retrieve: only required params', async () => {
-    const responsePromise = embed.syncs.retrieve('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const responsePromise = client.syncs.retrieve('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,16 +51,17 @@ describe('resource syncs', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await embed.syncs.retrieve('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const response = await client.syncs.retrieve('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = embed.syncs.update('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const responsePromise = client.syncs.update('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,15 +73,18 @@ describe('resource syncs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await embed.syncs.update('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
-      frequency: 'daily',
+    const response = await client.syncs.update('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
+      exclusions: ['string', 'string', 'string'],
+      frequency: 'Every 6 hours',
+      inclusions: ['string', 'string', 'string'],
     });
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = embed.syncs.list({ connection_id: 'user-123', integration_id: 'github-123' });
+  test('list', async () => {
+    const responsePromise = client.syncs.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,14 +94,49 @@ describe('resource syncs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await embed.syncs.list({ connection_id: 'user-123', integration_id: 'github-123' });
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.syncs.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Embed.NotFoundError,
+    );
+  });
+
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.syncs.list(
+        { connected_account_id: 'user-123', integration: 'github-123' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Embed.NotFoundError);
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.syncs.delete('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.syncs.delete('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
+    });
   });
 
   test('start: only required params', async () => {
-    const responsePromise = embed.syncs.start('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const responsePromise = client.syncs.start('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -82,16 +148,17 @@ describe('resource syncs', () => {
   });
 
   test('start: required and optional params', async () => {
-    const response = await embed.syncs.start('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const response = await client.syncs.start('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
     });
   });
 
   test('stop: only required params', async () => {
-    const responsePromise = embed.syncs.stop('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const responsePromise = client.syncs.stop('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -103,16 +170,17 @@ describe('resource syncs', () => {
   });
 
   test('stop: required and optional params', async () => {
-    const response = await embed.syncs.stop('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const response = await client.syncs.stop('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
     });
   });
 
   test('trigger: only required params', async () => {
-    const responsePromise = embed.syncs.trigger('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const responsePromise = client.syncs.trigger('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -124,9 +192,10 @@ describe('resource syncs', () => {
   });
 
   test('trigger: required and optional params', async () => {
-    const response = await embed.syncs.trigger('issues', {
-      connection_id: 'user-123',
-      integration_id: 'github-123',
+    const response = await client.syncs.trigger('issues', {
+      connected_account_id: 'user-123',
+      integration: 'github-123',
+      collection_version: '1.2',
     });
   });
 });

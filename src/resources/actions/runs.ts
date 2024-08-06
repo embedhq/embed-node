@@ -1,31 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as RunsAPI from '@embedhq/node/resources/actions/runs';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as RunsAPI from './runs';
 
 export class Runs extends APIResource {
   /**
    * Returns an action run.
    */
   retrieve(
-    actionKey: string,
+    action: string,
     actionRunId: string,
     query: RunRetrieveParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActionRun> {
-    return this._client.get(`/actions/${actionKey}/runs/${actionRunId}`, { query, ...options });
+    return this._client.get(`/actions/${action}/runs/${actionRunId}`, { query, ...options });
   }
 
   /**
    * Returns a list of recent action runs.
    */
   list(
-    actionKey: string,
+    action: string,
     query: RunListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RunListResponse> {
-    return this._client.get(`/actions/${actionKey}/runs`, { query, ...options });
+    return this._client.get(`/actions/${action}/runs`, { query, ...options });
   }
 }
 
@@ -39,19 +39,19 @@ export interface ActionRun {
   id: string;
 
   /**
-   * The unique key of the action being run.
+   * The unique slug of the action being run.
    */
-  action_key: string;
+  action: string;
 
   /**
-   * The unique identifier of the connection to which the action belongs.
+   * The unique identifier of the connected account to which the action belongs.
    */
-  connection_id: string;
+  connected_account_id: string;
 
   /**
    * The duration of the action run (in seconds).
    */
-  duration: number;
+  duration: number | null;
 
   /**
    * The input parameters for the action run.
@@ -59,9 +59,9 @@ export interface ActionRun {
   input: Record<string, unknown>;
 
   /**
-   * The unique identifier of the integration to which the action belongs.
+   * The slug of the integration to which the action belongs.
    */
-  integration_id: string;
+  integration: string;
 
   /**
    * The object type, which is always `action_run`.
@@ -71,7 +71,7 @@ export interface ActionRun {
   /**
    * The output of the action run.
    */
-  output: Record<string, unknown>;
+  output: Record<string, unknown> | null;
 
   /**
    * The status of the action run.
@@ -92,26 +92,36 @@ export interface RunListResponse {
 
 export interface RunRetrieveParams {
   /**
-   * The ID of the connection to which the action run belongs.
+   * The ID of the connected account to which the action belongs.
    */
-  connection_id: string;
+  connected_account_id: string;
 
   /**
-   * The ID of the integration to which the action run belongs.
+   * The slug of the integration to which the action belongs.
    */
-  integration_id: string;
+  integration: string;
+
+  /**
+   * The version of the action (defaults to latest).
+   */
+  action_version?: string;
 }
 
 export interface RunListParams {
   /**
-   * The ID of the connection to which the action runs belong.
+   * The ID of the connected account to which the action belongs.
    */
-  connection_id: string;
+  connected_account_id: string;
 
   /**
-   * The ID of the integration to which the action runs belong.
+   * The slug of the integration to which the action belongs.
    */
-  integration_id: string;
+  integration: string;
+
+  /**
+   * The version of the action (defaults to latest).
+   */
+  action_version?: string;
 }
 
 export namespace Runs {

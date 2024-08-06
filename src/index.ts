@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from './core';
 import * as Errors from './error';
-import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
-import * as API from '@embedhq/node/resources/index';
+import { type Agent } from './_shims/index';
+import * as Core from './core';
+import * as API from './resources/index';
 
 export interface ClientOptions {
   /**
@@ -69,7 +69,9 @@ export interface ClientOptions {
   defaultQuery?: Core.DefaultQuery;
 }
 
-/** API Client for interfacing with the Embed API. */
+/**
+ * API Client for interfacing with the Embed API.
+ */
 export class Embed extends Core.APIClient {
   apiKey: string;
 
@@ -111,14 +113,15 @@ export class Embed extends Core.APIClient {
       maxRetries: options.maxRetries,
       fetch: options.fetch,
     });
+
     this._options = options;
 
     this.apiKey = apiKey;
   }
 
   integrations: API.Integrations = new API.Integrations(this);
-  connections: API.Connections = new API.Connections(this);
-  sessionTokens: API.SessionTokens = new API.SessionTokens(this);
+  connectedAccounts: API.ConnectedAccounts = new API.ConnectedAccounts(this);
+  connectSessions: API.ConnectSessions = new API.ConnectSessions(this);
   providers: API.Providers = new API.Providers(this);
   collections: API.Collections = new API.Collections(this);
   syncs: API.Syncs = new API.Syncs(this);
@@ -142,6 +145,7 @@ export class Embed extends Core.APIClient {
   }
 
   static Embed = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static EmbedError = Errors.EmbedError;
   static APIError = Errors.APIError;
@@ -191,43 +195,47 @@ export namespace Embed {
   export import IntegrationUpdateParams = API.IntegrationUpdateParams;
   export import IntegrationListParams = API.IntegrationListParams;
 
-  export import Connections = API.Connections;
-  export import Connection = API.Connection;
-  export import ConnectionListResponse = API.ConnectionListResponse;
-  export import ConnectionDeleteResponse = API.ConnectionDeleteResponse;
-  export import ConnectionRetrieveParams = API.ConnectionRetrieveParams;
-  export import ConnectionUpdateParams = API.ConnectionUpdateParams;
-  export import ConnectionListParams = API.ConnectionListParams;
-  export import ConnectionDeleteParams = API.ConnectionDeleteParams;
-  export import ConnectionUpsertParams = API.ConnectionUpsertParams;
+  export import ConnectedAccounts = API.ConnectedAccounts;
+  export import ConnectedAccount = API.ConnectedAccount;
+  export import ConnectedAccountListResponse = API.ConnectedAccountListResponse;
+  export import ConnectedAccountDeleteResponse = API.ConnectedAccountDeleteResponse;
+  export import ConnectedAccountRetrieveParams = API.ConnectedAccountRetrieveParams;
+  export import ConnectedAccountUpdateParams = API.ConnectedAccountUpdateParams;
+  export import ConnectedAccountListParams = API.ConnectedAccountListParams;
+  export import ConnectedAccountDeleteParams = API.ConnectedAccountDeleteParams;
+  export import ConnectedAccountUpsertParams = API.ConnectedAccountUpsertParams;
 
-  export import SessionTokens = API.SessionTokens;
-  export import SessionToken = API.SessionToken;
-  export import SessionTokenListResponse = API.SessionTokenListResponse;
-  export import SessionTokenDeleteResponse = API.SessionTokenDeleteResponse;
-  export import SessionTokenCreateParams = API.SessionTokenCreateParams;
+  export import ConnectSessions = API.ConnectSessions;
+  export import ConnectSession = API.ConnectSession;
+  export import ConnectSessionListResponse = API.ConnectSessionListResponse;
+  export import ConnectSessionDeleteResponse = API.ConnectSessionDeleteResponse;
+  export import ConnectSessionCreateParams = API.ConnectSessionCreateParams;
 
   export import Providers = API.Providers;
   export import Provider = API.Provider;
   export import ProviderListResponse = API.ProviderListResponse;
+  export import ProviderRetrieveParams = API.ProviderRetrieveParams;
+  export import ProviderListParams = API.ProviderListParams;
 
   export import Collections = API.Collections;
   export import Collection = API.Collection;
   export import CollectionListResponse = API.CollectionListResponse;
-  export import CollectionQueryResponse = API.CollectionQueryResponse;
+  export import CollectionDeleteResponse = API.CollectionDeleteResponse;
+  export import CollectionCreateParams = API.CollectionCreateParams;
   export import CollectionRetrieveParams = API.CollectionRetrieveParams;
   export import CollectionUpdateParams = API.CollectionUpdateParams;
   export import CollectionListParams = API.CollectionListParams;
-  export import CollectionDisableParams = API.CollectionDisableParams;
-  export import CollectionEnableParams = API.CollectionEnableParams;
-  export import CollectionQueryParams = API.CollectionQueryParams;
+  export import CollectionDeleteParams = API.CollectionDeleteParams;
 
   export import Syncs = API.Syncs;
   export import Sync = API.Sync;
   export import SyncListResponse = API.SyncListResponse;
+  export import SyncDeleteResponse = API.SyncDeleteResponse;
+  export import SyncCreateParams = API.SyncCreateParams;
   export import SyncRetrieveParams = API.SyncRetrieveParams;
   export import SyncUpdateParams = API.SyncUpdateParams;
   export import SyncListParams = API.SyncListParams;
+  export import SyncDeleteParams = API.SyncDeleteParams;
   export import SyncStartParams = API.SyncStartParams;
   export import SyncStopParams = API.SyncStopParams;
   export import SyncTriggerParams = API.SyncTriggerParams;
@@ -235,12 +243,13 @@ export namespace Embed {
   export import Actions = API.Actions;
   export import Action = API.Action;
   export import ActionListResponse = API.ActionListResponse;
+  export import ActionDeleteResponse = API.ActionDeleteResponse;
   export import ActionTriggerResponse = API.ActionTriggerResponse;
+  export import ActionCreateParams = API.ActionCreateParams;
   export import ActionRetrieveParams = API.ActionRetrieveParams;
+  export import ActionUpdateParams = API.ActionUpdateParams;
   export import ActionListParams = API.ActionListParams;
-  export import ActionDisableParams = API.ActionDisableParams;
-  export import ActionEnableParams = API.ActionEnableParams;
-  export import ActionSchemaParams = API.ActionSchemaParams;
+  export import ActionDeleteParams = API.ActionDeleteParams;
   export import ActionTriggerParams = API.ActionTriggerParams;
 
   export import Proxy = API.Proxy;

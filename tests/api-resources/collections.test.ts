@@ -8,9 +8,12 @@ const client = new Embed({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource integrations', () => {
+describe('resource collections', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.integrations.create({ provider: 'github' });
+    const responsePromise = client.collections.create({
+      collection_template: 'issues',
+      integration: 'github-123',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,19 +24,18 @@ describe('resource integrations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.integrations.create({
-      provider: 'github',
-      name: 'GitHub',
-      oauth_client_id: 'oauth_client_id',
-      oauth_client_secret: 'oauth_client_secret',
-      oauth_scopes: ['string', 'string', 'string'],
-      slug: 'github-123',
-      use_test_credentials: false,
+    const response = await client.collections.create({
+      collection_template: 'issues',
+      integration: 'github-123',
+      configuration: { foo: 'bar' },
+      name: 'Issues',
+      required_scopes: ['repo'],
+      slug: 'issues',
     });
   });
 
-  test('retrieve', async () => {
-    const responsePromise = client.integrations.retrieve('github-123');
+  test('retrieve: only required params', async () => {
+    const responsePromise = client.collections.retrieve('issues', { integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,15 +45,15 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.integrations.retrieve('github-123', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Embed.NotFoundError);
+  test('retrieve: required and optional params', async () => {
+    const response = await client.collections.retrieve('issues', {
+      integration: 'github-123',
+      collection_version: '1.2',
+    });
   });
 
-  test('update', async () => {
-    const responsePromise = client.integrations.update('github-123', {});
+  test('update: only required params', async () => {
+    const responsePromise = client.collections.update('issues', { integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,8 +63,19 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list', async () => {
-    const responsePromise = client.integrations.list();
+  test('update: required and optional params', async () => {
+    const response = await client.collections.update('issues', {
+      integration: 'github-123',
+      collection_version: '1.2',
+      configuration: { foo: 'bar' },
+      is_enabled: true,
+      name: 'Issues',
+      required_scopes: ['repo'],
+    });
+  });
+
+  test('list: only required params', async () => {
+    const responsePromise = client.collections.list({ integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,25 +85,12 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.integrations.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Embed.NotFoundError,
-    );
+  test('list: required and optional params', async () => {
+    const response = await client.collections.list({ integration: 'github-123' });
   });
 
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.integrations.list(
-        { after: 'after', before: 'before', limit: 20, order: 'desc' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Embed.NotFoundError);
-  });
-
-  test('delete', async () => {
-    const responsePromise = client.integrations.delete('github-123');
+  test('delete: only required params', async () => {
+    const responsePromise = client.collections.delete('issues', { integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,10 +100,10 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.integrations.delete('github-123', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Embed.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await client.collections.delete('issues', {
+      integration: 'github-123',
+      collection_version: '1.2',
+    });
   });
 });

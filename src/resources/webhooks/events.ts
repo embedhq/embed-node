@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as EventsAPI from '@embedhq/node/resources/webhooks/events';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as EventsAPI from './events';
 
 export class Events extends APIResource {
   /**
@@ -10,10 +10,10 @@ export class Events extends APIResource {
    */
   retrieve(
     webhookId: string,
-    eventId: string,
+    webhookEventId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookEventObject> {
-    return this._client.get(`/webhooks/${webhookId}/events/${eventId}`, options);
+    return this._client.get(`/webhooks/${webhookId}/events/${webhookEventId}`, options);
   }
 
   /**

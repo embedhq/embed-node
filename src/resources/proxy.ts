@@ -1,92 +1,123 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as ProxyAPI from '@embedhq/node/resources/proxy';
+import { APIResource } from '../resource';
+import * as Core from '../core';
+import * as ProxyAPI from './proxy';
 
 export class Proxy extends APIResource {
   /**
-   * Proxy DELETE request with connection credentials.
+   * Proxy DELETE request with connected account's credentials.
    */
   delete(
     endpoint: string,
     params: ProxyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyDeleteResponse> {
-    const { body, connection_id, integration_id, base_url_override, retries } = params;
+    const {
+      body,
+      'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+      'X-Embed-Integration': xEmbedIntegration,
+      'X-Embed-Base-Url-Override': xEmbedBaseURLOverride,
+      'X-Embed-Retries': xEmbedRetries,
+    } = params;
     return this._client.delete(`/proxy/${endpoint}`, {
       body: body,
       ...options,
       headers: {
-        connection_id: connection_id,
-        integration_id: integration_id,
-        ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
-        ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
+        'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+        'X-Embed-Integration': xEmbedIntegration,
+        ...(xEmbedBaseURLOverride != null ?
+          { 'X-Embed-Base-Url-Override': xEmbedBaseURLOverride }
+        : undefined),
+        ...(xEmbedRetries?.toString() != null ? { 'X-Embed-Retries': xEmbedRetries?.toString() } : undefined),
         ...options?.headers,
       },
     });
   }
 
   /**
-   * Proxy GET request with connection credentials.
+   * Proxy GET request with connected account's credentials.
    */
   get(
     endpoint: string,
     params: ProxyGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyGetResponse> {
-    const { connection_id, integration_id, base_url_override, retries } = params;
+    const {
+      'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+      'X-Embed-Integration': xEmbedIntegration,
+      'X-Embed-Base-Url-Override': xEmbedBaseURLOverride,
+      'X-Embed-Retries': xEmbedRetries,
+    } = params;
     return this._client.get(`/proxy/${endpoint}`, {
       ...options,
       headers: {
-        connection_id: connection_id,
-        integration_id: integration_id,
-        ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
-        ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
+        'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+        'X-Embed-Integration': xEmbedIntegration,
+        ...(xEmbedBaseURLOverride != null ?
+          { 'X-Embed-Base-Url-Override': xEmbedBaseURLOverride }
+        : undefined),
+        ...(xEmbedRetries?.toString() != null ? { 'X-Embed-Retries': xEmbedRetries?.toString() } : undefined),
         ...options?.headers,
       },
     });
   }
 
   /**
-   * Proxy POST request with connection credentials.
+   * Proxy POST request with connected account's credentials.
    */
   post(
     endpoint: string,
     params: ProxyPostParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyPostResponse> {
-    const { body, connection_id, integration_id, base_url_override, retries } = params;
+    const {
+      body,
+      'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+      'X-Embed-Integration': xEmbedIntegration,
+      'X-Embed-Base-Url-Override': xEmbedBaseURLOverride,
+      'X-Embed-Retries': xEmbedRetries,
+    } = params;
     return this._client.post(`/proxy/${endpoint}`, {
       body: body,
       ...options,
       headers: {
-        connection_id: connection_id,
-        integration_id: integration_id,
-        ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
-        ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
+        'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+        'X-Embed-Integration': xEmbedIntegration,
+        ...(xEmbedBaseURLOverride != null ?
+          { 'X-Embed-Base-Url-Override': xEmbedBaseURLOverride }
+        : undefined),
+        ...(xEmbedRetries?.toString() != null ? { 'X-Embed-Retries': xEmbedRetries?.toString() } : undefined),
         ...options?.headers,
       },
     });
   }
 
   /**
-   * Proxy PUT request with connection credentials.
+   * Proxy PUT request with connected account's credentials.
    */
   put(
     endpoint: string,
     params: ProxyPutParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyPutResponse> {
-    const { body, connection_id, integration_id, base_url_override, retries } = params;
+    const {
+      body,
+      'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+      'X-Embed-Integration': xEmbedIntegration,
+      'X-Embed-Base-Url-Override': xEmbedBaseURLOverride,
+      'X-Embed-Retries': xEmbedRetries,
+    } = params;
     return this._client.put(`/proxy/${endpoint}`, {
       body: body,
       ...options,
       headers: {
-        connection_id: connection_id,
-        integration_id: integration_id,
-        ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
-        ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
+        'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
+        'X-Embed-Integration': xEmbedIntegration,
+        ...(xEmbedBaseURLOverride != null ?
+          { 'X-Embed-Base-Url-Override': xEmbedBaseURLOverride }
+        : undefined),
+        ...(xEmbedRetries?.toString() != null ? { 'X-Embed-Retries': xEmbedRetries?.toString() } : undefined),
         ...options?.headers,
       },
     });
@@ -108,46 +139,46 @@ export interface ProxyDeleteParams {
   body: Record<string, unknown>;
 
   /**
-   * Header param: The ID of the connection to use for the request.
+   * Header param: The ID of the connected account to use for the request.
    */
-  connection_id: string;
+  'X-Embed-Connected-Account-Id': string;
 
   /**
-   * Header param: The ID of the integration to use for the request.
+   * Header param: The slug of the integration to use for the request.
    */
-  integration_id: string;
+  'X-Embed-Integration': string;
 
   /**
    * Header param: Override the base URL for the request.
    */
-  base_url_override?: string;
+  'X-Embed-Base-Url-Override'?: string;
 
   /**
    * Header param: The number of times to retry the request.
    */
-  retries?: number;
+  'X-Embed-Retries'?: number;
 }
 
 export interface ProxyGetParams {
   /**
-   * The ID of the connection to use for the request.
+   * The ID of the connected account to use for the request.
    */
-  connection_id: string;
+  'X-Embed-Connected-Account-Id': string;
 
   /**
-   * The ID of the integration to use for the request.
+   * The slug of the integration to use for the request.
    */
-  integration_id: string;
+  'X-Embed-Integration': string;
 
   /**
    * Override the base URL for the request.
    */
-  base_url_override?: string;
+  'X-Embed-Base-Url-Override'?: string;
 
   /**
    * The number of times to retry the request.
    */
-  retries?: number;
+  'X-Embed-Retries'?: number;
 }
 
 export interface ProxyPostParams {
@@ -157,24 +188,24 @@ export interface ProxyPostParams {
   body: Record<string, unknown>;
 
   /**
-   * Header param: The ID of the connection to use for the request.
+   * Header param: The ID of the connected account to use for the request.
    */
-  connection_id: string;
+  'X-Embed-Connected-Account-Id': string;
 
   /**
-   * Header param: The ID of the integration to use for the request.
+   * Header param: The slug of the integration to use for the request.
    */
-  integration_id: string;
+  'X-Embed-Integration': string;
 
   /**
    * Header param: Override the base URL for the request.
    */
-  base_url_override?: string;
+  'X-Embed-Base-Url-Override'?: string;
 
   /**
    * Header param: The number of times to retry the request.
    */
-  retries?: number;
+  'X-Embed-Retries'?: number;
 }
 
 export interface ProxyPutParams {
@@ -184,24 +215,24 @@ export interface ProxyPutParams {
   body: Record<string, unknown>;
 
   /**
-   * Header param: The ID of the connection to use for the request.
+   * Header param: The ID of the connected account to use for the request.
    */
-  connection_id: string;
+  'X-Embed-Connected-Account-Id': string;
 
   /**
-   * Header param: The ID of the integration to use for the request.
+   * Header param: The slug of the integration to use for the request.
    */
-  integration_id: string;
+  'X-Embed-Integration': string;
 
   /**
    * Header param: Override the base URL for the request.
    */
-  base_url_override?: string;
+  'X-Embed-Base-Url-Override'?: string;
 
   /**
    * Header param: The number of times to retry the request.
    */
-  retries?: number;
+  'X-Embed-Retries'?: number;
 }
 
 export namespace Proxy {

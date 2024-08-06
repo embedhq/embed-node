@@ -3,38 +3,45 @@
 export {
   Action,
   ActionListResponse,
+  ActionDeleteResponse,
   ActionTriggerResponse,
+  ActionCreateParams,
   ActionRetrieveParams,
+  ActionUpdateParams,
   ActionListParams,
-  ActionDisableParams,
-  ActionEnableParams,
-  ActionSchemaParams,
+  ActionDeleteParams,
   ActionTriggerParams,
   Actions,
 } from './actions/actions';
 export {
   Collection,
   CollectionListResponse,
-  CollectionQueryResponse,
+  CollectionDeleteResponse,
+  CollectionCreateParams,
   CollectionRetrieveParams,
   CollectionUpdateParams,
   CollectionListParams,
-  CollectionDisableParams,
-  CollectionEnableParams,
-  CollectionQueryParams,
+  CollectionDeleteParams,
   Collections,
-} from './collections/collections';
+} from './collections';
 export {
-  Connection,
-  ConnectionListResponse,
-  ConnectionDeleteResponse,
-  ConnectionRetrieveParams,
-  ConnectionUpdateParams,
-  ConnectionListParams,
-  ConnectionDeleteParams,
-  ConnectionUpsertParams,
-  Connections,
-} from './connections';
+  ConnectSession,
+  ConnectSessionListResponse,
+  ConnectSessionDeleteResponse,
+  ConnectSessionCreateParams,
+  ConnectSessions,
+} from './connect-sessions';
+export {
+  ConnectedAccount,
+  ConnectedAccountListResponse,
+  ConnectedAccountDeleteResponse,
+  ConnectedAccountRetrieveParams,
+  ConnectedAccountUpdateParams,
+  ConnectedAccountListParams,
+  ConnectedAccountDeleteParams,
+  ConnectedAccountUpsertParams,
+  ConnectedAccounts,
+} from './connected-accounts';
 export {
   Integration,
   IntegrationListResponse,
@@ -44,7 +51,13 @@ export {
   IntegrationListParams,
   Integrations,
 } from './integrations';
-export { Provider, ProviderListResponse, Providers } from './providers';
+export {
+  Provider,
+  ProviderListResponse,
+  ProviderRetrieveParams,
+  ProviderListParams,
+  Providers,
+} from './providers/providers';
 export {
   ProxyDeleteResponse,
   ProxyGetResponse,
@@ -57,18 +70,14 @@ export {
   Proxy,
 } from './proxy';
 export {
-  SessionToken,
-  SessionTokenListResponse,
-  SessionTokenDeleteResponse,
-  SessionTokenCreateParams,
-  SessionTokens,
-} from './session-tokens';
-export {
   Sync,
   SyncListResponse,
+  SyncDeleteResponse,
+  SyncCreateParams,
   SyncRetrieveParams,
   SyncUpdateParams,
   SyncListParams,
+  SyncDeleteParams,
   SyncStartParams,
   SyncStopParams,
   SyncTriggerParams,

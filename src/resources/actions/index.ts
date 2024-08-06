@@ -3,14 +3,14 @@
 export {
   Action,
   ActionListResponse,
+  ActionDeleteResponse,
   ActionTriggerResponse,
+  ActionCreateParams,
   ActionRetrieveParams,
+  ActionUpdateParams,
   ActionListParams,
-  ActionDisableParams,
-  ActionEnableParams,
-  ActionSchemaParams,
+  ActionDeleteParams,
   ActionTriggerParams,
   Actions,
 } from './actions';
 export { ActionRun, RunListResponse, RunRetrieveParams, RunListParams, Runs } from './runs';
-export { ActionSchema, SchemaListResponse, SchemaRetrieveParams, SchemaListParams, Schemas } from './schemas';

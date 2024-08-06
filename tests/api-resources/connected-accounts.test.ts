@@ -3,14 +3,14 @@
 import Embed from '@embedhq/node';
 import { Response } from 'node-fetch';
 
-const embed = new Embed({
+const client = new Embed({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource connections', () => {
+describe('resource connectedAccounts', () => {
   test('retrieve: only required params', async () => {
-    const responsePromise = embed.connections.retrieve('user-123', { integration_id: 'string' });
+    const responsePromise = client.connectedAccounts.retrieve('user-123', { integration: 'integration' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +21,11 @@ describe('resource connections', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await embed.connections.retrieve('user-123', { integration_id: 'string' });
+    const response = await client.connectedAccounts.retrieve('user-123', { integration: 'integration' });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = embed.connections.update('user-123', { integration_id: 'string' });
+    const responsePromise = client.connectedAccounts.update('user-123', { integration: 'integration' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,16 +36,16 @@ describe('resource connections', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await embed.connections.update('user-123', {
-      integration_id: 'string',
-      exclusions: { foo: 'bar' },
-      inclusions: { foo: 'bar' },
+    const response = await client.connectedAccounts.update('user-123', {
+      integration: 'integration',
+      configuration: { foo: 'bar' },
       metadata: { foo: 'bar' },
+      name: 'Octocat',
     });
   });
 
   test('list', async () => {
-    const responsePromise = embed.connections.list();
+    const responsePromise = client.connectedAccounts.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,7 +57,7 @@ describe('resource connections', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(embed.connections.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.connectedAccounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
@@ -65,15 +65,15 @@ describe('resource connections', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      embed.connections.list(
-        { after: 'string', before: 'string', integration_id: 'string', limit: 20, order: 'desc' },
+      client.connectedAccounts.list(
+        { after: 'after', before: 'before', integration: 'integration', limit: 20, order: 'desc' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Embed.NotFoundError);
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = embed.connections.delete('user-123', { integration_id: 'string' });
+    const responsePromise = client.connectedAccounts.delete('user-123', { integration: 'integration' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,14 +84,15 @@ describe('resource connections', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await embed.connections.delete('user-123', { integration_id: 'string' });
+    const response = await client.connectedAccounts.delete('user-123', { integration: 'integration' });
   });
 
   test('upsert: only required params', async () => {
-    const responsePromise = embed.connections.upsert({
-      auth_scheme: 'oauth2',
-      credentials: { access_token: 'string', refresh_token: 'string' },
-      integration_id: 'string',
+    const responsePromise = client.connectedAccounts.upsert({
+      id: 'id',
+      auth_method: 'oauth2',
+      credentials: { access_token: 'access_token', refresh_token: 'refresh_token' },
+      integration: 'integration',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -103,14 +104,12 @@ describe('resource connections', () => {
   });
 
   test('upsert: required and optional params', async () => {
-    const response = await embed.connections.upsert({
-      auth_scheme: 'oauth2',
-      credentials: { access_token: 'string', refresh_token: 'string', expires_at: 0 },
-      integration_id: 'string',
-      id: 'string',
+    const response = await client.connectedAccounts.upsert({
+      id: 'id',
+      auth_method: 'oauth2',
+      credentials: { access_token: 'access_token', refresh_token: 'refresh_token', expires_at: 0 },
+      integration: 'integration',
       configuration: { foo: 'bar' },
-      exclusions: { foo: 'bar' },
-      inclusions: { foo: 'bar' },
       metadata: { foo: 'bar' },
     });
   });

@@ -1,31 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as RunsAPI from '@embedhq/node/resources/syncs/runs';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as RunsAPI from './runs';
 
 export class Runs extends APIResource {
   /**
    * Returns a sync run.
    */
   retrieve(
-    collectionKey: string,
+    collection: string,
     syncRunId: string,
     query: RunRetrieveParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SyncRun> {
-    return this._client.get(`/syncs/${collectionKey}/runs/${syncRunId}`, { query, ...options });
+    return this._client.get(`/syncs/${collection}/runs/${syncRunId}`, { query, ...options });
   }
 
   /**
    * Returns a list of recent sync runs.
    */
   list(
-    collectionKey: string,
+    collection: string,
     query: RunListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RunListResponse> {
-    return this._client.get(`/syncs/${collectionKey}/runs`, { query, ...options });
+    return this._client.get(`/syncs/${collection}/runs`, { query, ...options });
   }
 }
 
@@ -39,19 +39,29 @@ export interface SyncRun {
   id: string;
 
   /**
-   * The unique key of the collection being synced.
+   * The unique slug of the collection being synced.
    */
-  collection_key: string;
+  collection: string;
 
   /**
-   * The unique identifier of the connection to which the sync belongs.
+   * The collection version used for the sync.
    */
-  connection_id: string;
+  collection_version: string;
 
   /**
-   * The unique identifier of the integration to which the sync belongs.
+   * The unique identifier of the connected account to which the sync belongs.
    */
-  integration_id: string;
+  connected_account_id: string;
+
+  /**
+   * The duration of the sync run (in seconds).
+   */
+  duration: number | null;
+
+  /**
+   * The unique slug of the integration to which the sync belongs.
+   */
+  integration: string;
 
   /**
    * The object type, which is always `sync_run`.
@@ -79,14 +89,9 @@ export interface SyncRun {
   status: 'running' | 'stopped' | 'succeeded' | 'failed';
 
   /**
-   * The duration of the sync run (in seconds).
-   */
-  duration?: number | null;
-
-  /**
    * The Unix timestamp (in seconds) for when the sync run started.
    */
-  timestamp?: number;
+  timestamp: number;
 }
 
 export interface RunListResponse {
@@ -97,26 +102,36 @@ export interface RunListResponse {
 
 export interface RunRetrieveParams {
   /**
-   * The ID of the connection to which the sync run belongs.
+   * The ID of the connected account to which the syncs belong.
    */
-  connection_id: string;
+  connected_account_id: string;
 
   /**
-   * The ID of the integration to which the sync run belongs.
+   * The slug of the integration to which the sync belongs.
    */
-  integration_id: string;
+  integration: string;
+
+  /**
+   * The collection version (defaults to latest).
+   */
+  collection_version?: string;
 }
 
 export interface RunListParams {
   /**
-   * The ID of the connection to which the sync runs belong.
+   * The ID of the connected account to which the syncs belong.
    */
-  connection_id: string;
+  connected_account_id: string;
 
   /**
-   * The ID of the integration to which the sync runs belong.
+   * The slug of the integration to which the sync belongs.
    */
-  integration_id: string;
+  integration: string;
+
+  /**
+   * The collection version (defaults to latest).
+   */
+  collection_version?: string;
 }
 
 export namespace Runs {

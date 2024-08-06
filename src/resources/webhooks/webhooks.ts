@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '@embedhq/node/core';
-import { APIResource } from '@embedhq/node/resource';
-import * as WebhooksAPI from '@embedhq/node/resources/webhooks/webhooks';
-import * as EventsAPI from '@embedhq/node/resources/webhooks/events';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as WebhooksAPI from './webhooks';
+import * as EventsAPI from './events';
 
 export class Webhooks extends APIResource {
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
@@ -45,20 +45,6 @@ export class Webhooks extends APIResource {
    */
   delete(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
     return this._client.delete(`/webhooks/${webhookId}`, options);
-  }
-
-  /**
-   * Disables a webhook.
-   */
-  disable(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<Webhook> {
-    return this._client.post(`/webhooks/${webhookId}/disable`, options);
-  }
-
-  /**
-   * Enables a webhook.
-   */
-  enable(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<Webhook> {
-    return this._client.post(`/webhooks/${webhookId}/enable`, options);
   }
 }
 
