@@ -7,6 +7,26 @@ import * as ProvidersAPI from './providers';
 
 export class Providers extends APIResource {
   /**
+   * Returns a provider.
+   */
+  retrieve(
+    provider: string,
+    query?: ProviderRetrieveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Provider>;
+  retrieve(provider: string, options?: Core.RequestOptions): Core.APIPromise<Provider>;
+  retrieve(
+    provider: string,
+    query: ProviderRetrieveParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Provider> {
+    if (isRequestOptions(query)) {
+      return this.retrieve(provider, {}, query);
+    }
+    return this._client.get(`/providers/${provider}`, { query, ...options });
+  }
+
+  /**
    * Returns a list of integration providers.
    */
   list(query?: ProviderListParams, options?: Core.RequestOptions): Core.APIPromise<ProviderListResponse>;
@@ -94,6 +114,18 @@ export interface ProviderListResponse {
   object: 'list';
 }
 
+export interface ProviderRetrieveParams {
+  /**
+   * Include action templates in the response.
+   */
+  include_action_templates?: boolean;
+
+  /**
+   * Include collection templates in the response.
+   */
+  include_collection_templates?: boolean;
+}
+
 export interface ProviderListParams {
   /**
    * Include action templates for each provider in the response.
@@ -109,5 +141,6 @@ export interface ProviderListParams {
 export namespace Providers {
   export import Provider = ProvidersAPI.Provider;
   export import ProviderListResponse = ProvidersAPI.ProviderListResponse;
+  export import ProviderRetrieveParams = ProvidersAPI.ProviderRetrieveParams;
   export import ProviderListParams = ProvidersAPI.ProviderListParams;
 }

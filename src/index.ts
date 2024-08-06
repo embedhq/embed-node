@@ -120,8 +120,8 @@ export class Embed extends Core.APIClient {
   }
 
   integrations: API.Integrations = new API.Integrations(this);
-  connections: API.Connections = new API.Connections(this);
-  sessionTokens: API.SessionTokens = new API.SessionTokens(this);
+  connectedAccounts: API.ConnectedAccounts = new API.ConnectedAccounts(this);
+  connectSessions: API.ConnectSessions = new API.ConnectSessions(this);
   providers: API.Providers = new API.Providers(this);
   collections: API.Collections = new API.Collections(this);
   syncs: API.Syncs = new API.Syncs(this);
@@ -190,32 +190,57 @@ export namespace Embed {
   export import Integrations = API.Integrations;
   export import Integration = API.Integration;
   export import IntegrationListResponse = API.IntegrationListResponse;
+  export import IntegrationDeleteResponse = API.IntegrationDeleteResponse;
   export import IntegrationCreateParams = API.IntegrationCreateParams;
+  export import IntegrationUpdateParams = API.IntegrationUpdateParams;
   export import IntegrationListParams = API.IntegrationListParams;
 
-  export import Connections = API.Connections;
+  export import ConnectedAccounts = API.ConnectedAccounts;
+  export import ConnectedAccount = API.ConnectedAccount;
+  export import ConnectedAccountListResponse = API.ConnectedAccountListResponse;
+  export import ConnectedAccountDeleteResponse = API.ConnectedAccountDeleteResponse;
+  export import ConnectedAccountRetrieveParams = API.ConnectedAccountRetrieveParams;
+  export import ConnectedAccountUpdateParams = API.ConnectedAccountUpdateParams;
+  export import ConnectedAccountListParams = API.ConnectedAccountListParams;
+  export import ConnectedAccountDeleteParams = API.ConnectedAccountDeleteParams;
+  export import ConnectedAccountUpsertParams = API.ConnectedAccountUpsertParams;
 
-  export import SessionTokens = API.SessionTokens;
+  export import ConnectSessions = API.ConnectSessions;
+  export import ConnectSession = API.ConnectSession;
+  export import ConnectSessionListResponse = API.ConnectSessionListResponse;
+  export import ConnectSessionDeleteResponse = API.ConnectSessionDeleteResponse;
+  export import ConnectSessionCreateParams = API.ConnectSessionCreateParams;
 
   export import Providers = API.Providers;
   export import Provider = API.Provider;
   export import ProviderListResponse = API.ProviderListResponse;
+  export import ProviderRetrieveParams = API.ProviderRetrieveParams;
   export import ProviderListParams = API.ProviderListParams;
 
   export import Collections = API.Collections;
   export import Collection = API.Collection;
   export import CollectionListResponse = API.CollectionListResponse;
+  export import CollectionRetrieveParams = API.CollectionRetrieveParams;
+  export import CollectionUpdateParams = API.CollectionUpdateParams;
   export import CollectionListParams = API.CollectionListParams;
 
   export import Syncs = API.Syncs;
   export import Sync = API.Sync;
   export import SyncListResponse = API.SyncListResponse;
+  export import SyncRetrieveParams = API.SyncRetrieveParams;
+  export import SyncUpdateParams = API.SyncUpdateParams;
   export import SyncListParams = API.SyncListParams;
+  export import SyncStartParams = API.SyncStartParams;
+  export import SyncStopParams = API.SyncStopParams;
+  export import SyncTriggerParams = API.SyncTriggerParams;
 
   export import Actions = API.Actions;
   export import Action = API.Action;
   export import ActionListResponse = API.ActionListResponse;
+  export import ActionTriggerResponse = API.ActionTriggerResponse;
+  export import ActionRetrieveParams = API.ActionRetrieveParams;
   export import ActionListParams = API.ActionListParams;
+  export import ActionTriggerParams = API.ActionTriggerParams;
 
   export import Proxy = API.Proxy;
   export import ProxyDeleteResponse = API.ProxyDeleteResponse;

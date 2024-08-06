@@ -1,9 +1,33 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as RunsAPI from './runs';
 
-export class Runs extends APIResource {}
+export class Runs extends APIResource {
+  /**
+   * Returns a sync run.
+   */
+  retrieve(
+    collection: string,
+    syncRunId: string,
+    query: RunRetrieveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SyncRun> {
+    return this._client.get(`/syncs/${collection}/runs/${syncRunId}`, { query, ...options });
+  }
+
+  /**
+   * Returns a list of recent sync runs.
+   */
+  list(
+    collection: string,
+    query: RunListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RunListResponse> {
+    return this._client.get(`/syncs/${collection}/runs`, { query, ...options });
+  }
+}
 
 /**
  * Represents a single run of a sync.
@@ -70,6 +94,49 @@ export interface SyncRun {
   timestamp: number;
 }
 
+export interface RunListResponse {
+  data: Array<SyncRun>;
+
+  object: 'list';
+}
+
+export interface RunRetrieveParams {
+  /**
+   * The ID of the connected account to which the syncs belong.
+   */
+  connected_account_id: string;
+
+  /**
+   * The slug of the integration to which the sync belongs.
+   */
+  integration: string;
+
+  /**
+   * The collection version (defaults to latest).
+   */
+  collection_version?: string;
+}
+
+export interface RunListParams {
+  /**
+   * The ID of the connected account to which the syncs belong.
+   */
+  connected_account_id: string;
+
+  /**
+   * The slug of the integration to which the sync belongs.
+   */
+  integration: string;
+
+  /**
+   * The collection version (defaults to latest).
+   */
+  collection_version?: string;
+}
+
 export namespace Runs {
   export import SyncRun = RunsAPI.SyncRun;
+  export import RunListResponse = RunsAPI.RunListResponse;
+  export import RunRetrieveParams = RunsAPI.RunRetrieveParams;
+  export import RunListParams = RunsAPI.RunListParams;
 }

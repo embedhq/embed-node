@@ -4,15 +4,46 @@ Types:
 
 - <code><a href="./src/resources/integrations.ts">Integration</a></code>
 - <code><a href="./src/resources/integrations.ts">IntegrationListResponse</a></code>
+- <code><a href="./src/resources/integrations.ts">IntegrationDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /integrations">client.integrations.<a href="./src/resources/integrations.ts">create</a>({ ...params }) -> Integration</code>
+- <code title="get /integrations/{integration}">client.integrations.<a href="./src/resources/integrations.ts">retrieve</a>(integration) -> Integration</code>
+- <code title="put /integrations/{integration}">client.integrations.<a href="./src/resources/integrations.ts">update</a>(integration, { ...params }) -> Integration</code>
 - <code title="get /integrations">client.integrations.<a href="./src/resources/integrations.ts">list</a>({ ...params }) -> IntegrationListResponse</code>
+- <code title="delete /integrations/{integration}">client.integrations.<a href="./src/resources/integrations.ts">delete</a>(integration) -> IntegrationDeleteResponse</code>
 
-# Connections
+# ConnectedAccounts
 
-# SessionTokens
+Types:
+
+- <code><a href="./src/resources/connected-accounts.ts">ConnectedAccount</a></code>
+- <code><a href="./src/resources/connected-accounts.ts">ConnectedAccountListResponse</a></code>
+- <code><a href="./src/resources/connected-accounts.ts">ConnectedAccountDeleteResponse</a></code>
+
+Methods:
+
+- <code title="get /connected-accounts/{connected_account_id}">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">retrieve</a>(connectedAccountId, { ...params }) -> ConnectedAccount</code>
+- <code title="put /connected-accounts/{connected_account_id}">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">update</a>(connectedAccountId, { ...params }) -> ConnectedAccount</code>
+- <code title="get /connected-accounts">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">list</a>({ ...params }) -> ConnectedAccountListResponse</code>
+- <code title="delete /connected-accounts/{connected_account_id}">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">delete</a>(connectedAccountId, { ...params }) -> ConnectedAccountDeleteResponse</code>
+- <code title="post /connected-accounts">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">upsert</a>({ ...params }) -> ConnectedAccount</code>
+
+# ConnectSessions
+
+Types:
+
+- <code><a href="./src/resources/connect-sessions.ts">ConnectSession</a></code>
+- <code><a href="./src/resources/connect-sessions.ts">ConnectSessionListResponse</a></code>
+- <code><a href="./src/resources/connect-sessions.ts">ConnectSessionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /connect-sessions">client.connectSessions.<a href="./src/resources/connect-sessions.ts">create</a>({ ...params }) -> ConnectSession</code>
+- <code title="get /connect-sessions/{connect_session_id}">client.connectSessions.<a href="./src/resources/connect-sessions.ts">retrieve</a>(connectSessionId) -> ConnectSession</code>
+- <code title="get /connect-sessions">client.connectSessions.<a href="./src/resources/connect-sessions.ts">list</a>() -> ConnectSessionListResponse</code>
+- <code title="delete /connect-sessions/{connect_session_id}">client.connectSessions.<a href="./src/resources/connect-sessions.ts">delete</a>(connectSessionId) -> ConnectSessionDeleteResponse</code>
 
 # Providers
 
@@ -23,20 +54,21 @@ Types:
 
 Methods:
 
+- <code title="get /providers/{provider}">client.providers.<a href="./src/resources/providers.ts">retrieve</a>(provider, { ...params }) -> Provider</code>
 - <code title="get /providers">client.providers.<a href="./src/resources/providers.ts">list</a>({ ...params }) -> ProviderListResponse</code>
 
 # Collections
 
 Types:
 
-- <code><a href="./src/resources/collections/collections.ts">Collection</a></code>
-- <code><a href="./src/resources/collections/collections.ts">CollectionListResponse</a></code>
+- <code><a href="./src/resources/collections.ts">Collection</a></code>
+- <code><a href="./src/resources/collections.ts">CollectionListResponse</a></code>
 
 Methods:
 
-- <code title="get /collections">client.collections.<a href="./src/resources/collections/collections.ts">list</a>({ ...params }) -> CollectionListResponse</code>
-
-## Schemas
+- <code title="get /collections/{collection}">client.collections.<a href="./src/resources/collections.ts">retrieve</a>(collection, { ...params }) -> Collection</code>
+- <code title="put /collections/{collection}">client.collections.<a href="./src/resources/collections.ts">update</a>(collection, { ...params }) -> Collection</code>
+- <code title="get /collections">client.collections.<a href="./src/resources/collections.ts">list</a>({ ...params }) -> CollectionListResponse</code>
 
 # Syncs
 
@@ -47,13 +79,24 @@ Types:
 
 Methods:
 
+- <code title="get /syncs/{collection}">client.syncs.<a href="./src/resources/syncs/syncs.ts">retrieve</a>(collection, { ...params }) -> Sync</code>
+- <code title="put /syncs/{collection}">client.syncs.<a href="./src/resources/syncs/syncs.ts">update</a>(collection, { ...params }) -> Sync</code>
 - <code title="get /syncs">client.syncs.<a href="./src/resources/syncs/syncs.ts">list</a>({ ...params }) -> SyncListResponse</code>
+- <code title="post /syncs/{collection}/start">client.syncs.<a href="./src/resources/syncs/syncs.ts">start</a>(collection, { ...params }) -> Sync</code>
+- <code title="post /syncs/{collection}/stop">client.syncs.<a href="./src/resources/syncs/syncs.ts">stop</a>(collection, { ...params }) -> Sync</code>
+- <code title="post /syncs/{collection}/trigger">client.syncs.<a href="./src/resources/syncs/syncs.ts">trigger</a>(collection, { ...params }) -> Sync</code>
 
 ## Runs
 
 Types:
 
 - <code><a href="./src/resources/syncs/runs.ts">SyncRun</a></code>
+- <code><a href="./src/resources/syncs/runs.ts">RunListResponse</a></code>
+
+Methods:
+
+- <code title="get /syncs/{collection}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">retrieve</a>(collection, syncRunId, { ...params }) -> SyncRun</code>
+- <code title="get /syncs/{collection}/runs">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">list</a>(collection, { ...params }) -> RunListResponse</code>
 
 # Actions
 
@@ -61,18 +104,25 @@ Types:
 
 - <code><a href="./src/resources/actions/actions.ts">Action</a></code>
 - <code><a href="./src/resources/actions/actions.ts">ActionListResponse</a></code>
+- <code><a href="./src/resources/actions/actions.ts">ActionTriggerResponse</a></code>
 
 Methods:
 
+- <code title="get /actions/{action}">client.actions.<a href="./src/resources/actions/actions.ts">retrieve</a>(action, { ...params }) -> Action</code>
 - <code title="get /actions">client.actions.<a href="./src/resources/actions/actions.ts">list</a>({ ...params }) -> ActionListResponse</code>
-
-## Schemas
+- <code title="post /actions/{action}/trigger">client.actions.<a href="./src/resources/actions/actions.ts">trigger</a>(action, { ...params }) -> ActionTriggerResponse</code>
 
 ## Runs
 
 Types:
 
 - <code><a href="./src/resources/actions/runs.ts">ActionRun</a></code>
+- <code><a href="./src/resources/actions/runs.ts">RunListResponse</a></code>
+
+Methods:
+
+- <code title="get /actions/{action}/runs/{action_run_id}">client.actions.runs.<a href="./src/resources/actions/runs.ts">retrieve</a>(action, actionRunId, { ...params }) -> ActionRun</code>
+- <code title="get /actions/{action}/runs">client.actions.runs.<a href="./src/resources/actions/runs.ts">list</a>(action, { ...params }) -> RunListResponse</code>
 
 # Proxy
 
@@ -115,4 +165,5 @@ Types:
 
 Methods:
 
+- <code title="get /webhooks/{webhook_id}/events/{webhook_event_id}">client.webhooks.events.<a href="./src/resources/webhooks/events.ts">retrieve</a>(webhookId, webhookEventId) -> WebhookEventObject</code>
 - <code title="get /webhooks/{webhook_id}/events">client.webhooks.events.<a href="./src/resources/webhooks/events.ts">list</a>(webhookId) -> EventListResponse</code>
