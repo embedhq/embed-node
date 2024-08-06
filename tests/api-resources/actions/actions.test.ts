@@ -35,7 +35,7 @@ describe('resource actions', () => {
   });
 
   test('retrieve: only required params', async () => {
-    const responsePromise = client.actions.retrieve('create-issue', { integration: 'github-123' });
+    const responsePromise = client.actions.retrieve({ action: 'create-issue', integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,14 +46,15 @@ describe('resource actions', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await client.actions.retrieve('create-issue', {
+    const response = await client.actions.retrieve({
+      action: 'create-issue',
       integration: 'github-123',
       action_version: '1.2',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.actions.update('create-issue', { integration: 'github-123' });
+    const responsePromise = client.actions.update({ action: 'create-issue', integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,7 +65,8 @@ describe('resource actions', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.actions.update('create-issue', {
+    const response = await client.actions.update({
+      action: 'create-issue',
       integration: 'github-123',
       action_version: '1.2',
       configuration: { foo: 'bar' },
@@ -90,7 +92,7 @@ describe('resource actions', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.actions.delete('create-issue', { integration: 'github-123' });
+    const responsePromise = client.actions.delete({ action: 'create-issue', integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,14 +103,16 @@ describe('resource actions', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.actions.delete('create-issue', {
+    const response = await client.actions.delete({
+      action: 'create-issue',
       integration: 'github-123',
       action_version: '1.2',
     });
   });
 
   test('trigger: only required params', async () => {
-    const responsePromise = client.actions.trigger('create-issue', {
+    const responsePromise = client.actions.trigger({
+      action: 'create-issue',
       connected_account_id: 'user-123',
       integration: 'github-123',
       input: { title: 'bar', body: 'bar' },
@@ -123,7 +127,8 @@ describe('resource actions', () => {
   });
 
   test('trigger: required and optional params', async () => {
-    const response = await client.actions.trigger('create-issue', {
+    const response = await client.actions.trigger({
+      action: 'create-issue',
       connected_account_id: 'user-123',
       integration: 'github-123',
       input: { title: 'bar', body: 'bar' },

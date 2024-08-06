@@ -15,23 +15,16 @@ export class Collections extends APIResource {
   /**
    * Returns a collection.
    */
-  retrieve(
-    collection: string,
-    query: CollectionRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Collection> {
+  retrieve(params: CollectionRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<Collection> {
+    const { collection, ...query } = params;
     return this._client.get(`/collections/${collection}`, { query, ...options });
   }
 
   /**
    * Updates a collection.
    */
-  update(
-    collection: string,
-    params: CollectionUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Collection> {
-    const { integration, collection_version, ...body } = params;
+  update(params: CollectionUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Collection> {
+    const { collection, integration, collection_version, ...body } = params;
     return this._client.put(`/collections/${collection}`, {
       query: { integration, collection_version },
       body,
@@ -50,11 +43,10 @@ export class Collections extends APIResource {
    * Deletes a collection.
    */
   delete(
-    collection: string,
     params: CollectionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CollectionDeleteResponse> {
-    const { integration, collection_version } = params;
+    const { collection, integration, collection_version } = params;
     return this._client.delete(`/collections/${collection}`, {
       query: { integration, collection_version },
       ...options,
@@ -171,17 +163,27 @@ export interface CollectionCreateParams {
 
 export interface CollectionRetrieveParams {
   /**
-   * The slug of the integration to which the collection belongs.
+   * Path param: The unique slug of the collection.
+   */
+  collection: string;
+
+  /**
+   * Query param: The slug of the integration to which the collection belongs.
    */
   integration: string;
 
   /**
-   * The version of the collection to retrieve (defaults to latest).
+   * Query param: The version of the collection to retrieve (defaults to latest).
    */
   collection_version?: string;
 }
 
 export interface CollectionUpdateParams {
+  /**
+   * Path param: The unique slug of the collection.
+   */
+  collection: string;
+
   /**
    * Query param: The slug of the integration to which the collection belongs.
    */
@@ -222,12 +224,17 @@ export interface CollectionListParams {
 
 export interface CollectionDeleteParams {
   /**
-   * The slug of the integration to which the collection belongs.
+   * Path param: The unique slug of the collection.
+   */
+  collection: string;
+
+  /**
+   * Query param: The slug of the integration to which the collection belongs.
    */
   integration: string;
 
   /**
-   * The version of the collection to delete (defaults to latest).
+   * Query param: The version of the collection to delete (defaults to latest).
    */
   collection_version?: string;
 }

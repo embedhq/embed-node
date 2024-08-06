@@ -8,12 +8,9 @@ export class Proxy extends APIResource {
   /**
    * Proxy DELETE request with connected account's credentials.
    */
-  delete(
-    endpoint: string,
-    params: ProxyDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyDeleteResponse> {
+  delete(params: ProxyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ProxyDeleteResponse> {
     const {
+      endpoint,
       body,
       'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
       'X-Embed-Integration': xEmbedIntegration,
@@ -38,12 +35,9 @@ export class Proxy extends APIResource {
   /**
    * Proxy GET request with connected account's credentials.
    */
-  get(
-    endpoint: string,
-    params: ProxyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyGetResponse> {
+  get(params: ProxyGetParams, options?: Core.RequestOptions): Core.APIPromise<ProxyGetResponse> {
     const {
+      endpoint,
       'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
       'X-Embed-Integration': xEmbedIntegration,
       'X-Embed-Base-Url-Override': xEmbedBaseURLOverride,
@@ -66,12 +60,9 @@ export class Proxy extends APIResource {
   /**
    * Proxy POST request with connected account's credentials.
    */
-  post(
-    endpoint: string,
-    params: ProxyPostParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyPostResponse> {
+  post(params: ProxyPostParams, options?: Core.RequestOptions): Core.APIPromise<ProxyPostResponse> {
     const {
+      endpoint,
       body,
       'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
       'X-Embed-Integration': xEmbedIntegration,
@@ -96,12 +87,9 @@ export class Proxy extends APIResource {
   /**
    * Proxy PUT request with connected account's credentials.
    */
-  put(
-    endpoint: string,
-    params: ProxyPutParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyPutResponse> {
+  put(params: ProxyPutParams, options?: Core.RequestOptions): Core.APIPromise<ProxyPutResponse> {
     const {
+      endpoint,
       body,
       'X-Embed-Connected-Account-Id': xEmbedConnectedAccountId,
       'X-Embed-Integration': xEmbedIntegration,
@@ -134,6 +122,11 @@ export type ProxyPutResponse = Record<string, unknown>;
 
 export interface ProxyDeleteParams {
   /**
+   * Path param: The endpoint to proxy the request to.
+   */
+  endpoint: string;
+
+  /**
    * Body param:
    */
   body: Record<string, unknown>;
@@ -161,27 +154,37 @@ export interface ProxyDeleteParams {
 
 export interface ProxyGetParams {
   /**
-   * The ID of the connected account to use for the request.
+   * Path param: The endpoint to proxy the request to.
+   */
+  endpoint: string;
+
+  /**
+   * Header param: The ID of the connected account to use for the request.
    */
   'X-Embed-Connected-Account-Id': string;
 
   /**
-   * The slug of the integration to use for the request.
+   * Header param: The slug of the integration to use for the request.
    */
   'X-Embed-Integration': string;
 
   /**
-   * Override the base URL for the request.
+   * Header param: Override the base URL for the request.
    */
   'X-Embed-Base-Url-Override'?: string;
 
   /**
-   * The number of times to retry the request.
+   * Header param: The number of times to retry the request.
    */
   'X-Embed-Retries'?: number;
 }
 
 export interface ProxyPostParams {
+  /**
+   * Path param: The endpoint to proxy the request to.
+   */
+  endpoint: string;
+
   /**
    * Body param:
    */
@@ -209,6 +212,11 @@ export interface ProxyPostParams {
 }
 
 export interface ProxyPutParams {
+  /**
+   * Path param: The endpoint to proxy the request to.
+   */
+  endpoint: string;
+
   /**
    * Body param:
    */

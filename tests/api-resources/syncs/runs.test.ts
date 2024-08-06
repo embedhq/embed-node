@@ -10,7 +10,9 @@ const client = new Embed({
 
 describe('resource runs', () => {
   test('retrieve: only required params', async () => {
-    const responsePromise = client.syncs.runs.retrieve('issues', 'sr_1a2b3c', {
+    const responsePromise = client.syncs.runs.retrieve({
+      collection: 'issues',
+      sync_run_id: 'sr_1a2b3c',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -24,7 +26,9 @@ describe('resource runs', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await client.syncs.runs.retrieve('issues', 'sr_1a2b3c', {
+    const response = await client.syncs.runs.retrieve({
+      collection: 'issues',
+      sync_run_id: 'sr_1a2b3c',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
@@ -32,7 +36,8 @@ describe('resource runs', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.syncs.runs.list('issues', {
+    const responsePromise = client.syncs.runs.list({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -46,7 +51,8 @@ describe('resource runs', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.syncs.runs.list('issues', {
+    const response = await client.syncs.runs.list({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
