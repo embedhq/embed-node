@@ -8,23 +8,16 @@ export class Runs extends APIResource {
   /**
    * Returns a sync run.
    */
-  retrieve(
-    collection: string,
-    syncRunId: string,
-    query: RunRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SyncRun> {
-    return this._client.get(`/syncs/${collection}/runs/${syncRunId}`, { query, ...options });
+  retrieve(params: RunRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<SyncRun> {
+    const { collection, sync_run_id, ...query } = params;
+    return this._client.get(`/syncs/${collection}/runs/${sync_run_id}`, { query, ...options });
   }
 
   /**
    * Returns a list of recent sync runs.
    */
-  list(
-    collection: string,
-    query: RunListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RunListResponse> {
+  list(params: RunListParams, options?: Core.RequestOptions): Core.APIPromise<RunListResponse> {
+    const { collection, ...query } = params;
     return this._client.get(`/syncs/${collection}/runs`, { query, ...options });
   }
 }
@@ -102,34 +95,49 @@ export interface RunListResponse {
 
 export interface RunRetrieveParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Path param: The ID of the sync run.
+   */
+  sync_run_id: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }
 
 export interface RunListParams {
   /**
-   * The ID of the connected account to which the syncs belong.
+   * Path param: The slug of the collection to which the syncs belong.
+   */
+  collection: string;
+
+  /**
+   * Query param: The ID of the connected account to which the syncs belong.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the sync belongs.
+   * Query param: The slug of the integration to which the sync belongs.
    */
   integration: string;
 
   /**
-   * The collection version (defaults to latest).
+   * Query param: The collection version (defaults to latest).
    */
   collection_version?: string;
 }

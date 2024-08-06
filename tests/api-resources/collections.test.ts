@@ -35,7 +35,7 @@ describe('resource collections', () => {
   });
 
   test('retrieve: only required params', async () => {
-    const responsePromise = client.collections.retrieve('issues', { integration: 'github-123' });
+    const responsePromise = client.collections.retrieve({ collection: 'issues', integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,14 +46,15 @@ describe('resource collections', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await client.collections.retrieve('issues', {
+    const response = await client.collections.retrieve({
+      collection: 'issues',
       integration: 'github-123',
       collection_version: '1.2',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.collections.update('issues', { integration: 'github-123' });
+    const responsePromise = client.collections.update({ collection: 'issues', integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,7 +65,8 @@ describe('resource collections', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.collections.update('issues', {
+    const response = await client.collections.update({
+      collection: 'issues',
       integration: 'github-123',
       collection_version: '1.2',
       configuration: { foo: 'bar' },
@@ -90,7 +92,7 @@ describe('resource collections', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.collections.delete('issues', { integration: 'github-123' });
+    const responsePromise = client.collections.delete({ collection: 'issues', integration: 'github-123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,7 +103,8 @@ describe('resource collections', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.collections.delete('issues', {
+    const response = await client.collections.delete({
+      collection: 'issues',
       integration: 'github-123',
       collection_version: '1.2',
     });
