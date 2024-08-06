@@ -37,7 +37,8 @@ describe('resource syncs', () => {
   });
 
   test('retrieve: only required params', async () => {
-    const responsePromise = client.syncs.retrieve('issues', {
+    const responsePromise = client.syncs.retrieve({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -51,7 +52,8 @@ describe('resource syncs', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await client.syncs.retrieve('issues', {
+    const response = await client.syncs.retrieve({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
@@ -59,7 +61,8 @@ describe('resource syncs', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.syncs.update('issues', {
+    const responsePromise = client.syncs.update({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -73,7 +76,8 @@ describe('resource syncs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.syncs.update('issues', {
+    const response = await client.syncs.update({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
@@ -112,7 +116,8 @@ describe('resource syncs', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.syncs.delete('issues', {
+    const responsePromise = client.syncs.delete({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -126,7 +131,8 @@ describe('resource syncs', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.syncs.delete('issues', {
+    const response = await client.syncs.delete({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
@@ -134,7 +140,8 @@ describe('resource syncs', () => {
   });
 
   test('start: only required params', async () => {
-    const responsePromise = client.syncs.start('issues', {
+    const responsePromise = client.syncs.start({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -148,7 +155,8 @@ describe('resource syncs', () => {
   });
 
   test('start: required and optional params', async () => {
-    const response = await client.syncs.start('issues', {
+    const response = await client.syncs.start({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
@@ -156,7 +164,8 @@ describe('resource syncs', () => {
   });
 
   test('stop: only required params', async () => {
-    const responsePromise = client.syncs.stop('issues', {
+    const responsePromise = client.syncs.stop({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -170,7 +179,8 @@ describe('resource syncs', () => {
   });
 
   test('stop: required and optional params', async () => {
-    const response = await client.syncs.stop('issues', {
+    const response = await client.syncs.stop({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',
@@ -178,7 +188,8 @@ describe('resource syncs', () => {
   });
 
   test('trigger: only required params', async () => {
-    const responsePromise = client.syncs.trigger('issues', {
+    const responsePromise = client.syncs.trigger({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -192,7 +203,8 @@ describe('resource syncs', () => {
   });
 
   test('trigger: required and optional params', async () => {
-    const response = await client.syncs.trigger('issues', {
+    const response = await client.syncs.trigger({
+      collection: 'issues',
       connected_account_id: 'user-123',
       integration: 'github-123',
       collection_version: '1.2',

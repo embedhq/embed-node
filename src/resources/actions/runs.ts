@@ -8,23 +8,16 @@ export class Runs extends APIResource {
   /**
    * Returns an action run.
    */
-  retrieve(
-    action: string,
-    actionRunId: string,
-    query: RunRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ActionRun> {
-    return this._client.get(`/actions/${action}/runs/${actionRunId}`, { query, ...options });
+  retrieve(params: RunRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<ActionRun> {
+    const { action, action_run_id, ...query } = params;
+    return this._client.get(`/actions/${action}/runs/${action_run_id}`, { query, ...options });
   }
 
   /**
    * Returns a list of recent action runs.
    */
-  list(
-    action: string,
-    query: RunListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RunListResponse> {
+  list(params: RunListParams, options?: Core.RequestOptions): Core.APIPromise<RunListResponse> {
+    const { action, ...query } = params;
     return this._client.get(`/actions/${action}/runs`, { query, ...options });
   }
 }
@@ -92,34 +85,49 @@ export interface RunListResponse {
 
 export interface RunRetrieveParams {
   /**
-   * The ID of the connected account to which the action belongs.
+   * Path param: The unique slug of the action to which the run belongs.
+   */
+  action: string;
+
+  /**
+   * Path param: The ID of the action run.
+   */
+  action_run_id: string;
+
+  /**
+   * Query param: The ID of the connected account to which the action belongs.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the action belongs.
+   * Query param: The slug of the integration to which the action belongs.
    */
   integration: string;
 
   /**
-   * The version of the action (defaults to latest).
+   * Query param: The version of the action (defaults to latest).
    */
   action_version?: string;
 }
 
 export interface RunListParams {
   /**
-   * The ID of the connected account to which the action belongs.
+   * Path param: The unique slug of the action to which the runs belong.
+   */
+  action: string;
+
+  /**
+   * Query param: The ID of the connected account to which the action belongs.
    */
   connected_account_id: string;
 
   /**
-   * The slug of the integration to which the action belongs.
+   * Query param: The slug of the integration to which the action belongs.
    */
   integration: string;
 
   /**
-   * The version of the action (defaults to latest).
+   * Query param: The version of the action (defaults to latest).
    */
   action_version?: string;
 }

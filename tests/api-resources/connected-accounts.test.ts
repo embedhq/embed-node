@@ -10,7 +10,10 @@ const client = new Embed({
 
 describe('resource connectedAccounts', () => {
   test('retrieve: only required params', async () => {
-    const responsePromise = client.connectedAccounts.retrieve('user-123', { integration: 'integration' });
+    const responsePromise = client.connectedAccounts.retrieve({
+      connected_account_id: 'user-123',
+      integration: 'integration',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +24,17 @@ describe('resource connectedAccounts', () => {
   });
 
   test('retrieve: required and optional params', async () => {
-    const response = await client.connectedAccounts.retrieve('user-123', { integration: 'integration' });
+    const response = await client.connectedAccounts.retrieve({
+      connected_account_id: 'user-123',
+      integration: 'integration',
+    });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.connectedAccounts.update('user-123', { integration: 'integration' });
+    const responsePromise = client.connectedAccounts.update({
+      connected_account_id: 'user-123',
+      integration: 'integration',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +45,8 @@ describe('resource connectedAccounts', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.connectedAccounts.update('user-123', {
+    const response = await client.connectedAccounts.update({
+      connected_account_id: 'user-123',
       integration: 'integration',
       configuration: { foo: 'bar' },
       metadata: { foo: 'bar' },
@@ -73,7 +83,10 @@ describe('resource connectedAccounts', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.connectedAccounts.delete('user-123', { integration: 'integration' });
+    const responsePromise = client.connectedAccounts.delete({
+      connected_account_id: 'user-123',
+      integration: 'integration',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,7 +97,10 @@ describe('resource connectedAccounts', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.connectedAccounts.delete('user-123', { integration: 'integration' });
+    const response = await client.connectedAccounts.delete({
+      connected_account_id: 'user-123',
+      integration: 'integration',
+    });
   });
 
   test('upsert: only required params', async () => {
