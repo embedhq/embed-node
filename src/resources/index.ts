@@ -24,7 +24,6 @@ export {
   CollectionDeleteParams,
   Collections,
 } from './collections';
-export { ConnectSessions } from './connect-sessions';
 export {
   ConnectedAccount,
   ConnectedAccountListResponse,
@@ -63,6 +62,15 @@ export {
   ProxyPutParams,
   Proxy,
 } from './proxy';
+export { QueryExecResponse, QueryMultiResponse, QueryExecParams, QueryMultiParams, Query } from './query';
+export {
+  SessionToken,
+  SessionTokenListResponse,
+  SessionTokenDeleteResponse,
+  SessionTokenCreateParams,
+  SessionTokenListParams,
+  SessionTokens,
+} from './session-tokens';
 export {
   Sync,
   SyncListResponse,
