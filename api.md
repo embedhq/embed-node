@@ -30,20 +30,20 @@ Methods:
 - <code title="delete /connected-accounts/{connected_account_id}">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">delete</a>({ ...params }) -> ConnectedAccountDeleteResponse</code>
 - <code title="post /connected-accounts">client.connectedAccounts.<a href="./src/resources/connected-accounts.ts">upsert</a>({ ...params }) -> ConnectedAccount</code>
 
-# ConnectSessions
+# SessionTokens
 
 Types:
 
-- <code><a href="./src/resources/connect-sessions.ts">ConnectSession</a></code>
-- <code><a href="./src/resources/connect-sessions.ts">ConnectSessionListResponse</a></code>
-- <code><a href="./src/resources/connect-sessions.ts">ConnectSessionDeleteResponse</a></code>
+- <code><a href="./src/resources/session-tokens.ts">SessionToken</a></code>
+- <code><a href="./src/resources/session-tokens.ts">SessionTokenListResponse</a></code>
+- <code><a href="./src/resources/session-tokens.ts">SessionTokenDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /connect-sessions">client.connectSessions.<a href="./src/resources/connect-sessions.ts">create</a>({ ...params }) -> ConnectSession</code>
-- <code title="get /connect-sessions/{connect_session_id}">client.connectSessions.<a href="./src/resources/connect-sessions.ts">retrieve</a>(connectSessionId) -> ConnectSession</code>
-- <code title="get /connect-sessions">client.connectSessions.<a href="./src/resources/connect-sessions.ts">list</a>() -> ConnectSessionListResponse</code>
-- <code title="delete /connect-sessions/{connect_session_id}">client.connectSessions.<a href="./src/resources/connect-sessions.ts">delete</a>(connectSessionId) -> ConnectSessionDeleteResponse</code>
+- <code title="post /session-tokens">client.sessionTokens.<a href="./src/resources/session-tokens.ts">create</a>({ ...params }) -> SessionToken</code>
+- <code title="get /session-tokens/{token}">client.sessionTokens.<a href="./src/resources/session-tokens.ts">retrieve</a>(token) -> SessionToken</code>
+- <code title="get /session-tokens">client.sessionTokens.<a href="./src/resources/session-tokens.ts">list</a>({ ...params }) -> SessionTokenListResponse</code>
+- <code title="delete /session-tokens/{token}">client.sessionTokens.<a href="./src/resources/session-tokens.ts">delete</a>(token) -> SessionTokenDeleteResponse</code>
 
 # Providers
 
@@ -127,6 +127,18 @@ Methods:
 
 - <code title="get /syncs/{collection}/runs/{sync_run_id}">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">retrieve</a>({ ...params }) -> SyncRun</code>
 - <code title="get /syncs/{collection}/runs">client.syncs.runs.<a href="./src/resources/syncs/runs.ts">list</a>({ ...params }) -> RunListResponse</code>
+
+# Query
+
+Types:
+
+- <code><a href="./src/resources/query.ts">QueryExecResponse</a></code>
+- <code><a href="./src/resources/query.ts">QueryMultiResponse</a></code>
+
+Methods:
+
+- <code title="post /query">client.query.<a href="./src/resources/query.ts">exec</a>({ ...params }) -> QueryExecResponse</code>
+- <code title="post /multi-query">client.query.<a href="./src/resources/query.ts">multi</a>({ ...params }) -> QueryMultiResponse</code>
 
 # Actions
 

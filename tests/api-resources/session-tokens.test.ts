@@ -8,9 +8,9 @@ const client = new Embed({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource connectSessions', () => {
+describe('resource sessionTokens', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.connectSessions.create({
+    const responsePromise = client.sessionTokens.create({
       connected_account_id: 'user-123',
       integration: 'github-123',
     });
@@ -24,7 +24,7 @@ describe('resource connectSessions', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.connectSessions.create({
+    const response = await client.sessionTokens.create({
       connected_account_id: 'user-123',
       integration: 'github-123',
       configuration: { foo: 'bar' },
@@ -36,7 +36,7 @@ describe('resource connectSessions', () => {
   });
 
   test('retrieve', async () => {
-    const responsePromise = client.connectSessions.retrieve('cs_1a2b3c');
+    const responsePromise = client.sessionTokens.retrieve('st_1a2b3c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,12 +49,12 @@ describe('resource connectSessions', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.connectSessions.retrieve('cs_1a2b3c', { path: '/_stainless_unknown_path' }),
+      client.sessionTokens.retrieve('st_1a2b3c', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Embed.NotFoundError);
   });
 
   test('list', async () => {
-    const responsePromise = client.connectSessions.list();
+    const responsePromise = client.sessionTokens.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,13 +66,23 @@ describe('resource connectSessions', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.connectSessions.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.sessionTokens.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Embed.NotFoundError,
     );
   });
 
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.sessionTokens.list(
+        { connected_account_id: 'connected_account_id', integration: 'integration' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Embed.NotFoundError);
+  });
+
   test('delete', async () => {
-    const responsePromise = client.connectSessions.delete('cs_1a2b3c');
+    const responsePromise = client.sessionTokens.delete('st_1a2b3c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,7 +95,7 @@ describe('resource connectSessions', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.connectSessions.delete('cs_1a2b3c', { path: '/_stainless_unknown_path' }),
+      client.sessionTokens.delete('st_1a2b3c', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Embed.NotFoundError);
   });
 });
