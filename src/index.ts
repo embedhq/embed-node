@@ -121,10 +121,11 @@ export class Embed extends Core.APIClient {
 
   integrations: API.Integrations = new API.Integrations(this);
   connectedAccounts: API.ConnectedAccounts = new API.ConnectedAccounts(this);
-  connectSessions: API.ConnectSessions = new API.ConnectSessions(this);
+  sessionTokens: API.SessionTokens = new API.SessionTokens(this);
   providers: API.Providers = new API.Providers(this);
   collections: API.Collections = new API.Collections(this);
   syncs: API.Syncs = new API.Syncs(this);
+  query: API.Query = new API.Query(this);
   actions: API.Actions = new API.Actions(this);
   proxy: API.Proxy = new API.Proxy(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
@@ -205,7 +206,12 @@ export namespace Embed {
   export import ConnectedAccountDeleteParams = API.ConnectedAccountDeleteParams;
   export import ConnectedAccountUpsertParams = API.ConnectedAccountUpsertParams;
 
-  export import ConnectSessions = API.ConnectSessions;
+  export import SessionTokens = API.SessionTokens;
+  export import SessionToken = API.SessionToken;
+  export import SessionTokenListResponse = API.SessionTokenListResponse;
+  export import SessionTokenDeleteResponse = API.SessionTokenDeleteResponse;
+  export import SessionTokenCreateParams = API.SessionTokenCreateParams;
+  export import SessionTokenListParams = API.SessionTokenListParams;
 
   export import Providers = API.Providers;
   export import Provider = API.Provider;
@@ -235,6 +241,12 @@ export namespace Embed {
   export import SyncStartParams = API.SyncStartParams;
   export import SyncStopParams = API.SyncStopParams;
   export import SyncTriggerParams = API.SyncTriggerParams;
+
+  export import Query = API.Query;
+  export import QueryExecResponse = API.QueryExecResponse;
+  export import QueryMultiResponse = API.QueryMultiResponse;
+  export import QueryExecParams = API.QueryExecParams;
+  export import QueryMultiParams = API.QueryMultiParams;
 
   export import Actions = API.Actions;
   export import Action = API.Action;
