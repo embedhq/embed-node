@@ -61,6 +61,11 @@ export interface SessionToken {
   configuration: Record<string, unknown> | null;
 
   /**
+   * The URL used to connect an account.
+   */
+  connect_url: string;
+
+  /**
    * The unique identifier to assign to the connected account.
    */
   connected_account_id: string;
@@ -81,6 +86,11 @@ export interface SessionToken {
   integration: string;
 
   /**
+   * The language to use for the authorization flow.
+   */
+  language: string | null;
+
+  /**
    * Additional metadata to assign to the connected account.
    */
   metadata: Record<string, unknown> | null;
@@ -99,11 +109,6 @@ export interface SessionToken {
    * The URL to redirect to after the authorization flow is complete.
    */
   redirect_url: string | null;
-
-  /**
-   * The magic link used to connect an account.
-   */
-  url: string;
 }
 
 export interface SessionTokenListResponse {
@@ -113,11 +118,11 @@ export interface SessionTokenListResponse {
 }
 
 export interface SessionTokenDeleteResponse {
-  id: string;
-
   deleted: boolean;
 
   object: 'session_token';
+
+  token?: string;
 }
 
 export interface SessionTokenCreateParams {
@@ -140,6 +145,11 @@ export interface SessionTokenCreateParams {
    * The number of minutes until the session token expires.
    */
   expires_in_mins?: number;
+
+  /**
+   * The language to use for the authorization flow.
+   */
+  language?: string | null;
 
   /**
    * Additional metadata to assign to the connected account.

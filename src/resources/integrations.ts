@@ -58,9 +58,14 @@ export class Integrations extends APIResource {
 }
 
 /**
- * Represents an integration with a third-party provider.
+ * Represents an integration with a provider.
  */
 export interface Integration {
+  /**
+   * The authentication method the integration uses.
+   */
+  auth_method: 'oauth2' | 'basic' | 'api_key' | 'none';
+
   /**
    * The Unix timestamp (in seconds) for when the integration was created.
    */
@@ -109,24 +114,19 @@ export interface Integration {
   provider: string;
 
   /**
+   * The unique slug of the integration.
+   */
+  slug: string;
+
+  /**
    * The Unix timestamp (in seconds) for when the integration was updated.
    */
   updated_at: number;
 
   /**
-   * The authentication methods the integration supports.
-   */
-  auth_methods?: Array<'oauth1' | 'oauth2' | 'basic' | 'api_key'>;
-
-  /**
    * The URL of the integration provider's logo suitable for dark mode.
    */
   logo_url_dark_mode?: string | null;
-
-  /**
-   * The unique slug of the integration.
-   */
-  slug?: string;
 }
 
 export interface IntegrationListResponse {
@@ -193,6 +193,11 @@ export interface IntegrationUpdateParams {
    * Whether the integration is using test credentials provided by Embed.
    */
   is_using_test_credentials?: boolean;
+
+  /**
+   * The display name of the integration (defaults to provider name).
+   */
+  name?: string;
 
   /**
    * The OAuth Client ID. Required for integrations that use OAuth authentication.

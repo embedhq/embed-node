@@ -101,6 +101,11 @@ export interface Action {
   object: 'action';
 
   /**
+   * The action schema.
+   */
+  schema: Record<string, unknown>;
+
+  /**
    * The unique slug of the action.
    */
   slug: string;
@@ -276,6 +281,11 @@ export interface ActionTriggerParams {
    * Query param: The version of the action to trigger (defaults to latest).
    */
   action_version?: string;
+
+  /**
+   * Body param: Whether to trigger the action asynchronously.
+   */
+  async?: boolean;
 }
 
 export namespace Actions {
