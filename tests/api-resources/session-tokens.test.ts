@@ -29,6 +29,7 @@ describe('resource sessionTokens', () => {
       integration: 'github-123',
       configuration: { foo: 'bar' },
       expires_in_mins: 60,
+      language: 'en',
       metadata: { foo: 'bar' },
       name: 'Octocat',
       redirect_url: 'https://my-app.com/callback',
