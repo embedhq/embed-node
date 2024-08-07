@@ -206,10 +206,6 @@ export namespace Embed {
   export import ConnectedAccountUpsertParams = API.ConnectedAccountUpsertParams;
 
   export import ConnectSessions = API.ConnectSessions;
-  export import ConnectSession = API.ConnectSession;
-  export import ConnectSessionListResponse = API.ConnectSessionListResponse;
-  export import ConnectSessionDeleteResponse = API.ConnectSessionDeleteResponse;
-  export import ConnectSessionCreateParams = API.ConnectSessionCreateParams;
 
   export import Providers = API.Providers;
   export import Provider = API.Provider;
