@@ -73,6 +73,11 @@ export interface Webhook {
   object: 'webhook';
 
   /**
+   * The secret used to sign the webhook payload.
+   */
+  signing_secret: string;
+
+  /**
    * The Unix timestamp (in seconds) for when the webhook was updated.
    */
   updated_at: number;
@@ -86,11 +91,6 @@ export interface Webhook {
    * The events to send to the webhook.
    */
   events?: Array<string>;
-
-  /**
-   * The secret used to sign the webhook payload.
-   */
-  signing_secret?: string;
 }
 
 export interface WebhookListResponse {
@@ -124,6 +124,11 @@ export interface WebhookUpdateParams {
    * The events to send to the webhook.
    */
   events?: Array<string>;
+
+  /**
+   * Whether the webhook is enabled.
+   */
+  is_enabled?: boolean;
 
   /**
    * The URL to send events to.

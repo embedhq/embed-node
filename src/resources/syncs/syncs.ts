@@ -170,8 +170,6 @@ export interface SyncListResponse {
 }
 
 export interface SyncDeleteResponse {
-  collection: string;
-
   deleted: boolean;
 
   object: 'sync';

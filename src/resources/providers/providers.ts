@@ -68,6 +68,11 @@ export interface Provider {
   docs_url: string | null;
 
   /**
+   * Whether the provider has OAuth credentials to test with.
+   */
+  has_test_credentials: boolean;
+
+  /**
    * Headers to attach to requests made to the provider.
    */
   headers: Record<string, unknown> | null;
