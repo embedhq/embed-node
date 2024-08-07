@@ -32,6 +32,7 @@ describe('resource proxy', () => {
       connected_account_id: 'connected_account_id',
       integration: 'integration',
       base_url_override: 'base_url_override',
+      response_type: 'arraybuffer',
       retries: 0,
     });
   });
@@ -57,6 +58,7 @@ describe('resource proxy', () => {
       connected_account_id: 'connected_account_id',
       integration: 'integration',
       base_url_override: 'base_url_override',
+      response_type: 'arraybuffer',
       retries: 0,
     });
   });
@@ -84,6 +86,7 @@ describe('resource proxy', () => {
       connected_account_id: 'connected_account_id',
       integration: 'integration',
       base_url_override: 'base_url_override',
+      response_type: 'arraybuffer',
       retries: 0,
     });
   });
@@ -111,6 +114,7 @@ describe('resource proxy', () => {
       connected_account_id: 'connected_account_id',
       integration: 'integration',
       base_url_override: 'base_url_override',
+      response_type: 'arraybuffer',
       retries: 0,
     });
   });

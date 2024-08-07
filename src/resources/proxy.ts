@@ -9,7 +9,8 @@ export class Proxy extends APIResource {
    * Proxy DELETE request with connected account's credentials.
    */
   delete(params: ProxyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ProxyDeleteResponse> {
-    const { endpoint, body, connected_account_id, integration, base_url_override, retries } = params;
+    const { endpoint, body, connected_account_id, integration, base_url_override, response_type, retries } =
+      params;
     return this._client.delete(`/proxy/${endpoint}`, {
       body: body,
       ...options,
@@ -17,6 +18,7 @@ export class Proxy extends APIResource {
         connected_account_id: connected_account_id,
         integration: integration,
         ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
+        ...(response_type?.toString() != null ? { response_type: response_type?.toString() } : undefined),
         ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
         ...options?.headers,
       },
@@ -27,13 +29,14 @@ export class Proxy extends APIResource {
    * Proxy GET request with connected account's credentials.
    */
   get(params: ProxyGetParams, options?: Core.RequestOptions): Core.APIPromise<ProxyGetResponse> {
-    const { endpoint, connected_account_id, integration, base_url_override, retries } = params;
+    const { endpoint, connected_account_id, integration, base_url_override, response_type, retries } = params;
     return this._client.get(`/proxy/${endpoint}`, {
       ...options,
       headers: {
         connected_account_id: connected_account_id,
         integration: integration,
         ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
+        ...(response_type?.toString() != null ? { response_type: response_type?.toString() } : undefined),
         ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
         ...options?.headers,
       },
@@ -44,7 +47,8 @@ export class Proxy extends APIResource {
    * Proxy POST request with connected account's credentials.
    */
   post(params: ProxyPostParams, options?: Core.RequestOptions): Core.APIPromise<ProxyPostResponse> {
-    const { endpoint, body, connected_account_id, integration, base_url_override, retries } = params;
+    const { endpoint, body, connected_account_id, integration, base_url_override, response_type, retries } =
+      params;
     return this._client.post(`/proxy/${endpoint}`, {
       body: body,
       ...options,
@@ -52,6 +56,7 @@ export class Proxy extends APIResource {
         connected_account_id: connected_account_id,
         integration: integration,
         ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
+        ...(response_type?.toString() != null ? { response_type: response_type?.toString() } : undefined),
         ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
         ...options?.headers,
       },
@@ -62,7 +67,8 @@ export class Proxy extends APIResource {
    * Proxy PUT request with connected account's credentials.
    */
   put(params: ProxyPutParams, options?: Core.RequestOptions): Core.APIPromise<ProxyPutResponse> {
-    const { endpoint, body, connected_account_id, integration, base_url_override, retries } = params;
+    const { endpoint, body, connected_account_id, integration, base_url_override, response_type, retries } =
+      params;
     return this._client.put(`/proxy/${endpoint}`, {
       body: body,
       ...options,
@@ -70,6 +76,7 @@ export class Proxy extends APIResource {
         connected_account_id: connected_account_id,
         integration: integration,
         ...(base_url_override != null ? { base_url_override: base_url_override } : undefined),
+        ...(response_type?.toString() != null ? { response_type: response_type?.toString() } : undefined),
         ...(retries?.toString() != null ? { retries: retries?.toString() } : undefined),
         ...options?.headers,
       },
@@ -112,6 +119,11 @@ export interface ProxyDeleteParams {
   base_url_override?: string;
 
   /**
+   * Header param: Override the base URL for the request.
+   */
+  response_type?: 'arraybuffer' | 'json' | 'text' | 'stream';
+
+  /**
    * Header param: The number of times to retry the request.
    */
   retries?: number;
@@ -137,6 +149,11 @@ export interface ProxyGetParams {
    * Header param: Override the base URL for the request.
    */
   base_url_override?: string;
+
+  /**
+   * Header param: Override the base URL for the request.
+   */
+  response_type?: 'arraybuffer' | 'json' | 'text' | 'stream';
 
   /**
    * Header param: The number of times to retry the request.
@@ -171,6 +188,11 @@ export interface ProxyPostParams {
   base_url_override?: string;
 
   /**
+   * Header param: Override the base URL for the request.
+   */
+  response_type?: 'arraybuffer' | 'json' | 'text' | 'stream';
+
+  /**
    * Header param: The number of times to retry the request.
    */
   retries?: number;
@@ -201,6 +223,11 @@ export interface ProxyPutParams {
    * Header param: Override the base URL for the request.
    */
   base_url_override?: string;
+
+  /**
+   * Header param: Override the base URL for the request.
+   */
+  response_type?: 'arraybuffer' | 'json' | 'text' | 'stream';
 
   /**
    * Header param: The number of times to retry the request.
