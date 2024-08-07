@@ -32,19 +32,6 @@ Methods:
 
 # ConnectSessions
 
-Types:
-
-- <code><a href="./src/resources/connect-sessions.ts">ConnectSession</a></code>
-- <code><a href="./src/resources/connect-sessions.ts">ConnectSessionListResponse</a></code>
-- <code><a href="./src/resources/connect-sessions.ts">ConnectSessionDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /connect-sessions">client.connectSessions.<a href="./src/resources/connect-sessions.ts">create</a>({ ...params }) -> ConnectSession</code>
-- <code title="get /connect-sessions/{connect_session_id}">client.connectSessions.<a href="./src/resources/connect-sessions.ts">retrieve</a>(connectSessionId) -> ConnectSession</code>
-- <code title="get /connect-sessions">client.connectSessions.<a href="./src/resources/connect-sessions.ts">list</a>() -> ConnectSessionListResponse</code>
-- <code title="delete /connect-sessions/{connect_session_id}">client.connectSessions.<a href="./src/resources/connect-sessions.ts">delete</a>(connectSessionId) -> ConnectSessionDeleteResponse</code>
-
 # Providers
 
 Types:

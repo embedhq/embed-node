@@ -227,6 +227,11 @@ export interface IntegrationListParams {
   before?: string;
 
   /**
+   * Filter for integrations associated with a connected account.
+   */
+  connected_account_id?: string;
+
+  /**
    * A limit on the number of objects to be returned.
    */
   limit?: number;

@@ -24,13 +24,7 @@ export {
   CollectionDeleteParams,
   Collections,
 } from './collections';
-export {
-  ConnectSession,
-  ConnectSessionListResponse,
-  ConnectSessionDeleteResponse,
-  ConnectSessionCreateParams,
-  ConnectSessions,
-} from './connect-sessions';
+export { ConnectSessions } from './connect-sessions';
 export {
   ConnectedAccount,
   ConnectedAccountListResponse,

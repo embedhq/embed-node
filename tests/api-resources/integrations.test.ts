@@ -83,7 +83,13 @@ describe('resource integrations', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.integrations.list(
-        { after: 'after', before: 'before', limit: 20, order: 'desc' },
+        {
+          after: 'after',
+          before: 'before',
+          connected_account_id: 'connected_account_id',
+          limit: 20,
+          order: 'desc',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Embed.NotFoundError);
