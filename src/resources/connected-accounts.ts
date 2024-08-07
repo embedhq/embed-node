@@ -244,7 +244,6 @@ export interface ConnectedAccountUpsertParams {
    */
   credentials:
     | ConnectedAccountUpsertParams.OAuth2Credentials
-    | ConnectedAccountUpsertParams.OAuth1Credentials
     | ConnectedAccountUpsertParams.BasicCredentials
     | ConnectedAccountUpsertParams.APIKeyCredentials;
 
@@ -262,6 +261,11 @@ export interface ConnectedAccountUpsertParams {
    * Additional metadata for the connected account.
    */
   metadata?: Record<string, unknown> | null;
+
+  /**
+   * The display name of the connected account.
+   */
+  name?: string;
 }
 
 export namespace ConnectedAccountUpsertParams {
@@ -280,18 +284,6 @@ export namespace ConnectedAccountUpsertParams {
      * The unix timestamp (in seconds) for when the access token expires.
      */
     expires_at?: number;
-  }
-
-  export interface OAuth1Credentials {
-    /**
-     * The OAuth 1.0a token.
-     */
-    oauth_token: string;
-
-    /**
-     * The OAuth 1.0a token.
-     */
-    oauth_token_secret: string;
   }
 
   export interface BasicCredentials {

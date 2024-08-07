@@ -127,6 +127,7 @@ describe('resource connectedAccounts', () => {
       integration: 'integration',
       configuration: { foo: 'bar' },
       metadata: { foo: 'bar' },
+      name: 'Octocat',
     });
   });
 });

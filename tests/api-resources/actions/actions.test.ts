@@ -133,6 +133,7 @@ describe('resource actions', () => {
       integration: 'github-123',
       input: { title: 'bar', body: 'bar' },
       action_version: '1.2',
+      async: false,
     });
   });
 });
